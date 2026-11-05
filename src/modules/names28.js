@@ -18,3 +18,12 @@ function nativeTxt(sc, s, x, y, col, size, align, alpha) {
   ctx.fillStyle = col; ctx.fillText(s, x, y); ctx.restore();
 }
 try { for (const k in NATIVE) document.fonts.load('bold 12px "NOC-' + NATIVE[k][0] + '"', NATIVE[k][1]); } catch (e) { }
+
+// Gemini-painted key art (original characters, no text in the images); drawn full-bleed on the select poster, the game adds name/stats on top.
+const ART_SRC = /*ART_JSON*/;
+const ART = {}; for (const k in ART_SRC) { const im = new Image(); im.src = 'data:image/jpeg;base64,' + ART_SRC[k]; ART[k] = im; }
+function artReady(k) { const a = ART[k]; return !!a && a.complete && a.naturalWidth > 0; }
+function drawArtPoster(k, x, y, w) {
+  const a = ART[k], h = a.naturalHeight * w / a.naturalWidth, off = -(h - PN.h) * 0.16, sm = ctx.imageSmoothingEnabled;
+  ctx.imageSmoothingEnabled = true; ctx.drawImage(a, x, y + off, w, h); ctx.imageSmoothingEnabled = sm;
+}

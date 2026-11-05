@@ -135,17 +135,19 @@ function slotFx(i, x, y, col, t) {
 function drawPoster(slot, idx, t, selected) {
   const x = panelX(slot), y = PN.y, w = PN.w, k = CHAR_KEYS[idx], C = CHARS[k], locked = !isUnlocked(k), o = ORIGIN[k] || 'TH', q = G.previews[idx];
   ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, PN.h); ctx.clip();
-  const bh = PN.heroH, gy = selBg(o, x, y, w, bh, t);
+  const useArt = artReady(k) && !locked, bh = PN.heroH, gy = useArt ? y + bh - 12 : selBg(o, x, y, w, bh, t);
   ctx.fillStyle = '#0a0510'; ctx.fillRect(x, y + bh, w, PN.h - bh);
-  if (NATIVE[k] && !locked) nativeTxt(NATIVE[k][0], NATIVE[k][2], x + w / 2, y + 24, ORI_PAL.IN[1], 44, 'center', 0.2 + 0.05 * Math.sin(t * 1.5));   // big ghost word in the hero's own script
+  if (useArt) drawArtPoster(k, x, y, w);
+  if (NATIVE[k] && !locked && !useArt) nativeTxt(NATIVE[k][0], NATIVE[k][2], x + w / 2, y + 24, ORI_PAL.IN[1], 44, 'center', 0.2 + 0.05 * Math.sin(t * 1.5));   // big ghost word in the hero's own script
   ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, bh); ctx.clip();
   selAnim(k, q, t, selected && !locked); if (!selected) { q.vx = 0; q.runPhase = 0; }
   const sc = k === 'wah' ? 1.9 : k === 'zhang' ? 2.2 : k === 'hongbao' ? 2.6 : 2.8;
   if (locked) ctx.globalAlpha = 0.28;
-  drawPreview(k, q, sc, x + w / 2 + (k === 'wah' ? 6 : 0), gy + 6);
+  if (!useArt) drawPreview(k, q, sc, x + w / 2 + (k === 'wah' ? 6 : 0), gy + 6);
   ctx.globalAlpha = 1; if (locked) txt('?', x + w / 2, y + 36, '#ffd23f', 28, 'center');
   ctx.restore();
   const vg = ctx.createLinearGradient(0, y + bh - 30, 0, y + bh); vg.addColorStop(0, 'rgba(10,5,16,0)'); vg.addColorStop(1, 'rgba(10,5,16,0.9)'); ctx.fillStyle = vg; ctx.fillRect(x, y + bh - 30, w, 30);
+  if (useArt) { const g2 = ctx.createLinearGradient(0, y + bh - 34, 0, y + bh + 10); g2.addColorStop(0, 'rgba(10,5,16,0)'); g2.addColorStop(1, 'rgba(10,5,16,0.94)'); ctx.fillStyle = g2; ctx.fillRect(x, y + bh - 34, w, 44); ctx.fillStyle = 'rgba(10,5,16,0.96)'; ctx.fillRect(x, y + bh + 10, w, PN.h - bh - 10); if (!selected) { ctx.fillStyle = 'rgba(8,2,12,0.45)'; ctx.fillRect(x, y, w, PN.h); } }
   { const qs = (QUIPS[k] || []).find(z => /^[\x20-\x7e]+$/.test(z)); if (qs && !locked) txt('“' + qs.slice(0, 30) + '”', x + w / 2, y + bh - 10, selected ? '#ffe9b8' : '#a89888', 6, 'center'); }
   drawOriginTag(k, x + 4, y + 4); txt(ORIGIN_NAME[o] || '', x + 19, y + 5, ORIGIN_COL[o] || '#fff', 6, 'left', false);
   if ((SEL_NEW.has(k) || PROG.fresh.includes(k)) && !locked && Math.floor(t * 3) % 2 === 0) { ctx.fillStyle = '#ff2a4a'; ctx.fillRect(x + w - 24, y + 4, 21, 9); txt('NEW', x + w - 13, y + 5, '#fff', 7, 'center', false); }
