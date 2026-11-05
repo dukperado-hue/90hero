@@ -136,6 +136,7 @@ function drawPoster(slot, idx, t, selected) {
   ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, PN.h); ctx.clip();
   const bh = PN.heroH, gy = selBg(o, x, y, w, bh, t);
   ctx.fillStyle = '#0a0510'; ctx.fillRect(x, y + bh, w, PN.h - bh);
+  if (NATIVE[k] && !locked) nativeTxt(NATIVE[k][0], NATIVE[k][2], x + w / 2, y + 24, ORI_PAL.IN[1], 44, 'center', 0.2 + 0.05 * Math.sin(t * 1.5));   // big ghost word in the hero's own script
   ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, bh); ctx.clip();
   selAnim(k, q, t, selected && !locked); if (!selected) { q.vx = 0; q.runPhase = 0; }
   const sc = k === 'wah' ? 1.9 : k === 'zhang' ? 2.2 : k === 'hongbao' ? 2.6 : 2.8;
@@ -148,7 +149,7 @@ function drawPoster(slot, idx, t, selected) {
   if ((SEL_NEW.has(k) || PROG.fresh.includes(k)) && !locked && Math.floor(t * 3) % 2 === 0) { ctx.fillStyle = '#ff2a4a'; ctx.fillRect(x + w - 24, y + 4, 21, 9); txt('NEW', x + w - 13, y + 5, '#fff', 7, 'center', false); }
   // name block
   const nm = C.name, ns = nm.length > 14 ? 9 : 11;
-  txt(nm, x + w / 2, y + bh + 2, locked ? '#8a7a80' : C.col, ns, 'center'); txt(C.th, x + w / 2, y + bh + 15, '#d8c8b8', 6, 'center', false);
+  txt(nm, x + w / 2, y + bh + 2, locked ? '#8a7a80' : C.col, ns, 'center'); if (NATIVE[k] && !locked) nativeTxt(NATIVE[k][0], NATIVE[k][1], x + w / 2, y + bh + 13, '#ffe9b8', 8, 'center');
   txt(locked ? 'LOCKED · ' + unlockText(k).slice(0, 26) : C.tag, x + w / 2, y + bh + 24, locked ? '#ff7a5a' : '#ffe9b8', 6, 'center', false);
   C.stats.forEach(([n, v], j) => { const sx = x + 3 + j * 37, lb = { SPEED: 'SPD', POWER: 'POW', RANGE: 'RNG', SAFETY: 'SAF' }[n] || n.slice(0, 3); txt(lb, sx, y + bh + 35, '#ffb070', 5, 'left', false); for (let b = 0; b < 5; b++) { ctx.fillStyle = b < v ? C.col : '#3a2a34'; ctx.fillRect(sx + 13 + b * 4.5, y + bh + 36, 3.5, 5); } });
   ctx.restore();

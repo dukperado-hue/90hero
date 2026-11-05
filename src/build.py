@@ -524,5 +524,15 @@ rep("function cardRect(i) { const c = i % CARD.cols,", "function cardRectOld(i) 
 rep("function cardAt(mx, my) { for (let i = 0; i < CHAR_KEYS.length; i++) { const R = cardRect(i);", "function cardAtOld(mx, my) { for (let i = 0; i < CHAR_KEYS.length; i++) { const R = cardRectOld(i);")
 rep("  G.mode = 'select'; G.sel = CHAR_KEYS.indexOf(CHOSEN); G.selT = 0;", "  G.mode = 'select'; G.sel = CHAR_KEYS.indexOf(CHOSEN); G.selT = 0; G.selOff = 0;")
 
+# ======================= v28: Uncle/Auntie names, hidden Thai labels, Indic-script lines =======================
+import json as _json, base64 as _b64, sys as _sys
+_sys.path.insert(0, ROOT + '/tools'); from native_names import NATIVE as _NAT
+_nat_js = _json.dumps({k: [{'deva': 'deva', 'taml': 'taml', 'telu': 'telu'}[v[0]], v[1], v[2]] for k, v in _NAT.items()}, ensure_ascii=False)
+names28_js = open(ROOT + '/modules/names28.js').read().replace('/*NATIVE_JSON*/', _nat_js)
+rep("\nfunction spawnDovesUI(x, y) {", "\n" + names28_js + "\nfunction spawnDovesUI(x, y) {")
+_css = ''.join('@font-face{font-family:"NOC-%s";font-weight:700;src:url(data:font/woff;base64,%s) format("woff");}' % (sc, _b64.b64encode(open(ROOT + '/assets/noc-%s.woff' % sc, 'rb').read()).decode()) for sc in ('deva', 'taml', 'telu'))
+rep("</head>", "<style>" + _css + "</style>\n</head>")
+s = s.replace(' (แนวล้อ)', '')            # the parody tag is gone everywhere (Thai labels are hidden in-game anyway)
+
 open(OUT, 'w').write(s)
 print('v21 written', len(s))

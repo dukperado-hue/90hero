@@ -33,3 +33,9 @@ Regression at this version: progression 34/34, v211 11/11, v23a 6/6, heroes5 24/
 Bot-only. Stage-1 bot clears with the new heroes died 2–3x more often than shaolin/aamir (silat worst), but the bot never holds K (silat's gun),
 and rescued stunt doubles randomly swap the hero mid-run, so the numbers are noisy. HERO_POW was nudged up (furie 1.05, bey 1.1, gada 1.0, silat 1.12, hongbao 1.08).
 Needs real human playtests before any balance decision.
+
+## v28 — names, hidden Thai labels, Indic scripts
+- Every hero name now contains UNCLE or AUNTIE plus a local word people of that country recognise (-JI Hindi, -MAAMA Tamil, MAMA/-GARU Telugu, AJEOSSI Korean, OJISAN Japanese, DAYI Turkish, OM Indonesian, CO-BA Vietnamese). Table: `src/modules/names28.js`. Not yet checked by native speakers or against real names.
+- Thai labels are kept as data (`thHidden`) but never drawn. The parody tag after each Thai label is removed everywhere (`build.py` strips it from the output).
+- The 8 Indian heroes show their full name in native script on the select poster plus a big ghost word behind the hero: Hindi (Devanagari) for singham/srk/aamir/gada, Tamil for vijay/rajini, Telugu for chiru/ram. Strings: `src/tools/native_names.py`; fonts: Noto Sans Bold subsets in `src/assets/noc-*.woff` (regenerate with `src/tools/make_indic_fonts.py`), embedded as base64.
+- Known flaky test: heroes5 "hongbao K reacts" failed 1 of 4 runs (enemy positions vary); progression 34/34, v211 11/11, v23a 6/6.
