@@ -31,12 +31,13 @@ const R = []; const check = (n, ok, info) => { R.push(ok); console.log((ok ? 'PA
     // K does something
     r = await pg.evaluate(async h => {
       const G = ONE.G, p = G.player; const e = G.enemies.find(e => !e.dead && e.type === 'soldier' && e !== null); e.hp = 40; e.stun = 99; p.x = e.x - 50; p.y = e.y + e.h - p.h; p.face = 1; p.vx = 0;
-      for (let i = 0; i < 60; i++) ONE.step(1 / 120, {}); const hp0 = e.hp, x0 = p.x, nb0 = G.bullets.length, np0 = (G.projs || []).length;
+      for (let i = 0; i < 60; i++) ONE.step(1 / 120, {}); const hs0 = G.hitstop, php0 = p.hp;   // diagnostic: a stray enemy bullet in the idle second hurts us and sets G.hitstop; step() then swallows the one-frame K press
+      p.inv = 99; p.hp = Math.max(p.hp, 3); G.hitstop = 0; const hp0 = e.hp, x0 = p.x, nb0 = G.bullets.length, np0 = (G.projs || []).length;
       window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyK' }));
       let a1 = 0, pr1 = 0; for (let i = 0; i < 120; i++) { ONE.step(1 / 120, i === 0 ? { bomb: true } : {}); if (i === 3) { a1 = (p.n5 || {}).a; pr1 = (G.projs || []).length; } }
       window.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyK' }));
       const s = p.n5 || {};
-      return { a1, pr1, moved: Math.round(p.x - x0), dmg: hp0 - e.hp, shots: G.stats.shots, projs: (G.projs || []).length - np0, a: s.a, mag: s.mag, swing: p.swingK };
+      return { hs0: +hs0.toFixed(3), php0, a1: +a1.toFixed(2), pr1, moved: Math.round(p.x - x0), dmg: hp0 - e.hp, shots: G.stats.shots, projs: (G.projs || []).length - np0, a: s.a, mag: s.mag, swing: p.swingK };
     }, h);
     check(h + ' K reacts', (h === 'silat' ? (r.mag < 30 || r.shots > 3) : r.a1 > 0), r);
     // L ultimate

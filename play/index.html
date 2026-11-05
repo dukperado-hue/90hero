@@ -10240,7 +10240,7 @@ function frame(now) {
       if (!G.paused) {
         for (const k in ip) G.pin[k] = true;
         acc += dt * G.timeScale; let n = 0;
-        while (acc >= STEP && n < 24) { step(STEP, G.pin); G.pin = {}; acc -= STEP; n++; }
+        while (acc >= STEP && n < 24) { const frozen = G.hitstop > 0; step(STEP, G.pin); if (!frozen) G.pin = {}; acc -= STEP; n++; }
         if (n >= 24) acc = 0;
       }
     }

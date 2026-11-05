@@ -534,5 +534,11 @@ _css = ''.join('@font-face{font-family:"NOC-%s";font-weight:700;src:url(data:fon
 rep("</head>", "<style>" + _css + "</style>\n</head>")
 s = s.replace(' (แนวล้อ)', '')            # the parody tag is gone everywhere (Thai labels are hidden in-game anyway)
 
+# ======================= v29: input pressed during hit-stop is no longer swallowed =======================
+# step() returns early while G.hitstop > 0, but the frame loop cleared the one-shot input table (G.pin) after every step, so a K/J/jump press that
+# landed inside a 10-140 ms freeze was silently dropped (root cause of the flaky "hongbao K reacts" test; real for players too). Keep it until a real step ran.
+rep("while (acc >= STEP && n < 24) { step(STEP, G.pin); G.pin = {}; acc -= STEP; n++; }",
+    "while (acc >= STEP && n < 24) { const frozen = G.hitstop > 0; step(STEP, G.pin); if (!frozen) G.pin = {}; acc -= STEP; n++; }")
+
 open(OUT, 'w').write(s)
 print('v21 written', len(s))
