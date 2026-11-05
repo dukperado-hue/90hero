@@ -490,7 +490,7 @@ rep("aamir: ['JO JEETA WOHI SIKANDAR!', 'ONE MORE ROUND, SIR.', 'PERFECT.'],", "
   furie: ['NO MERCY.', 'REVENGE, SENSIBLY DRESSED.', 'RELOAD? NO. FINISH.'], bey: ['I AM THE SAVIOR OF THE WORLD.', 'MOUSTACHE FIRST.', 'SLOWLY. THEN ALL AT ONCE.'],
   gada: ['MACE OF JUSTICE!', 'ONE SWING. ONE VILLAGE.', 'THAAP!'], silat: ['FIFTEEN FLOORS. NO LIFT.', 'SILAT. THEN BULLETS.', 'THE CORRIDOR IS MINE.'],
   hongbao: ['LIGHT ON MY FEET. HEAVY ON YOUR FACE.', 'DUMPLINGS FIRST.', 'A GOOD LUNCH IS A WEAPON.'],""")
-rep("const HERO_POW = { aamir: 0.95, ", "const HERO_POW = { furie: 1.05, bey: 1.1, gada: 1.0, silat: 1.12, hongbao: 1.08, aamir: 0.95, ")
+rep("const HERO_POW = { aamir: 0.95, ", "const HERO_POW = { furie: 1.2, bey: 1.0, gada: 1.2, silat: 1.25, hongbao: 1.25, aamir: 0.95, ")
 rep("srk: 'introSRK', aamir: 'introAamir',", "srk: 'introSRK', aamir: 'introAamir', furie: 'introNew5', bey: 'introNew5', gada: 'introNew5', silat: 'introNew5', hongbao: 'introNew5',")
 rep("    case 'introSingham':", """    case 'introNew5':
       p.vx = 0;

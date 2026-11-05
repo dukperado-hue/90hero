@@ -5,7 +5,7 @@ const F = path.resolve(process.argv[2]), N = +process.argv[3] || 20, HEROES = (p
 const BOT = fs.readFileSync(__dirname + '/bot.js', 'utf8');
 const srv = http.createServer((q, r) => { r.writeHead(200, { 'content-type': 'text/html' }); r.end(fs.readFileSync(F)); }).listen(0);
 (async () => {
-  const b = await chromium.launch(); const out = {};
+  const b = await chromium.launch(); const out = {}, fails = {};
   for (const h of HEROES) {
     const c = await b.newContext({ viewport: { width: 960, height: 540 } }); const pg = await c.newPage(); const errs = []; pg.on('pageerror', e => errs.push(String(e).slice(0, 100)));
     out[h] = [];
@@ -19,11 +19,12 @@ const srv = http.createServer((q, r) => { r.writeHead(200, { 'content-type': 'te
         while (ONE.G.mode === 'play' && performance.now() - t0 < 150000) await __T.bot(10000, { stop: true, range: 60, special: 15, holdK: HOLDK });
         const G = ONE.G; return { ch: G.player.ch, win: G.mode === 'win', deaths: G.stats.deaths, time: +G.time.toFixed(1), kills: G.stats.kills };
       }, { h, HOLDK });
+      if (r.ch !== h || r.time === 0) { n--; fails[h] = (fails[h] || 0) + 1; if (fails[h] > N) break; continue; }   // harness glitch (select screen not reached under CPU load): redo, never count it
       out[h].push(r);
     }
     await c.close();
     const o = out[h], m = f => o.reduce((a, x) => a + f(x), 0) / o.length, sd = f => { const mu = m(f); return Math.sqrt(m(x => (f(x) - mu) ** 2)); };
-    console.log(h.padEnd(8), 'n=' + o.length, 'win=' + o.filter(x => x.win).length, 'deaths ' + m(x => x.deaths).toFixed(2) + '±' + sd(x => x.deaths).toFixed(2), 'time ' + m(x => x.time).toFixed(1) + '±' + sd(x => x.time).toFixed(1), 'heroChanged=' + o.filter(x => x.ch !== h).length, errs.length ? errs : '');
+    console.log(h.padEnd(8), 'n=' + o.length, 'win=' + o.filter(x => x.win).length, 'deaths ' + m(x => x.deaths).toFixed(2) + '±' + sd(x => x.deaths).toFixed(2), 'time ' + m(x => x.time).toFixed(1) + '±' + sd(x => x.time).toFixed(1), 'startRetries=' + (fails[h] || 0), errs.length ? errs : '');
   }
   fs.writeFileSync(process.env.BAL_OUT || '/tmp/bal.json', JSON.stringify(out)); await b.close(); srv.close();
 })();

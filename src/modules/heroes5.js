@@ -51,7 +51,7 @@ function updFurie(p, dt, ip) {
   moveRunner(p, dt, ip);
   if (ip.ult) tryUltimate(p);
   if (s.slide > 0) return;
-  if (ip.bomb && s.a <= 0) { s.a = 1.6; s.slide = 0.22; s.hit = new Set(); audio.play('whoosh'); popup(p.x + 5, p.y - 14, 'SLIDE!', '#ff9ad0'); return; }
+  if (ip.bomb && s.a <= 0) { s.a = 1.6; s.slide = 0.22; s.hit = new Set(); p.inv = Math.max(p.inv, 0.4); audio.play('whoosh'); popup(p.x + 5, p.y - 14, 'SLIDE!', '#ff9ad0'); return; }
   if ((held('shoot') || ip.shoot) && p.fireCd <= 0) {
     const foe = frontFoe(p, 24);
     if (foe && !held('down')) {                        // point blank: gun-fu — elbow, shoot, shove
@@ -147,7 +147,7 @@ function updGada(p, dt, ip) {
     } else {                                           // J: wide mace arcs, the third one is THE swing
       p.combo = ((p.combo || 0) + 1) % 3; const big = p.combo === 2, weak = s.maceOut > 0;
       p.atkCd = big ? 0.5 : 0.36; p.swingT = 0.2; p.swingK = weak ? 'punch' : 'slash';
-      const hit = meleeSwing(p, weak ? { dmg: 1.2, reach: 16, y0: -20, y1: -4 } : { dmg: big ? 5 : 2.8, reach: big ? 38 : 32, y0: -26, y1: 0, launch: big, tile: big ? 3 : 2 });
+      const hit = meleeSwing(p, weak ? { dmg: 1.2, reach: 16, y0: -20, y1: -4 } : { dmg: big ? 5.5 : 3.2, reach: big ? 38 : 32, y0: -26, y1: 0, launch: big, tile: big ? 3 : 2 });
       if (hit) addUlt(p, big ? 8 : 4);
     }
   }
@@ -196,7 +196,7 @@ function updSilat(p, dt, ip) {
   let firing = false;
   if (held('bomb') && s.rel <= 0 && p.fireCd <= 0) {   // K (hold): the submachine gun
     if (s.mag > 0) {
-      firing = true; s.mag--; s.idle = 0; p.fireCd = 0.07; p.shootT = 0.09; pBullet(p, 0.9, 10, 0.5, 700);
+      firing = true; s.mag--; s.idle = 0; p.fireCd = 0.07; p.shootT = 0.09; pBullet(p, 1.0, 10, 0.5, 700);
       part('shell', p.x + p.w / 2, p.y + 6, -p.face * rnd(40, 90), rnd(-160, -90), rnd(0.8, 1.2), 1, '#e8c040', { g: 900, vr: rnd(-20, 20) });
       if (s.mag <= 0) { s.rel = 1.1; popup(p.x + 5, p.y - 14, 'RELOAD', '#ffb070'); }
     }
@@ -210,7 +210,7 @@ function updSilat(p, dt, ip) {
       if (hit) addUlt(p, 5);
     } else {                                           // J: elbow - knee - spinning back-kick
       p.combo = ((p.combo || 0) + 1) % 3; p.atkCd = p.combo === 2 ? 0.3 : 0.13; p.swingT = 0.12; p.swingK = ['elbow', 'kick', 'bigkick'][p.combo];
-      const hit = meleeSwing(p, { dmg: p.combo === 2 ? 2.8 : 1.5, reach: p.combo === 2 ? 24 : 18, y0: -22, y1: -4, launch: p.combo === 2 });
+      const hit = meleeSwing(p, { dmg: p.combo === 2 ? 3.2 : 1.8, reach: p.combo === 2 ? 26 : 20, y0: -22, y1: -4, launch: p.combo === 2 });
       if (hit) addUlt(p, 4);
     }
   }
@@ -254,7 +254,7 @@ function updHongbao(p, dt, ip) {
       if (hit) { addUlt(p, 6); popup(p.x + 5, p.y - 14, 'BUMP!', '#ffd23f'); }
     } else {                                           // J: kick, kick, spinning back-kick
       p.combo = ((p.combo || 0) + 1) % 3; p.atkCd = p.combo === 2 ? 0.26 : 0.14; p.swingT = 0.12; p.swingK = p.combo === 2 ? 'bigkick' : 'kick';
-      const hit = meleeSwing(p, { dmg: p.combo === 2 ? 3 : 1.6, reach: p.combo === 2 ? 26 : 22, y0: -18, y1: -2, launch: p.combo === 2 });
+      const hit = meleeSwing(p, { dmg: p.combo === 2 ? 3.4 : 1.9, reach: p.combo === 2 ? 28 : 24, y0: -18, y1: -2, launch: p.combo === 2 });
       if (hit) addUlt(p, 4);
     }
   }
