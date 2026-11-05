@@ -490,7 +490,7 @@ rep("aamir: ['JO JEETA WOHI SIKANDAR!', 'ONE MORE ROUND, SIR.', 'PERFECT.'],", "
   furie: ['NO MERCY.', 'REVENGE, SENSIBLY DRESSED.', 'RELOAD? NO. FINISH.'], bey: ['I AM THE SAVIOR OF THE WORLD.', 'MOUSTACHE FIRST.', 'SLOWLY. THEN ALL AT ONCE.'],
   gada: ['MACE OF JUSTICE!', 'ONE SWING. ONE VILLAGE.', 'THAAP!'], silat: ['FIFTEEN FLOORS. NO LIFT.', 'SILAT. THEN BULLETS.', 'THE CORRIDOR IS MINE.'],
   hongbao: ['LIGHT ON MY FEET. HEAVY ON YOUR FACE.', 'DUMPLINGS FIRST.', 'A GOOD LUNCH IS A WEAPON.'],""")
-rep("const HERO_POW = { aamir: 0.95, ", "const HERO_POW = { furie: 1.05, bey: 1.1, gada: 1.0, silat: 1.12, hongbao: 1.08, aamir: 0.95, ")
+rep("const HERO_POW = { aamir: 0.95, ", "const HERO_POW = { furie: 1.2, bey: 1.0, gada: 1.2, silat: 1.25, hongbao: 1.25, aamir: 0.95, ")
 rep("srk: 'introSRK', aamir: 'introAamir',", "srk: 'introSRK', aamir: 'introAamir', furie: 'introNew5', bey: 'introNew5', gada: 'introNew5', silat: 'introNew5', hongbao: 'introNew5',")
 rep("    case 'introSingham':", """    case 'introNew5':
       p.vx = 0;
@@ -534,6 +534,19 @@ rep("\nfunction spawnDovesUI(x, y) {", "\n" + names28_js + "\nfunction spawnDove
 _css = ''.join('@font-face{font-family:"NOC-%s";font-weight:700;src:url(data:font/woff;base64,%s) format("woff");}' % (sc, _b64.b64encode(open(ROOT + '/assets/noc-%s.woff' % sc, 'rb').read()).decode()) for sc in ('deva', 'taml', 'telu'))
 rep("</head>", "<style>" + _css + "</style>\n</head>")
 s = s.replace(' (แนวล้อ)', '')            # the parody tag is gone everywhere (Thai labels are hidden in-game anyway)
+
+# ======================= v29: input pressed during hit-stop is no longer swallowed =======================
+# step() returns early while G.hitstop > 0, but the frame loop cleared the one-shot input table (G.pin) after every step, so a K/J/jump press that
+# landed inside a 10-140 ms freeze was silently dropped (root cause of the flaky "hongbao K reacts" test; real for players too). Keep it until a real step ran.
+rep("while (acc >= STEP && n < 24) { step(STEP, G.pin); G.pin = {}; acc -= STEP; n++; }",
+    "while (acc >= STEP && n < 24) { const frozen = G.hitstop > 0; step(STEP, G.pin); if (!frozen) G.pin = {}; acc -= STEP; n++; }")
+
+# ======================= v29: help bar re-appears after a stunt-double swap (known issue from HANDOFF_v26 s9.5) =======================
+# The control-hint bar was shown while G.time < 14 only, so a hero swap later in the run left the new hero with no hint.
+rep("  if (G.time < 14 && G.mode === 'play' && !G.cine) { ctx.globalAlpha = clamp((14 - G.time) / 3, 0, 1);",
+    "  if (helpAge() < 14 && G.mode === 'play' && !G.cine) { ctx.globalAlpha = clamp((14 - helpAge()) / 3, 0, 1);")
+rep("function swapHero(k, c) {\n  const p = G.player; if (!p || p.dead || G.mode !== 'play' || G.cine) return;\n  G.actor = k;",
+    "const helpAge = () => G.time - (G.helpT0 || 0);        // seconds since the control hints were last (re)started: run start or a stunt-double swap\nfunction swapHero(k, c) {\n  const p = G.player; if (!p || p.dead || G.mode !== 'play' || G.cine) return;\n  G.actor = k; G.helpT0 = G.time;")
 
 open(OUT, 'w').write(s)
 print('v21 written', len(s))

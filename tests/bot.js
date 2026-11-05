@@ -44,6 +44,10 @@
       if (p.ch === 'li') { hold('KeyJ', false); if (st.t % 36 === 0) ip.shoot = true; }
       if (st.t % spEvery === 0 && p.ch !== 'zhang') ip.bomb = true;
       if (p.ch === 'zhang') { const cx = p.x + p.w / 2; const th = G.ebullets.some(e => Math.abs(e.x - cx) < 120 && Math.abs(e.y - p.y) < 40 && Math.sign(cx - e.x) === Math.sign(e.vx)); hold('KeyK', th && p.qi > 15); }
+      if (opt.holdK && p.ch === 'silat') {                   // scripted K-hold pattern (v29): the SMG is a held weapon, so spray whenever a foe/boss is ahead
+        const f = G.enemies.some(e => !e.dead && !e.para && (e.x - p.x) * (p.face || 1) > 0 && Math.abs(e.x - p.x) < 190 && Math.abs(e.y + e.h - p.y - p.h) < 30) || (b && !b.dead && b.state !== 'enter' && Math.abs(b.x - p.x) < 220);
+        hold('KeyK', f);
+      }
       if (p.ult >= 100) ip.ult = true;
       ONE.step(1 / 120, ip);
     }
