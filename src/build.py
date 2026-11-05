@@ -460,7 +460,7 @@ rep("ELBOW-KNEE J  BONE BREAKER K  FLYING KNEE S+J", "ELBOW-KNEE J  UP+J RISING 
 
 # ======================= v27: FIVE NEW HEROES + HERO SELECT 2.0 + LOOK PRESETS =======================
 heroes5_js = open(ROOT + '/modules/heroes5.js').read()
-sel2_js = open(ROOT + '/modules/select2.js').read()
+sel2_js = open(ROOT + '/modules/select3.js').read()
 rep("\nfunction slapLaunch(e, dir, power) {", "\n" + heroes5_js + "\nfunction slapLaunch(e, dir, power) {")
 rep("  madong: { name: 'FIST HYUNG',", """  furie: { name: 'AUNTIE FURIE', card: 'A.FURIE', cn: '怒姨', th: 'ป้าฟิวรี่ (แนวล้อ)', tag: 'GUN-FU ASSASSIN', col: '#e04aff', role: 'GUN-FU / PRECISION', diff: 2,
     lines: ['ROLE: GUN-FU / PRECISION   ·   DIFFICULTY ★★☆', 'J  PISTOL (POINT BLANK = ELBOW + SHOT)  ·  S+J  THE ONE HEADSHOT', 'K  TACTICAL SLIDE: DISARMS AND THROWS WHOEVER IS IN THE WAY', 'L  NO MERCY: A CURVING BULLET FOR EVERY FACE ON SCREEN'],

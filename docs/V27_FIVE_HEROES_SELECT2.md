@@ -1,4 +1,4 @@
-# V27 — five new heroes, Hero Select 2.0, look presets
+# V27 — five new heroes, Hero Select 3.0, look presets
 
 ## New heroes (parody names only; the real-person inspirations live ONLY in this doc / the legal list, never in the game)
 | key | in-game name | inspiration (legal review list) | kit |
@@ -12,11 +12,15 @@
 Code: `src/modules/heroes5.js` (state in `p.n5`, lazily created). Wiring: the `v27` section at the end of `build.py`.
 All five need LEGAL_QUESTIONS_FOR_COUNSEL.md entries (living people): names/likeness cues, "(แนวล้อ)" Thai labels.
 
-## Hero Select 2.0 (`src/modules/select2.js`)
-Poster stage (4× hero, move loop, sunburst in hero colour), info panel (stats, move list with pulsing active move, ranks, best time),
-18-per-row portrait roster that scrolls by row, origin stripe, NEW badges, 10 country filter chips (F). Overrides `drawSelect/cardRect/cardAt`;
-`selInput` (select.js) still does F / R / mouse. Old versions are kept as `drawSelectOld/cardRectOld/cardAtOld`.
-New origins: VN, TR, ID (`select.js`).
+## Hero Select 3.0 — three-poster select (`src/modules/select3.js`, replaces the earlier select2)
+Three side-by-side posters: previous / **selected** / next hero. Each poster is drawn by the game with a country motif behind the hero
+(TH prang + lanterns, HK neon + rain, CN moon + mountains + pagoda, IN holi dust + dome + bunting, KR skyline + hanok + petals, JP sun + torii + sakura,
+VN lanterns + rice terraces, TR domes + minarets + balloons, ID stepped stupa), the name, Thai name, role, 4 stat bars, and a 4-slot move strip
+(J / K / S+J / L, small animated icons, the active slot pulses). Slot labels are parsed from each hero's own move text, with generic fallbacks
+(ATTACK / SPECIAL / SKILL / ULTIMATE) in dimmer text; the "bottom moves" are meant to be edited per hero later.
+A one-row mini roster across the top, 10 country filter chips (F), R random, V look, TAB stage, mouse click on poster or mini roster.
+Old versions remain as `drawSelectOld/cardRectOld/cardAtOld`. New origins: VN, TR, ID (`select.js`).
+No AI-generated art is used; all poster art is drawn in code. A Gemini triptych with real names/likenesses must not be used as is.
 
 ## Look presets (`look.js`)
 V cycles HEROIC (default; head x1.2, legs x1.42, reach x1.42) -> BIG HEADS (v26) -> CLASSIC. Saved in `localStorage.omr_look2`.

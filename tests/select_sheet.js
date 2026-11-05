@@ -7,6 +7,6 @@ const srv = http.createServer((q, r) => { r.writeHead(200, { 'content-type': 'te
   await pg.goto('http://127.0.0.1:' + srv.address().port + '/'); await pg.addScriptTag({ content: BOT }); await pg.waitForTimeout(300);
   await pg.evaluate(async () => { ONE.enterSelect(); await __T.S(300); });
   const keys = await pg.evaluate(() => CHAR_KEYS);
-  for (let i = 0; i < keys.length; i++) { await pg.evaluate(async i => { ONE.G.sel = i; await __T.S(250); }, i); await pg.screenshot({ path: OUT + '/sel_' + String(i).padStart(2, '0') + '_' + keys[i] + '.png', clip: { x: 360, y: 40, width: 600, height: 320 } }); }
+  for (let i = 0; i < keys.length; i++) { await pg.evaluate(async i => { ONE.G.sel = i; await __T.S(250); }, i); await pg.screenshot({ path: OUT + '/sel_' + String(i).padStart(2, '0') + '_' + keys[i] + '.png', fullPage: false }); }
   console.log('errors', JSON.stringify(errs)); await b.close(); srv.close();
 })();

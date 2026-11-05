@@ -35,7 +35,7 @@ function selInput(ip, dt) {                       // returns true when the hero 
   }
   if (G.randPick > 0) G.randPick -= dt;
   // mouse hover picks the card under the pointer
-  if (G.lastMouse && (Math.abs(mouse.x - G.lastMouse.x) > 0.5 || Math.abs(mouse.y - G.lastMouse.y) > 0.5)) { const c = cardAt(mouse.x, mouse.y); if (c >= 0 && c !== G.sel) { G.sel = c; audio.play('bounce'); } }
+  if (G.lastMouse && (Math.abs(mouse.x - G.lastMouse.x) > 0.5 || Math.abs(mouse.y - G.lastMouse.y) > 0.5)) { const c = typeof miniAt === 'function' ? miniAt(mouse.x, mouse.y) : cardAt(mouse.x, mouse.y); if (c >= 0 && c !== G.sel) { G.sel = c; audio.play('bounce'); } }
   G.lastMouse = { x: mouse.x, y: mouse.y };
   return null;
 }

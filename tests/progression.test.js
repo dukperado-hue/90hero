@@ -114,7 +114,7 @@ const disk = page => page.evaluate(() => { try { return JSON.parse(localStorage.
     });
     // mouse: click the locked RAM card twice (17th card, second row, col 7)
     const box = await page.locator('canvas').boundingBox();
-    const sx = box.width / 480, sy = box.height / 270; const cr = await page.evaluate(() => cardRect(16)); const cx = box.x + (cr.x + 20) * sx, cy = box.y + (cr.y + 14) * sy;   // geometry from the game (grid width changes with the roster)
+    const sx = box.width / 480, sy = box.height / 270; const cr = await page.evaluate(() => cardRect(16)); const mw = await page.evaluate(() => (typeof miniW === 'function' ? miniW() : 40)); const cx = box.x + (cr.x + mw / 2) * sx, cy = box.y + (cr.y + (typeof MINI !== 'undefined' ? 8 : 14)) * sy;   // geometry from the game (grid width changes with the roster)
     await page.mouse.click(cx, cy); await page.waitForTimeout(150); await page.mouse.click(cx, cy); await page.waitForTimeout(200);
     const click = await page.evaluate(() => ({ mode: ONE.G.mode, sel: ONE.G.sel }));
     await page.screenshot({ path: SHOTS + '/select_locked.png' });

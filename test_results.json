@@ -214,7 +214,7 @@
   "name": "T2 stage 02 clear recorded (forced C)",
   "ok": true,
   "info": {
-   "time": 90.33,
+   "time": 88.06,
    "rank": "C"
   }
  },
@@ -223,20 +223,21 @@
   "ok": true,
   "info": {
    "mode": "win",
-   "time": 88.13,
-   "deaths": 1,
-   "rank": "A",
-   "expected": "A",
+   "time": 83.8,
+   "deaths": 0,
+   "rank": "S",
+   "expected": "S",
    "prog": {
     "prevHero": "C",
     "prevStage": "C",
-    "heroBest": "A",
+    "heroBest": "S",
     "newRank": true,
     "unlocked": [
      "nine",
      "li",
      "dong",
      "srk",
+     "oldboy",
      "gada",
      "hongbao"
     ]
@@ -247,8 +248,8 @@
   "name": "T3 better rank replaces saved rank",
   "ok": true,
   "info": {
-   "got": "A",
-   "saved": "A"
+   "got": "S",
+   "saved": "S"
   }
  },
  {
@@ -269,6 +270,7 @@
     "li",
     "dong",
     "srk",
+    "oldboy",
     "gada",
     "hongbao"
    ],
@@ -277,6 +279,7 @@
     "li",
     "dong",
     "srk",
+    "oldboy",
     "gada",
     "hongbao"
    ]
@@ -299,6 +302,7 @@
    "li",
    "dong",
    "srk",
+   "oldboy",
    "gada",
    "hongbao"
   ]
@@ -308,7 +312,7 @@
   "ok": true,
   "info": {
    "run": "C",
-   "saved": "A"
+   "saved": "S"
   }
  },
  {
@@ -330,7 +334,7 @@
    "ranks": {
     "1": {},
     "2": {
-     "wah": "A"
+     "wah": "S"
     },
     "3": {},
     "4": {},
@@ -346,6 +350,7 @@
     "juk",
     "li",
     "nine",
+    "oldboy",
     "shaolin",
     "sombat",
     "sorapong",
@@ -359,7 +364,7 @@
  {
   "name": "T6 best time (original key) kept",
   "ok": true,
-  "info": "76.95833333334065"
+  "info": "83.80000000001276"
  },
  {
   "name": "T5 unlocked UNCLE NINE can be selected and plays",
@@ -375,7 +380,7 @@
     "mode": "play",
     "x": 788,
     "deaths": 0,
-    "time": 4.941666666666702
+    "time": 5.000000000000038
    }
   }
  },
@@ -389,7 +394,7 @@
   "info": {
    "1": {},
    "2": {
-    "wah": "A"
+    "wah": "S"
    },
    "3": {
     "vijay": "A"
@@ -403,8 +408,8 @@
   "name": "T8 stage 01 completes with wah",
   "ok": true,
   "info": {
-   "time": 134.95,
-   "deaths": 8
+   "time": 112.53,
+   "deaths": 7
   }
  },
  {
@@ -430,7 +435,7 @@
   "name": "T8 stage 03 completes with fei",
   "ok": true,
   "info": {
-   "time": 142.84,
+   "time": 141.1,
    "deaths": 6
   }
  },
@@ -457,7 +462,7 @@
   "name": "T8 stage 03 completes with vijay",
   "ok": true,
   "info": {
-   "time": 150.95,
+   "time": 148.93,
    "deaths": 6
   }
  },
