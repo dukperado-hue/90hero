@@ -1,0 +1,11 @@
+const { chromium } = require('playwright'); const http = require('http'), fs = require('fs'), path = require('path');
+const BOT = fs.readFileSync(__dirname + '/bot.js', 'utf8'); const F = path.resolve(process.argv[2]);
+const srv = http.createServer((q, r) => { r.writeHead(200, { 'content-type': 'text/html' }); r.end(fs.readFileSync(F)); }).listen(0);
+(async () => { const b = await chromium.launch(); const pg = await (await b.newContext({ viewport: { width: 960, height: 540 } })).newPage(); const errs = []; pg.on('pageerror', e => errs.push(String(e)));
+  await pg.goto('http://127.0.0.1:' + srv.address().port + '/'); await pg.addScriptTag({ content: BOT }); await pg.waitForTimeout(400);
+  const r = await pg.evaluate(async () => { ONE.enterSelect(); await __T.S(400); while (ONE.STAGE !== 1) await __T.tap('Tab'); ONE.G.sel = CHAR_KEYS.indexOf('kham'); await __T.tap('Enter'); await __T.S(1300); for (let i = 0; i < 2000 && ONE.G.cine; i++) ONE.step(1/120, {});
+    const G = ONE.G, p = G.player; G.enemies.forEach(e => e.dead = true); p.x = 40 * 16; p.y = 18 * 16 - p.h; for (let i = 0; i < 60; i++) ONE.step(1/120, {});
+    const e = mkEnemy('soldier', 40, 16); e.y = p.y - 30; e.hp = 99; e.para = false; G.enemies.push(e); const hp0 = e.hp;
+    keys.up = true; for (let i = 0; i < 4; i++) { pressed.shoot = true; ONE.step(1/120, { shoot: true }); for (let k = 0; k < 40; k++) ONE.step(1/120, {}); } keys.up = false;
+    return { ch: p.ch, hp0, hp1: e.hp, sw: p.swingK }; });
+  console.log(JSON.stringify(r), errs); await b.close(); srv.close(); })();
