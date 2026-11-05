@@ -8342,7 +8342,8 @@ function selAnim(k, q, t, on) {                      // idle / action loop for o
 }
 // ---------- layout
 const PN = { x0: 4, w: 154, gap: 5, y: 32, h: 170, heroH: 118, sy: 206, sh: 46 };
-const panelX = s => PN.x0 + s * (PN.w + PN.gap);
+let selSlideX = 0;                                  // posters glide when the selection changes (px, eases to 0)
+const panelX = s => PN.x0 + s * (PN.w + PN.gap) + Math.round(selSlideX);
 function selList() { const a = []; for (let i = 0; i < CHAR_KEYS.length; i++) if (selMatch(CHAR_KEYS[i]) || i === G.sel) a.push(i); return a; }
 function selNb() { const a = selList(), p = a.indexOf(G.sel), n = a.length; return { prev: n >= 3 ? a[(p - 1 + n) % n] : -1, next: n >= 2 ? a[(p + 1) % n] : -1, n }; }
 const MINI = { y: 15, h: 17 };
@@ -8460,6 +8461,7 @@ function drawPoster(slot, idx, t, selected) {
   ctx.globalAlpha = 1; if (locked) txt('?', x + w / 2, y + 36, '#ffd23f', 28, 'center');
   ctx.restore();
   const vg = ctx.createLinearGradient(0, y + bh - 30, 0, y + bh); vg.addColorStop(0, 'rgba(10,5,16,0)'); vg.addColorStop(1, 'rgba(10,5,16,0.9)'); ctx.fillStyle = vg; ctx.fillRect(x, y + bh - 30, w, 30);
+  { const qs = (QUIPS[k] || []).find(z => /^[\x20-\x7e]+$/.test(z)); if (qs && !locked) txt('“' + qs.slice(0, 30) + '”', x + w / 2, y + bh - 10, selected ? '#ffe9b8' : '#a89888', 6, 'center'); }
   drawOriginTag(k, x + 4, y + 4); txt(ORIGIN_NAME[o] || '', x + 19, y + 5, ORIGIN_COL[o] || '#fff', 6, 'left', false);
   if ((SEL_NEW.has(k) || PROG.fresh.includes(k)) && !locked && Math.floor(t * 3) % 2 === 0) { ctx.fillStyle = '#ff2a4a'; ctx.fillRect(x + w - 24, y + 4, 21, 9); txt('NEW', x + w - 13, y + 5, '#fff', 7, 'center', false); }
   // name block
@@ -8491,6 +8493,8 @@ function drawPoster(slot, idx, t, selected) {
 }
 function drawSelect() {
   const t = G.clock, k = CHAR_KEYS[G.sel], C = CHARS[k], n = CHAR_KEYS.length, nb = selNb();
+  if (G._selSeen !== G.sel) { if (G._selSeen != null && G.sel !== G._selSeen) { const L = CHAR_KEYS.length, d = (G.sel - G._selSeen + L) % L; selSlideX = (d > L / 2 ? -1 : 1) * (PN.w + PN.gap) * 0.55; } G._selSeen = G.sel; }
+  selSlideX *= 0.8; if (Math.abs(selSlideX) < 0.5) selSlideX = 0;
   const bg = ctx.createLinearGradient(0, 0, 0, VH); bg.addColorStop(0, '#0b0412'); bg.addColorStop(1, '#1e0818'); ctx.fillStyle = bg; ctx.fillRect(0, 0, VW, VH);
   // header: title, count, country chips
   txt('CHOOSE YOUR HERO', 6, 1, '#ffd23f', 10, 'left'); txt('เลือกตัวละคร', 108, 3, '#ffe9b8', 7, 'left', false); txt(CHAR_KEYS.filter(isUnlocked).length + '/' + n, 172, 3, '#7dff8a', 7, 'left', false);
