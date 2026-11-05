@@ -1,0 +1,488 @@
+[
+ {
+  "name": "rank thresholds are per stage and match the table",
+  "ok": true,
+  "info": [
+   "S",
+   "A",
+   "A",
+   "B",
+   "B",
+   "C",
+   "C",
+   "S",
+   "A",
+   "B",
+   "C",
+   "S",
+   "A",
+   "B",
+   "C"
+  ]
+ },
+ {
+  "name": "corrupt JSON: game loads, 9 starters, backup kept",
+  "ok": true,
+  "info": {
+   "unlocked": [
+    "shaolin",
+    "eagle",
+    "sombat",
+    "sorapong",
+    "juk",
+    "wah",
+    "fei",
+    "vijay",
+    "ximen"
+   ],
+   "bak": "{not json"
+  }
+ },
+ {
+  "name": "malformed fields are dropped, valid ones kept",
+  "ok": true,
+  "info": {
+   "v": 1,
+   "ranks": {
+    "1": {
+     "ma": "S"
+    },
+    "2": {},
+    "3": {},
+    "4": {},
+    "5": {},
+    "6": {}
+   },
+   "clears": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+   },
+   "unlocked": [
+    "shaolin",
+    "eagle",
+    "sombat",
+    "sorapong",
+    "juk",
+    "wah",
+    "fei",
+    "vijay",
+    "ximen",
+    "ram",
+    "ma",
+    "sura",
+    "phiphop",
+    "kham",
+    "bey"
+   ],
+   "fresh": [
+    "ma",
+    "sura",
+    "phiphop",
+    "kham",
+    "bey"
+   ]
+  }
+ },
+ {
+  "name": "rule-based unlocks are derived from loaded ranks",
+  "ok": true,
+  "info": [
+   "shaolin",
+   "eagle",
+   "sombat",
+   "sorapong",
+   "juk",
+   "wah",
+   "fei",
+   "vijay",
+   "ximen",
+   "ram",
+   "ma",
+   "sura",
+   "phiphop",
+   "kham",
+   "bey"
+  ]
+ },
+ {
+  "name": "wrong JSON type (array) handled as corrupt",
+  "ok": true,
+  "info": [
+   "shaolin",
+   "eagle",
+   "sombat",
+   "sorapong",
+   "juk",
+   "wah",
+   "fei",
+   "vijay",
+   "ximen"
+  ]
+ },
+ {
+  "name": "legacy save: heroes with an old best time stay unlocked, old times kept",
+  "ok": true,
+  "info": [
+   "shaolin",
+   "eagle",
+   "sombat",
+   "sorapong",
+   "juk",
+   "wah",
+   "fei",
+   "vijay",
+   "ximen",
+   "li"
+  ]
+ },
+ {
+  "name": "storage blocked (throws): game still boots with 9 starters",
+  "ok": true,
+  "info": {
+   "mode": "title",
+   "n": 9
+  }
+ },
+ {
+  "name": "T1 first-time player has exactly 9 unlocked heroes",
+  "ok": true,
+  "info": [
+   "shaolin",
+   "eagle",
+   "sombat",
+   "sorapong",
+   "juk",
+   "wah",
+   "fei",
+   "ximen",
+   "vijay"
+  ]
+ },
+ {
+  "name": "T1 progress record saved on first boot",
+  "ok": true
+ },
+ {
+  "name": "T7 number key on a locked hero only selects it",
+  "ok": true,
+  "info": {
+   "mode": "select",
+   "sel": 5
+  }
+ },
+ {
+  "name": "T7 Enter on a locked hero is refused (deny feedback)",
+  "ok": true,
+  "info": {
+   "mode": "select",
+   "deny": true
+  }
+ },
+ {
+  "name": "T7 W / J on a locked hero are refused",
+  "ok": true
+ },
+ {
+  "name": "T7 arrow-select + Enter on locked hero refused",
+  "ok": true,
+  "info": {
+   "mode": "select",
+   "sel": 7
+  }
+ },
+ {
+  "name": "T7 double-click on locked card refused",
+  "ok": true,
+  "info": {
+   "mode": "select",
+   "sel": 16
+  }
+ },
+ {
+  "name": "T7 unlocked hero (number key) still starts the game",
+  "ok": true,
+  "info": {
+   "mode": "play",
+   "ch": "shaolin"
+  }
+ },
+ {
+  "name": "T2 stage 02 clear recorded (forced C)",
+  "ok": true,
+  "info": {
+   "time": 90.33,
+   "rank": "C"
+  }
+ },
+ {
+  "name": "T2 rank shown equals per-stage rule",
+  "ok": true,
+  "info": {
+   "mode": "win",
+   "time": 88.13,
+   "deaths": 1,
+   "rank": "A",
+   "expected": "A",
+   "prog": {
+    "prevHero": "C",
+    "prevStage": "C",
+    "heroBest": "A",
+    "newRank": true,
+    "unlocked": [
+     "nine",
+     "li",
+     "dong",
+     "srk",
+     "gada",
+     "hongbao"
+    ]
+   }
+  }
+ },
+ {
+  "name": "T3 better rank replaces saved rank",
+  "ok": true,
+  "info": {
+   "got": "A",
+   "saved": "A"
+  }
+ },
+ {
+  "name": "T5 unlock: Rank B+ on stage 02 unlocks UNCLE NINE",
+  "ok": true,
+  "info": {
+   "unlocked": [
+    "shaolin",
+    "eagle",
+    "sombat",
+    "sorapong",
+    "juk",
+    "wah",
+    "fei",
+    "vijay",
+    "ximen",
+    "nine",
+    "li",
+    "dong",
+    "srk",
+    "gada",
+    "hongbao"
+   ],
+   "thisRun": [
+    "nine",
+    "li",
+    "dong",
+    "srk",
+    "gada",
+    "hongbao"
+   ]
+  }
+ },
+ {
+  "name": "T5 unlock: Rank A+ on stage 02 unlocks DAGGER LI; Rank A with AH WAH unlocks DONGFANG",
+  "ok": true,
+  "info": [
+   "shaolin",
+   "eagle",
+   "sombat",
+   "sorapong",
+   "juk",
+   "wah",
+   "fei",
+   "vijay",
+   "ximen",
+   "nine",
+   "li",
+   "dong",
+   "srk",
+   "gada",
+   "hongbao"
+  ]
+ },
+ {
+  "name": "T4 worse rank does not overwrite best",
+  "ok": true,
+  "info": {
+   "run": "C",
+   "saved": "A"
+  }
+ },
+ {
+  "name": "T4 clear count increments",
+  "ok": true,
+  "info": {
+   "1": 0,
+   "2": 3,
+   "3": 0,
+   "4": 0,
+   "5": 0,
+   "6": 0
+  }
+ },
+ {
+  "name": "T6 refresh keeps ranks, unlocks, clears",
+  "ok": true,
+  "info": {
+   "ranks": {
+    "1": {},
+    "2": {
+     "wah": "A"
+    },
+    "3": {},
+    "4": {},
+    "5": {},
+    "6": {}
+   },
+   "unlocked": [
+    "dong",
+    "eagle",
+    "fei",
+    "gada",
+    "hongbao",
+    "juk",
+    "li",
+    "nine",
+    "shaolin",
+    "sombat",
+    "sorapong",
+    "srk",
+    "vijay",
+    "wah",
+    "ximen"
+   ]
+  }
+ },
+ {
+  "name": "T6 best time (original key) kept",
+  "ok": true,
+  "info": "76.95833333334065"
+ },
+ {
+  "name": "T5 unlocked UNCLE NINE can be selected and plays",
+  "ok": true,
+  "info": {
+   "st": {
+    "mode": "play",
+    "ch": "nine",
+    "stage": 2
+   },
+   "r": {
+    "x0": 64,
+    "mode": "play",
+    "x": 788,
+    "deaths": 0,
+    "time": 4.941666666666702
+   }
+  }
+ },
+ {
+  "name": "T5 NEW tag cleared after picking the hero",
+  "ok": true
+ },
+ {
+  "name": "two tabs: a save from tab B merges instead of erasing tab A's result",
+  "ok": true,
+  "info": {
+   "1": {},
+   "2": {
+    "wah": "A"
+   },
+   "3": {
+    "vijay": "A"
+   },
+   "4": {},
+   "5": {},
+   "6": {}
+  }
+ },
+ {
+  "name": "T8 stage 01 completes with wah",
+  "ok": true,
+  "info": {
+   "time": 134.95,
+   "deaths": 8
+  }
+ },
+ {
+  "name": "T2 stage 01 rank recorded (wah)",
+  "ok": true,
+  "info": {
+   "rank": "C",
+   "saved": "C",
+   "unlocked": [
+    "shaolin",
+    "eagle",
+    "sombat",
+    "sorapong",
+    "juk",
+    "wah",
+    "fei",
+    "vijay",
+    "ximen"
+   ]
+  }
+ },
+ {
+  "name": "T8 stage 03 completes with fei",
+  "ok": true,
+  "info": {
+   "time": 142.84,
+   "deaths": 6
+  }
+ },
+ {
+  "name": "T2 stage 03 rank recorded (fei)",
+  "ok": true,
+  "info": {
+   "rank": "C",
+   "saved": "C",
+   "unlocked": [
+    "shaolin",
+    "eagle",
+    "sombat",
+    "sorapong",
+    "juk",
+    "wah",
+    "fei",
+    "vijay",
+    "ximen"
+   ]
+  }
+ },
+ {
+  "name": "T8 stage 03 completes with vijay",
+  "ok": true,
+  "info": {
+   "time": 150.95,
+   "deaths": 6
+  }
+ },
+ {
+  "name": "T2 stage 03 rank recorded (vijay)",
+  "ok": true,
+  "info": {
+   "rank": "C",
+   "saved": "C",
+   "unlocked": [
+    "shaolin",
+    "eagle",
+    "sombat",
+    "sorapong",
+    "juk",
+    "wah",
+    "fei",
+    "vijay",
+    "ximen"
+   ]
+  }
+ },
+ {
+  "name": "no uncaught page errors during all tests",
+  "ok": true,
+  "info": []
+ }
+]

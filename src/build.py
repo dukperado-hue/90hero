@@ -457,5 +457,72 @@ rep("    if (held('down') && p.kneeCd <= 0) { p.kneeCd = 1.4; p.kneeT = 0.45; p.
     "    else {                                                     // PRIMARY: elbow - knee - elbow")
 rep("      if (k === 'punch') { px(1, -16, 5, 2, SK); px(5, -18, 2, 4, SK); }           // elbow strike", "      if (k === 'upper') { px(0, -26, 3, 10, SK); px(-1, -29, 4, 4, SK); px(-5, -17, 2, 5, SK); }   // rising elbow, straight up\n      else if (k === 'punch') { px(1, -16, 5, 2, SK); px(5, -18, 2, 4, SK); }           // elbow strike")
 rep("ELBOW-KNEE J  BONE BREAKER K  FLYING KNEE S+J", "ELBOW-KNEE J  UP+J RISING ELBOW  BREAKER K  KNEE S+J")
+
+# ======================= v27: FIVE NEW HEROES + HERO SELECT 2.0 + LOOK PRESETS =======================
+heroes5_js = open(ROOT + '/modules/heroes5.js').read()
+sel2_js = open(ROOT + '/modules/select2.js').read()
+rep("\nfunction slapLaunch(e, dir, power) {", "\n" + heroes5_js + "\nfunction slapLaunch(e, dir, power) {")
+rep("  madong: { name: 'FIST HYUNG',", """  furie: { name: 'AUNTIE FURIE', card: 'A.FURIE', cn: '怒姨', th: 'ป้าฟิวรี่ (แนวล้อ)', tag: 'GUN-FU ASSASSIN', col: '#e04aff', role: 'GUN-FU / PRECISION', diff: 2,
+    lines: ['ROLE: GUN-FU / PRECISION   ·   DIFFICULTY ★★☆', 'J  PISTOL (POINT BLANK = ELBOW + SHOT)  ·  S+J  THE ONE HEADSHOT', 'K  TACTICAL SLIDE: DISARMS AND THROWS WHOEVER IS IN THE WAY', 'L  NO MERCY: A CURVING BULLET FOR EVERY FACE ON SCREEN'],
+    stats: [['SPEED', 4], ['POWER', 3], ['RANGE', 4], ['SAFETY', 2]] },
+  bey: { name: 'UNCLE THUNDER-BEY', card: 'T-BEY', cn: '雷伯', th: 'ลุงสายฟ้าหนวดเฟิ้ม (แนวล้อ)', tag: 'SLOW · HEAVY · UNBREAKABLE', col: '#e8a030', role: 'BRAWLER / TANK', diff: 1,
+    lines: ['ROLE: BRAWLER / TANK   ·   DIFFICULTY ★☆☆', 'J  HEAVY FISTS (EVERY 2ND KNOCKS OUT)  ·  S+J  STOMP  ·  AIR J  DIVE', 'K  CURVED SWORD: WIDE SLASH THAT BATS BULLETS BACK', 'EVERY 2ND HIT BOUNCES OFF HIM. HE RUNS SLOWLY. HE DOES NOT CARE.', 'L  SAVIOR OF THE WORLD: THE GROUND ANSWERS (+1 HEART)'],
+    stats: [['SPEED', 1], ['POWER', 5], ['RANGE', 2], ['SAFETY', 5]] },
+  gada: { name: 'MACE-RAJA', card: 'MACE-RAJA', cn: '棍王', th: 'ราชากระบอง (แนวล้อ)', tag: 'THE GADA SMASH', col: '#ff9a3a', role: 'BRAWLER / AREA', diff: 2,
+    lines: ['ROLE: BRAWLER / AREA   ·   DIFFICULTY ★★☆', 'J  MACE ARCS: THE THIRD ONE SENDS THEM THROUGH THE WALL', 'S+J  GROUND SMASH (CRACKS WALLS)  ·  K  THROW THE MACE: IT COMES BACK', 'L  GADA WHIRLWIND: SPIN, STEER, LAUNCH EVERYTHING AROUND HIM'],
+    stats: [['SPEED', 2], ['POWER', 5], ['RANGE', 3], ['SAFETY', 3]] },
+  silat: { name: 'AGENT SILAT', card: 'SILAT', cn: '拳影', th: 'เอเจนต์ซิลัต (แนวล้อ)', tag: 'SILAT + SMG', col: '#4ae8a0', role: 'MELEE / GUN HYBRID', diff: 3,
+    lines: ['ROLE: MELEE / GUN HYBRID   ·   DIFFICULTY ★★★', 'J  ELBOW - KNEE - SPINNING KICK  ·  S+J  LOW SWEEP', 'K (HOLD)  SUBMACHINE GUN: 30 ROUNDS, REFILLS WHILE NOT FIRING', 'L  THE RAID: SPRAY EVERY FOE ON SCREEN, THEN A SPINNING FINISHER'],
+    stats: [['SPEED', 5], ['POWER', 3], ['RANGE', 3], ['SAFETY', 2]] },
+  hongbao: { name: 'UNCLE HONG-BAO', card: 'HONG-BAO', cn: '洪包叔', th: 'ลุงอั่งเปา (แนวล้อ)', tag: 'THE NIMBLE FAT UNCLE', col: '#ff5a4a', role: 'ACROBAT / BRAWLER', diff: 2,
+    lines: ['ROLE: ACROBAT / BRAWLER   ·   DIFFICULTY ★★☆', 'J  KICK - KICK - SPINNING KICK  ·  AIR J  FLYING DROP-KICK', 'S+J  BELLY BUMP (BIG SHOVE)  ·  K  LOB A STEAMED BUN (STUNS)', 'L  ALL-YOU-CAN-EAT: +1 HEART, THEN ROLL THROUGH EVERYONE'],
+    stats: [['SPEED', 5], ['POWER', 3], ['RANGE', 2], ['SAFETY', 3]] },
+  madong: { name: 'FIST HYUNG',""")
+rep("'ichi', 'ogami', 'juk', 'aamir'];", "'ichi', 'ogami', 'juk', 'aamir', 'furie', 'bey', 'gada', 'silat', 'hongbao'];")
+rep("aamir: ['CHACHA PERFECT', 'C.PERFECT'],", "aamir: ['CHACHA PERFECT', 'C.PERFECT'], furie: ['AUNTIE FURIE', 'A.FURIE'], bey: ['UNCLE THUNDER-BEY', 'T-BEY'], gada: ['MACE-RAJA', 'MACE-RAJA'], silat: ['AGENT SILAT', 'SILAT'], hongbao: ['UNCLE HONG-BAO', 'HONG-BAO'],")
+rep("  aamir: { stage: 4, rank: 'B' },", "  aamir: { stage: 4, rank: 'B' },\n  furie: { stage: 3, rank: 'B' }, bey: { stage: 1, rank: 'A' }, gada: { stage: 2, rank: 'A' }, silat: { stage: 3, rank: 'A' }, hongbao: { stage: 2, rank: 'B' },")
+rep("'ogami', 'ram'];", "'ogami', 'ram', 'furie', 'bey', 'gada', 'silat', 'hongbao'];")
+rep("const RUNCFG = { aamir: {", "const RUNCFG = { furie: { run: 205, jump: 455 }, bey: { run: 150, jump: 420 }, gada: { run: 176, jump: 440 }, silat: { run: 215, jump: 470 }, hongbao: { run: 222, jump: 480 }, aamir: {")
+rep("  else if (p.ch === 'aamir') updAamir(p, dt, ip);", "  else if (p.ch === 'aamir') updAamir(p, dt, ip);\n  else if (p.ch === 'furie') updFurie(p, dt, ip);\n  else if (p.ch === 'bey') updBey(p, dt, ip);\n  else if (p.ch === 'gada') updGada(p, dt, ip);\n  else if (p.ch === 'silat') updSilat(p, dt, ip);\n  else if (p.ch === 'hongbao') updHongbao(p, dt, ip);")
+rep("function drawPlayerRaw(p) { if (p.ch === 'aamir') return drawAamir(p);", "function drawPlayerRaw(p) { if (DRAW5[p.ch]) return DRAW5[p.ch](p); if (p.ch === 'aamir') return drawAamir(p);")
+rep("  } else if (p.ch === 'aamir') {\n    startTrain(p);", "  } else if (NEW5.has(p.ch)) {\n    ult5(p);\n  } else if (p.ch === 'aamir') {\n    startTrain(p);")
+rep("aamir: ['JO JEETA WOHI SIKANDAR!', 'ONE MORE ROUND, SIR.', 'PERFECT.'],", """aamir: ['JO JEETA WOHI SIKANDAR!', 'ONE MORE ROUND, SIR.', 'PERFECT.'],
+  furie: ['NO MERCY.', 'REVENGE, SENSIBLY DRESSED.', 'RELOAD? NO. FINISH.'], bey: ['I AM THE SAVIOR OF THE WORLD.', 'MOUSTACHE FIRST.', 'SLOWLY. THEN ALL AT ONCE.'],
+  gada: ['MACE OF JUSTICE!', 'ONE SWING. ONE VILLAGE.', 'THAAP!'], silat: ['FIFTEEN FLOORS. NO LIFT.', 'SILAT. THEN BULLETS.', 'THE CORRIDOR IS MINE.'],
+  hongbao: ['LIGHT ON MY FEET. HEAVY ON YOUR FACE.', 'DUMPLINGS FIRST.', 'A GOOD LUNCH IS A WEAPON.'],""")
+rep("const HERO_POW = { aamir: 0.95, ", "const HERO_POW = { furie: 1.05, bey: 1.1, gada: 1.0, silat: 1.12, hongbao: 1.08, aamir: 0.95, ")
+rep("srk: 'introSRK', aamir: 'introAamir',", "srk: 'introSRK', aamir: 'introAamir', furie: 'introNew5', bey: 'introNew5', gada: 'introNew5', silat: 'introNew5', hongbao: 'introNew5',")
+rep("    case 'introSingham':", """    case 'introNew5':
+      p.vx = 0;
+      if (at(0.2)) { audio.play('whoosh'); dust(p.x + p.w / 2, p.y + p.h, 6, 8); }
+      if (at(0.55)) { p.swingT = 0.4; p.swingK = (p.ch === 'gada' || p.ch === 'bey') ? 'slash' : 'punch'; if (p.ch === 'furie' || p.ch === 'silat') p.shootT = 0.4; audio.play('whoosh'); popup(p.x + 5, p.y - 16, '"' + (QUIPS[p.ch] || ['ACTION!'])[0] + '"', heroOf(p).col, true); }
+      if (c.t > 1.5) G.cine = null;
+      break;
+    case 'introSingham':""")
+rep("const r = p.ch === 'aamir' ? clamp(1 - (p.bikeCd || 0) / 3.2, 0, 1) : ", "const r = HUD5[p.ch] ? HUD5[p.ch](p) : p.ch === 'aamir' ? clamp(1 - (p.bikeCd || 0) / 3.2, 0, 1) : ")
+rep("'ichi', 'ogami', 'aamir'].includes(p.ch)) {", "'ichi', 'ogami', 'aamir', 'furie', 'bey', 'gada', 'silat', 'hongbao'].includes(p.ch)) {")
+rep("srk: 'ARMS', aamir: 'BIKE',", "srk: 'ARMS', aamir: 'BIKE', furie: 'SLIDE', bey: 'BLADE', gada: 'MACE', silat: 'MAG', hongbao: 'BUN',")
+rep("TRAIN DARE L',", """TRAIN DARE L',
+    furie: 'MOVE A/D  JUMP W/CTRL  PISTOL J  SLIDE K  HEADSHOT S+J  NO MERCY L',
+    bey: 'MOVE A/D  JUMP W/CTRL  HEAVY FISTS J  SWORD K  STOMP S+J  DIVE AIR+J  SAVIOR L',
+    gada: 'MOVE A/D  JUMP W/CTRL  MACE J  THROW K  GROUND SMASH S+J  WHIRLWIND L',
+    silat: 'MOVE A/D  JUMP W/CTRL  SILAT J  SMG HOLD K  SWEEP S+J  THE RAID L',
+    hongbao: 'MOVE A/D  JUMP W/CTRL  KICKS J  BUN K  BELLY BUMP S+J  AIR+J DROP-KICK  BUFFET L',""")
+rep("['TRAINS DARED', String(s.ults)]],", """['TRAINS DARED', String(s.ults)]],
+    furie: [['SHOTS FIRED', String(s.shots)], ['NO MERCY', String(s.ults)]], bey: [['BLOWS LANDED', String(s.melee)], ['WORLDS SAVED', String(s.ults)]],
+    gada: [['SWINGS LANDED', String(s.melee)], ['WHIRLWINDS', String(s.ults)]], silat: [['ROUNDS FIRED', String(s.shots)], ['RAIDS', String(s.ults)]],
+    hongbao: [['HITS LANDED', String(s.melee)], ['BUFFETS', String(s.ults)]],""")
+rep("  if (p.ch === 'paimei' && p.stanceT > 0) {", "  if (p.ch === 'bey') { const s5 = n5(p); s5.shrug++; if (s5.shrug % 2 === 1) { p.inv = 0.6; popup(p.x + 5, p.y - 12, 'NOT EVEN A SCRATCH.', '#e8a030'); audio.play('clang'); sparks(p.x + 5, p.y + 8, 5, p.face, '#ffffff'); return; } }\n  if (p.ch === 'paimei' && p.stanceT > 0) {")
+rep("(P.ch === 'siang' || P.ch === 'sura' || P.ch === 'juk')", "(P.ch === 'siang' || P.ch === 'sura' || P.ch === 'juk' || NEW5.has(P.ch))")
+rep("    else if (q.kind === 'shot') { ctx.fillStyle = '#fff2b0'; ctx.fillRect(-3, -1, 6, 2); }", """    else if (q.kind === 'bun') { ctx.rotate(q.t * 10); ctx.fillStyle = '#f8f0e0'; ctx.beginPath(); ctx.arc(0, 0, 4, 0, 6.283); ctx.fill(); ctx.fillStyle = '#d8c8a8'; ctx.fillRect(-1, -4, 2, 2); ctx.fillStyle = '#fff'; ctx.fillRect(-2, -2, 2, 1); }
+    else if (q.kind === 'mace') { ctx.rotate(q.rot || 0); ctx.fillStyle = '#6a4a2a'; ctx.fillRect(-1, -3, 2, 12); ctx.fillStyle = '#d8a830'; ctx.beginPath(); ctx.arc(0, -6, 5, 0, 6.283); ctx.fill(); ctx.fillStyle = '#ffe28a'; ctx.fillRect(-1, -12, 2, 3); ctx.fillRect(-9, -7, 3, 2); ctx.fillRect(6, -7, 3, 2); }
+    else if (q.kind === 'shot') { ctx.fillStyle = '#fff2b0'; ctx.fillRect(-3, -1, 6, 2); }""")
+# hero select 2.0
+rep("\nfunction spawnDovesUI(x, y) {", "\n" + sel2_js + "\nfunction spawnDovesUI(x, y) {")
+rep("function drawSelect() {\n  ctx.fillStyle = 'rgba(8,2,12,0.76)'", "function drawSelectOld() {\n  ctx.fillStyle = 'rgba(8,2,12,0.76)'")
+rep("function cardRect(i) { const c = i % CARD.cols,", "function cardRectOld(i) { const c = i % CARD.cols,")
+rep("function cardAt(mx, my) { for (let i = 0; i < CHAR_KEYS.length; i++) { const R = cardRect(i);", "function cardAtOld(mx, my) { for (let i = 0; i < CHAR_KEYS.length; i++) { const R = cardRectOld(i);")
+rep("  G.mode = 'select'; G.sel = CHAR_KEYS.indexOf(CHOSEN); G.selT = 0;", "  G.mode = 'select'; G.sel = CHAR_KEYS.indexOf(CHOSEN); G.selT = 0; G.selOff = 0;")
+
 open(OUT, 'w').write(s)
 print('v21 written', len(s))

@@ -114,6 +114,21 @@ const CHARS = {
   aamir: { name: 'PERFECT BHAI', was: 'AAMIR (YOUNG)', cn: 'MR. PERFECTIONIST', th: 'อาเมียร์ (แนวล้อ)', tag: 'THE STREET BOXER', col: '#4aa0ff',
     lines: ['ROLE: BRAWLER / MOBILITY   ·   DIFFICULTY ★★☆', 'J  JAB-JAB-HOOK (THE HOOK SENDS THEM THROUGH THE WALL)', 'K  RACING BICYCLE: RAM THROUGH THEM (JUMP = BUNNY HOP)  ·  S+J  HAYMAKER', 'L  THE TRAIN DARE: RUN AT THE EXPRESS, JUMP AT THE LAST SECOND'],
     stats: [['SPEED', 5], ['POWER', 3], ['RANGE', 2], ['SAFETY', 3]] },
+  furie: { name: 'AUNTIE FURIE', card: 'A.FURIE', cn: '怒姨', th: 'ป้าฟิวรี่ (แนวล้อ)', tag: 'GUN-FU ASSASSIN', col: '#e04aff', role: 'GUN-FU / PRECISION', diff: 2,
+    lines: ['ROLE: GUN-FU / PRECISION   ·   DIFFICULTY ★★☆', 'J  PISTOL (POINT BLANK = ELBOW + SHOT)  ·  S+J  THE ONE HEADSHOT', 'K  TACTICAL SLIDE: DISARMS AND THROWS WHOEVER IS IN THE WAY', 'L  NO MERCY: A CURVING BULLET FOR EVERY FACE ON SCREEN'],
+    stats: [['SPEED', 4], ['POWER', 3], ['RANGE', 4], ['SAFETY', 2]] },
+  bey: { name: 'UNCLE THUNDER-BEY', card: 'T-BEY', cn: '雷伯', th: 'ลุงสายฟ้าหนวดเฟิ้ม (แนวล้อ)', tag: 'SLOW · HEAVY · UNBREAKABLE', col: '#e8a030', role: 'BRAWLER / TANK', diff: 1,
+    lines: ['ROLE: BRAWLER / TANK   ·   DIFFICULTY ★☆☆', 'J  HEAVY FISTS (EVERY 2ND KNOCKS OUT)  ·  S+J  STOMP  ·  AIR J  DIVE', 'K  CURVED SWORD: WIDE SLASH THAT BATS BULLETS BACK', 'EVERY 2ND HIT BOUNCES OFF HIM. HE RUNS SLOWLY. HE DOES NOT CARE.', 'L  SAVIOR OF THE WORLD: THE GROUND ANSWERS (+1 HEART)'],
+    stats: [['SPEED', 1], ['POWER', 5], ['RANGE', 2], ['SAFETY', 5]] },
+  gada: { name: 'MACE-RAJA', card: 'MACE-RAJA', cn: '棍王', th: 'ราชากระบอง (แนวล้อ)', tag: 'THE GADA SMASH', col: '#ff9a3a', role: 'BRAWLER / AREA', diff: 2,
+    lines: ['ROLE: BRAWLER / AREA   ·   DIFFICULTY ★★☆', 'J  MACE ARCS: THE THIRD ONE SENDS THEM THROUGH THE WALL', 'S+J  GROUND SMASH (CRACKS WALLS)  ·  K  THROW THE MACE: IT COMES BACK', 'L  GADA WHIRLWIND: SPIN, STEER, LAUNCH EVERYTHING AROUND HIM'],
+    stats: [['SPEED', 2], ['POWER', 5], ['RANGE', 3], ['SAFETY', 3]] },
+  silat: { name: 'AGENT SILAT', card: 'SILAT', cn: '拳影', th: 'เอเจนต์ซิลัต (แนวล้อ)', tag: 'SILAT + SMG', col: '#4ae8a0', role: 'MELEE / GUN HYBRID', diff: 3,
+    lines: ['ROLE: MELEE / GUN HYBRID   ·   DIFFICULTY ★★★', 'J  ELBOW - KNEE - SPINNING KICK  ·  S+J  LOW SWEEP', 'K (HOLD)  SUBMACHINE GUN: 30 ROUNDS, REFILLS WHILE NOT FIRING', 'L  THE RAID: SPRAY EVERY FOE ON SCREEN, THEN A SPINNING FINISHER'],
+    stats: [['SPEED', 5], ['POWER', 3], ['RANGE', 3], ['SAFETY', 2]] },
+  hongbao: { name: 'UNCLE HONG-BAO', card: 'HONG-BAO', cn: '洪包叔', th: 'ลุงอั่งเปา (แนวล้อ)', tag: 'THE NIMBLE FAT UNCLE', col: '#ff5a4a', role: 'ACROBAT / BRAWLER', diff: 2,
+    lines: ['ROLE: ACROBAT / BRAWLER   ·   DIFFICULTY ★★☆', 'J  KICK - KICK - SPINNING KICK  ·  AIR J  FLYING DROP-KICK', 'S+J  BELLY BUMP (BIG SHOVE)  ·  K  LOB A STEAMED BUN (STUNS)', 'L  ALL-YOU-CAN-EAT: +1 HEART, THEN ROLL THROUGH EVERYONE'],
+    stats: [['SPEED', 5], ['POWER', 3], ['RANGE', 2], ['SAFETY', 3]] },
   madong: { name: 'FIST HYUNG', was: 'MADONG', cn: '마동석', th: 'มาดงซอก (แนวล้อ)', tag: 'ONE PUNCH', col: '#c8946a',
     lines: ['J  ONE PUNCH (REGULAR MEN DROP IN ONE HIT, BREAKS WALLS)', 'K  DOOR BREAKER: SHOULDER CHARGE THROUGH ANYTHING', 'S+J  GRAB THE MAN NEXT TO YOU AND THROW HIM', 'L  ONE. TWO. THREE: A PUNCH THAT SHAKES THE SCREEN'],
     stats: [['SPEED', 2], ['POWER', 5], ['RANGE', 1], ['SAFETY', 4]] },
@@ -136,12 +151,12 @@ const CHARS = {
     lines: ['J  ONE CLEAN CUT', 'K  PASS-THROUGH CUT: THEY FALL WHEN HE SHEATHES', 'S+J  THE BABY CART\'S HIDDEN GUNS', 'L  THE CART GOES IN ON ITS OWN, GUNS BLAZING'],
     stats: [['SPEED', 3], ['POWER', 4], ['RANGE', 3], ['SAFETY', 3]] }
 };
-const CHAR_KEYS = ['shaolin', 'eagle', 'sombat', 'sorapong', 'wah', 'ma', 'fei', 'nine', 'siang', 'sura', 'li', 'ximen', 'chiru', 'dong', 'zhang', 'vijay', 'ram', 'singham', 'michelle', 'phiphop', 'srk', 'rajini', 'madong', 'oldboy', 'kham', 'paimei', 'lady', 'ichi', 'ogami', 'juk', 'aamir'];
+const CHAR_KEYS = ['shaolin', 'eagle', 'sombat', 'sorapong', 'wah', 'ma', 'fei', 'nine', 'siang', 'sura', 'li', 'ximen', 'chiru', 'dong', 'zhang', 'vijay', 'ram', 'singham', 'michelle', 'phiphop', 'srk', 'rajini', 'madong', 'oldboy', 'kham', 'paimei', 'lady', 'ichi', 'ogami', 'juk', 'aamir', 'furie', 'bey', 'gada', 'silat', 'hongbao'];
 const UNCLE_NAMES = {   // [in-game name, card name] — the title is part of who they are
   wah: ['UNCLE WAH', 'U.WAH'], ma: ['UNCLE MAGNUM', 'U.MAGNUM'], fei: ['SHIFU-UNCLE FEI', 'U.FEI'], nine: ['UNCLE NINE', 'U.NINE'], siang: ['UNCLE BANGFAI', 'U.BANGFAI'],
   sura: ['DRUNKEN UNCLE', 'DRUNK U.'], li: ['UNCLE DAGGER', 'U.DAGGER'], ximen: ['UNCLE SNOW', 'U.SNOW'], chiru: ['CHACHA MEGA', 'C.MEGA'], dong: ['AUNTIE NEEDLE', 'A.NEEDLE'],
   zhang: ['SHUSHU TAI CHI', 'S.TAICHI'], vijay: ['CHACHA SOFA', 'C.SOFA'], ram: ['CHACHA ROAR', 'C.ROAR'], singham: ['CHACHA LION', 'C.LION'], michelle: ['AUNTIE ARSENAL', 'A.ARSENAL'],
-  phiphop: ['UNCLE UZI', 'U.UZI'], srk: ['CHACHA KING', 'C.KING'], aamir: ['CHACHA PERFECT', 'C.PERFECT'], rajini: ['CHACHA STYLE', 'C.STYLE'], madong: ['AHJUSSI FIST', 'AJ.FIST'], oldboy: ['AHJUSSI HAMMER', 'AJ.HAMMER'],
+  phiphop: ['UNCLE UZI', 'U.UZI'], srk: ['CHACHA KING', 'C.KING'], aamir: ['CHACHA PERFECT', 'C.PERFECT'], furie: ['AUNTIE FURIE', 'A.FURIE'], bey: ['UNCLE THUNDER-BEY', 'T-BEY'], gada: ['MACE-RAJA', 'MACE-RAJA'], silat: ['AGENT SILAT', 'SILAT'], hongbao: ['UNCLE HONG-BAO', 'HONG-BAO'], rajini: ['CHACHA STYLE', 'C.STYLE'], madong: ['AHJUSSI FIST', 'AJ.FIST'], oldboy: ['AHJUSSI HAMMER', 'AJ.HAMMER'],
   kham: ['UNCLE TOM-YUM', 'U.TOMYUM'], paimei: ['SHIFU-UNCLE BROW', 'U.BROW'], lady: ['AUNTIE GRUDGE', 'A.GRUDGE'], ichi: ['OJI-SAN ICHI', 'OJI ICHI'], ogami: ['OJI-SAN WOLF', 'OJI WOLF']
 };
 for (const k in UNCLE_NAMES) { CHARS[k].oldName = CHARS[k].name; CHARS[k].name = UNCLE_NAMES[k][0]; CHARS[k].card = UNCLE_NAMES[k][1]; }
@@ -618,6 +633,7 @@ const UNLOCKS = {
   singham: { stage: 3, rank: 'A' },
   srk: { stage: 2, rank: 'A' },
   aamir: { stage: 4, rank: 'B' },
+  furie: { stage: 3, rank: 'B' }, bey: { stage: 1, rank: 'A' }, gada: { stage: 2, rank: 'A' }, silat: { stage: 3, rank: 'A' }, hongbao: { stage: 2, rank: 'B' },
   rajini: { hero: 'vijay', rank: 'S' },
   madong: { hero: 'chiru', rank: 'A' },
   oldboy: { stage: 2, rank: 'S' },
@@ -627,7 +643,7 @@ const UNLOCKS = {
   ichi: { hero: 'ximen', rank: 'S' },
   ogami: { hero: 'li', rank: 'A' }
 };
-const UNLOCK_ORDER = ['aamir', 'ma', 'nine', 'siang', 'sura', 'li', 'dong', 'zhang', 'chiru', 'phiphop', 'michelle', 'singham', 'srk', 'rajini', 'madong', 'oldboy', 'kham', 'paimei', 'lady', 'ichi', 'ogami', 'ram'];
+const UNLOCK_ORDER = ['aamir', 'ma', 'nine', 'siang', 'sura', 'li', 'dong', 'zhang', 'chiru', 'phiphop', 'michelle', 'singham', 'srk', 'rajini', 'madong', 'oldboy', 'kham', 'paimei', 'lady', 'ichi', 'ogami', 'ram', 'furie', 'bey', 'gada', 'silat', 'hongbao'];
 function unlockText(k) {
   const u = UNLOCKS[k]; if (!u) return '';
   if (u.stage) return 'RANK ' + u.rank + ' OR BETTER ON STAGE 0' + u.stage + ' (ANY HERO)';
@@ -882,7 +898,7 @@ function killEnemy(e, dir, explosive, chain) {
   e.vy = explosive ? -rnd(260, 380) : -rnd(130, 190);
   e.vr = dir * (explosive ? rnd(10, 18) : rnd(6, 10));
   G.stats.kills++; if (e.type === 'crowd') crowdKO(e);
-  { const P = G.player; if (P && (P.ch === 'siang' || P.ch === 'sura' || P.ch === 'juk')) addUlt(P, P.ch === 'juk' ? 9 : 8); }
+  { const P = G.player; if (P && (P.ch === 'siang' || P.ch === 'sura' || P.ch === 'juk' || NEW5.has(P.ch))) addUlt(P, P.ch === 'juk' ? 9 : 8); }
   if (e.type === 'monk') { G.stats.monks++; popup(e.x + 5, e.y - 10, '金人 ' + G.stats.monks + '/18', '#ffd23f'); }
   audio.play('edie');
   gore(e.x + e.w / 2, e.y + e.h / 2, explosive ? 14 : 6, explosive ? 1.4 : 0.8);
@@ -902,6 +918,7 @@ function hurtPlayer(n, srcX, contact) {
   if (p.ch === 'oldboy' && p.rushT > 0 && p.armor > 0) { p.armor--; p.inv = 0.4; popup(p.x + 5, p.y - 12, 'NOT YET.', '#c8c8d0'); audio.play('clang'); return; }
   // Ah Wah is untouchable while ramming: the bike is the armour
   if (contact && p.ch === 'wah' && !p.foot && (p.ramT > 0 || p.boostT > 0 || Math.abs(p.vx) > BK.ramMin)) return;
+  if (p.ch === 'bey') { const s5 = n5(p); s5.shrug++; if (s5.shrug % 2 === 1) { p.inv = 0.6; popup(p.x + 5, p.y - 12, 'NOT EVEN A SCRATCH.', '#e8a030'); audio.play('clang'); sparks(p.x + 5, p.y + 8, 5, p.face, '#ffffff'); return; } }
   if (p.ch === 'paimei' && p.stanceT > 0) { p.inv = 0.3; popup(p.x + 5, p.y - 12, 'PATHETIC.', '#ffffff'); audio.play('clang'); return; }
   p.hp -= n; p.inv = 1.1; p.flash = 0.1; G.stats.damage += n; bloodScreen(0.5);
   if (p.ch === 'lady') { p.grudge = Math.min(100, p.grudge + 35); popup(p.x + 5, p.y - 18, 'GRUDGE +35', '#ff3a5a'); }
@@ -1033,6 +1050,11 @@ function updatePlayer(dt, ip) {
   else if (p.ch === 'phiphop') updPhiphop(p, dt, ip);
   else if (p.ch === 'srk') updSRK(p, dt, ip);
   else if (p.ch === 'aamir') updAamir(p, dt, ip);
+  else if (p.ch === 'furie') updFurie(p, dt, ip);
+  else if (p.ch === 'bey') updBey(p, dt, ip);
+  else if (p.ch === 'gada') updGada(p, dt, ip);
+  else if (p.ch === 'silat') updSilat(p, dt, ip);
+  else if (p.ch === 'hongbao') updHongbao(p, dt, ip);
   else if (p.ch === 'rajini') updRajini(p, dt, ip);
   else if (p.ch === 'madong') updMadong(p, dt, ip);
   else if (p.ch === 'oldboy') updOldboy(p, dt, ip);
@@ -1054,7 +1076,7 @@ function updatePlayer(dt, ip) {
 // SIU MA — twin pistols, long coat, sunglasses (and doves)
 // =====================================================================
 // movement shared by every on-foot hero (tuned per hero)
-const RUNCFG = { aamir: { run: 218, jump: 470 }, juk: { run: 188, jump: 430 }, shaolin: { run: 210, jump: 465 }, eagle: { run: 225, jump: 500 }, sombat: { run: 200, jump: 450 }, sorapong: { run: 215, jump: 460 }, wah: { run: 212, jump: 470 }, paimei: { run: 210, jump: 480 }, lady: { run: 210, jump: 455 }, ichi: { run: 190, jump: 450 }, ogami: { run: 200, jump: 455 }, madong: { run: 185, jump: 440 }, oldboy: { run: 205, jump: 455 }, kham: { run: 228, jump: 485 }, srk: { run: 220, jump: 470 }, rajini: { run: 205, jump: 600 }, singham: { run: 205, jump: 460 }, michelle: { run: 225, jump: 475 }, phiphop: { run: 200, jump: 450 }, zhang: { run: 165, jump: 440 }, vijay: { run: 238, jump: 465 }, ram: { run: 212, jump: 470 }, chiru: { run: 205, jump: 470 }, dong: { run: 225, jump: 470 }, sura: { run: 198, jump: 460 }, li: { run: 195, jump: 450 }, ximen: { run: 208, jump: 460 }, ma: { run: 205, jump: 450 }, fei: { run: 215, jump: 480 }, nine: { run: 192, jump: 450 }, siang: { run: 208, jump: 455 } };
+const RUNCFG = { furie: { run: 205, jump: 455 }, bey: { run: 150, jump: 420 }, gada: { run: 176, jump: 440 }, silat: { run: 215, jump: 470 }, hongbao: { run: 222, jump: 480 }, aamir: { run: 218, jump: 470 }, juk: { run: 188, jump: 430 }, shaolin: { run: 210, jump: 465 }, eagle: { run: 225, jump: 500 }, sombat: { run: 200, jump: 450 }, sorapong: { run: 215, jump: 460 }, wah: { run: 212, jump: 470 }, paimei: { run: 210, jump: 480 }, lady: { run: 210, jump: 455 }, ichi: { run: 190, jump: 450 }, ogami: { run: 200, jump: 455 }, madong: { run: 185, jump: 440 }, oldboy: { run: 205, jump: 455 }, kham: { run: 228, jump: 485 }, srk: { run: 220, jump: 470 }, rajini: { run: 205, jump: 600 }, singham: { run: 205, jump: 460 }, michelle: { run: 225, jump: 475 }, phiphop: { run: 200, jump: 450 }, zhang: { run: 165, jump: 440 }, vijay: { run: 238, jump: 465 }, ram: { run: 212, jump: 470 }, chiru: { run: 205, jump: 470 }, dong: { run: 225, jump: 470 }, sura: { run: 198, jump: 460 }, li: { run: 195, jump: 450 }, ximen: { run: 208, jump: 460 }, ma: { run: 205, jump: 450 }, fei: { run: 215, jump: 480 }, nine: { run: 192, jump: 450 }, siang: { run: 208, jump: 455 } };
 function moveRunner(p, dt, ip) {
   if (BOLLY.has(p.ch)) bollyHang(p, dt);
   if (poleTick(p, dt, ip)) return;
@@ -2037,6 +2059,318 @@ function drawAamir(p) {
   });
 }
 
+// =====================================================================
+// v27: FIVE NEW HEROES (parody names only — see docs/LEGAL_QUESTIONS_FOR_COUNSEL.md)
+//   furie    AUNTIE FURIE        gun-fu assassin in a black suit (female "gun-fu" parody)
+//   bey      UNCLE THUNDER-BEY   slow, heavy, unbreakable: every second hit bounces off
+//   gada     MACE-RAJA           the Indian mace (gada): big arcs, ground smash, thrown mace, whirlwind
+//   silat    AGENT SILAT         pencak-silat flurries + a submachine gun (hold K)
+//   hongbao  UNCLE HONG-BAO      the nimble fat uncle: kicks, bumps, steamed buns, the rolling banquet
+// Per-hero state lives in p.n5 (created lazily), so mkPlayer needs no changes.
+// =====================================================================
+const NEW5 = new Set(['furie', 'bey', 'gada', 'silat', 'hongbao']);
+BOLLY.add('gada');                                   // the mace gets the Bollywood physics too (THAAP!, through the wall)
+const n5 = p => p.n5 || (p.n5 = { atk: 0, a: 0, b: 0, c: 0, combo: 0, slide: 0, hit: new Set(), mag: 30, rel: 0, idle: 0, dive: 0, whirl: 0, whirlTick: 0, roll: 0, rollHit: new Set(), maceOut: 0, raid: 0, raidTick: 0, shrug: 0 });
+function frontFoe(p, reach) {                          // nearest living enemy inside the reach box in front
+  const cx = p.x + p.w / 2, box = { x: p.face > 0 ? cx : cx - reach, y: p.y - 4, w: reach, h: p.h + 4 };
+  let best = null, bd = 1e9;
+  for (const e of G.enemies) if (!e.dead && !e.para && overlap(box, e)) { const d = Math.abs(e.x + e.w / 2 - cx); if (d < bd) { bd = d; best = e; } }
+  return best;
+}
+function aoeHit(p, r, dmg, o) {                        // everything within r of the hero
+  o = o || {}; const cx = p.x + p.w / 2, cy = p.y + p.h / 2; let n = 0;
+  for (const e of G.enemies) if (!e.dead && !e.para && Math.abs(e.x + e.w / 2 - cx) < r && Math.abs(e.y + e.h / 2 - cy) < (o.ry || r * 0.7)) {
+    damageEnemy(e, dmg, cx, !!o.launch);
+    if (!e.dead) { if (o.stun) e.stun = Math.max(e.stun, o.stun); if (o.launch) { e.vx = (sign(e.x + e.w / 2 - cx) || p.face) * (o.kb || 240); e.vy = -(o.lift || 200); e.fling = o.fling || 0; } }
+    n++;
+  }
+  const b = G.boss;
+  if (b && !b.dead && b.dying <= 0 && b.state !== 'enter' && b.state !== 'roar' && Math.abs(b.x + b.w / 2 - cx) < r + b.w / 2 && Math.abs(b.y + b.h / 2 - cy) < r + 10) { damageBoss(o.bossDmg != null ? o.bossDmg : dmg, cx); n++; }
+  return n;
+}
+function pBullet(p, dmg, spread, life, speed) {
+  const tip = gunTip(p), v = speed || PC.bulletV;
+  G.bullets.push({ x: tip.x, y: tip.y, vx: tip.dx * v + (tip.dy ? rnd(-spread, spread) : 0), vy: tip.dy * v + (tip.dx ? rnd(-spread, spread) : 0), life: life || 0.55, dmg });
+  G.muzzles.push({ x: tip.x, y: tip.y, dx: tip.dx, dy: tip.dy, t: 0.05 }); G.stats.shots++;
+  light(tip.x, tip.y, 22, 0.05, '255,220,140'); audio.play('shot');
+}
+function slamFx(p, big) { shake(big ? 0.5 : 0.25); hitstop(big ? 0.08 : 0.04); audio.play('slam'); dust(p.x + p.w / 2, p.y + p.h, big ? 14 : 8, big ? 30 : 16); }
+
+// ---------------------------------------------------------------- AUNTIE FURIE
+function updFurie(p, dt, ip) {
+  const s = n5(p); p.fireCd -= dt; p.swingT -= dt; s.a -= dt; s.b -= dt;
+  if (s.slide > 0) {                                   // K: the tactical slide-throw — disarms whoever is in the way
+    s.slide -= dt; p.vx = p.face * 360; p.inv = Math.max(p.inv, 0.06); p.swingT = 0.1; p.swingK = 'kick';
+    for (const e of G.enemies) if (!e.dead && !e.para && !s.hit.has(e) && overlap({ x: p.x - 4, y: p.y, w: p.w + 8, h: p.h }, e)) {
+      s.hit.add(e); damageEnemy(e, 3.2, p.x, true); if (!e.dead) { e.vx = p.face * 300; e.vy = -220; e.stun = 0.8; }
+      popup(e.x + 4, e.y - 6, 'DISARMED', '#ff9ad0'); addUlt(p, 6); audio.play('punch'); hitstop(0.04);
+    }
+    const b = G.boss; if (b && !b.dead && b.dying <= 0 && !s.hit.has(b) && overlap(p, b)) { s.hit.add(b); damageBoss(4, p.x); s.slide = 0; p.vx = -p.face * 160; }
+    if (Math.random() < dt * 40) dust(p.x + p.w / 2 - p.face * 6, p.y + p.h, 1, 3);
+  }
+  p.driveT = s.slide > 0 ? 1 : 0;
+  moveRunner(p, dt, ip);
+  if (ip.ult) tryUltimate(p);
+  if (s.slide > 0) return;
+  if (ip.bomb && s.a <= 0) { s.a = 1.6; s.slide = 0.22; s.hit = new Set(); audio.play('whoosh'); popup(p.x + 5, p.y - 14, 'SLIDE!', '#ff9ad0'); return; }
+  if ((held('shoot') || ip.shoot) && p.fireCd <= 0) {
+    const foe = frontFoe(p, 24);
+    if (foe && !held('down')) {                        // point blank: gun-fu — elbow, shoot, shove
+      p.fireCd = 0.2; p.shootT = 0.1; p.swingT = 0.1; p.swingK = 'elbow';
+      damageEnemy(foe, 2.6, p.x, false); if (!foe.dead) { foe.vx = p.face * 150; foe.stun = Math.max(foe.stun, 0.25); }
+      const tip = gunTip(p); G.muzzles.push({ x: tip.x, y: tip.y, dx: p.face, dy: 0, t: 0.05 }); sparks(foe.x + foe.w / 2, foe.y + 8, 4, p.face, '#fff2b0');
+      audio.play('shot'); hitstop(0.03); G.stats.shots++; G.stats.melee++; addUlt(p, 4);
+      if (Math.random() < 0.25) popup(foe.x + 4, foe.y - 8, 'GUN-FU', '#ff9ad0');
+    } else if (held('down') && s.b <= 0) {             // S+J: the single, careful headshot
+      s.b = 0.9; p.fireCd = 0.35; p.shootT = 0.12; pBullet(p, 4.5, 0, 0.8, 860); popup(p.x + 5, p.y - 16, 'HEADSHOT', '#ffffff');
+    } else if (!held('down')) {
+      p.fireCd = 0.15; p.shootT = 0.08; p.hand = p.hand ? 0 : 1; pBullet(p, 1.5, 4);
+    }
+  }
+}
+function drawFurie(p) {
+  const SK = '#efc4a0', SU = '#16161e', SU2 = '#2c2c3a', SH = '#f4f4f4', HR = '#0c0a0e', GUN = '#2a2a32';
+  drawFighterBase(p, {
+    SK, TOP: SU, TOP2: SU2, PNT: SU, SHOE: '#050505', SLEEVE: SU,
+    body() { px(-4, -17, 8, 10, SU); px(-4, -17, 1, 10, SU2); px(-1, -17, 2, 7, SH); px(0, -16, 1, 6, '#c01838'); px(-3, -9, 6, 2, SU2); px(-4, -7, 8, 2, SU); },
+    head() {
+      px(-3, -23, 6, 6, SK); px(-4, -25, 8, 3, HR); px(-4, -24, 2, 7, HR); px(2, -24, 1, 2, HR);
+      const sw = Math.round(Math.sin(G.clock * 8 + p.vx * 0.01) * 1.5 + Math.min(3, Math.abs(p.vx) / 70));
+      px(-5 - sw, -22, 2, 2, HR); px(-6 - sw, -20, 2, 6, HR);                                       // ponytail
+      px(1, -21, 1, 1, '#000'); px(1, -19, 2, 1, '#b02848');
+    },
+    arms() {
+      if (p.shootT > 0 || (p.swingT > 0 && p.swingK === 'elbow')) { px(1, -15, 6, 2, SU); px(6, -16, 3, 3, SK); px(8, -16, 8, 2, GUN); px(8, -14, 2, 3, GUN); }
+      else { px(-5, -16, 2, 6, SU); px(2, -14, 5, 2, SU); px(6, -14, 2, 2, SK); px(7, -16, 6, 2, GUN); px(7, -14, 2, 2, GUN); }   // low-ready
+    }
+  });
+}
+
+// ---------------------------------------------------------------- UNCLE THUNDER-BEY
+function updBey(p, dt, ip) {
+  const s = n5(p); p.atkCd -= dt; p.swingT -= dt; s.a -= dt; s.b -= dt;
+  if (s.dive > 0 && p.onGround) {                      // landed from the dive: a shockwave
+    s.dive = 0; slamFx(p, true); const n = aoeHit(p, 38, 4, { launch: true, kb: 200, lift: 160, stun: 0.8 }); if (n) addUlt(p, 6 + n * 2);
+    popup(p.x + 5, p.y - 12, 'THUNDER!', '#e8a030', true);
+  }
+  moveRunner(p, dt, ip);
+  if (ip.ult) tryUltimate(p);
+  if (s.dive > 0) { s.dive -= dt; p.swingT = 0.1; p.swingK = 'bigkick'; p.vx = p.face * 170; }
+  if ((held('shoot') || ip.shoot) && p.atkCd <= 0) {
+    if (!p.onGround && s.dive <= 0) {                  // air J: the Anatolian dive kick
+      s.dive = 0.8; p.vy = 520; p.atkCd = 0.4; p.swingT = 0.4; p.swingK = 'bigkick'; audio.play('whoosh');
+    } else if (p.onGround && held('down') && s.b <= 0) {   // S+J: the stomp
+      s.b = 1.1; p.atkCd = 0.5; p.swingT = 0.25; p.swingK = 'bigkick'; slamFx(p, false);
+      const n = aoeHit(p, 34, 3, { stun: 1.0 }); if (n) addUlt(p, 5 + n * 2); popup(p.x + 5, p.y - 14, 'STOMP!', '#e8a030');
+    } else if (p.onGround) {                           // J: slow, heavy fists
+      p.combo = ((p.combo || 0) + 1) % 2; p.atkCd = p.combo ? 0.34 : 0.52; p.swingT = 0.2; p.swingK = 'punch';
+      const big = !p.combo;
+      const hit = meleeSwing(p, { dmg: big ? 5 : 3.2, reach: big ? 28 : 22, y0: -22, y1: -4, launch: big, tile: 2 });
+      if (hit) { addUlt(p, big ? 8 : 5); if (big) { shake(0.2); hitstop(0.06); } }
+    }
+  }
+  if (ip.bomb && s.a <= 0 && p.onGround) {             // K: the curved sword — wide, reflects bullets
+    s.a = 0.8; p.atkCd = 0.35; p.swingT = 0.25; p.swingK = 'slash';
+    const hit = meleeSwing(p, { dmg: 4.5, reach: 36, y0: -26, y1: 0, launch: true, tile: 2 });
+    reflectBullets(p, 34, 1, 3); if (hit) addUlt(p, 7);
+  }
+}
+function drawBey(p) {
+  const SK = '#d29a6a', SH = '#e8dcc0', VEST = '#8a2a1a', VEST2 = '#5a1a10', TR = '#2a2220', HR = '#1a1210', MS = '#0a0808', GOLD = '#c89a30';
+  drawFighterBase(p, {
+    SK, TOP: SH, TOP2: VEST2, PNT: TR, SHOE: '#1a1210', SLEEVE: SK,
+    body() { px(-5, -17, 10, 11, SH); px(-5, -17, 3, 11, VEST); px(2, -17, 3, 11, VEST); px(-5, -17, 1, 11, VEST2); px(-5, -8, 10, 2, GOLD); px(-1, -8, 2, 2, '#fff2a0'); px(-5, -6, 10, 2, TR); },
+    head() { px(-3, -23, 6, 6, SK); px(-4, -25, 8, 3, HR); px(-4, -24, 1, 5, HR); px(0, -19, 5, 2, MS); px(-1, -18, 1, 3, MS); px(0, -22, 3, 1, MS); px(1, -21, 1, 1, '#000'); },
+    arms() {
+      if (p.swingT > 0 && p.swingK === 'slash') { px(1, -17, 5, 3, SK); px(5, -19, 3, 4, '#c89a30'); px(7, -19, 22, 2, '#dfe3ee'); px(26, -20, 3, 2, '#dfe3ee'); px(28, -21, 2, 2, '#ffffff'); }
+      else { px(-7, -17, 3, 6, SK); px(4, -17, 3, 6, SK); px(4, -12, 3, 3, SK); px(-7, -12, 3, 3, SK); }   // arms like fence posts
+    }
+  });
+}
+
+// ---------------------------------------------------------------- MACE-RAJA
+function updGada(p, dt, ip) {
+  const s = n5(p); p.atkCd -= dt; p.swingT -= dt; s.a -= dt; s.b -= dt; s.maceOut -= dt;
+  if (s.whirl > 0) {                                   // L: the whirlwind — a spinning mace, he steers
+    s.whirl -= dt; s.whirlTick -= dt; p.inv = Math.max(p.inv, 0.1); p.swingT = 0.1; p.swingK = 'slash'; p.face = Math.sin(s.whirl * 18) > 0 ? 1 : -1;
+    if (s.whirlTick <= 0) { s.whirlTick = 0.12; const n = aoeHit(p, 36, 2.2, { launch: true, kb: 260, lift: 180, fling: 0.4 }); if (n) { audio.play('punch'); sparks(p.x + 5, p.y + 8, 4, p.face, '#ffd23f'); } }
+    const L = held('left'), R = held('right'); p.vx = ((R ? 1 : 0) - (L ? 1 : 0)) * 130;
+    p.driveT = 1;
+  } else p.driveT = 0;
+  moveRunner(p, dt, ip);
+  if (ip.ult) tryUltimate(p);
+  if (s.whirl > 0) return;
+  if ((held('shoot') || ip.shoot) && p.atkCd <= 0) {
+    if (p.onGround && held('down') && s.b <= 0) {      // S+J: the ground smash
+      s.b = 1.4; p.atkCd = 0.6; p.swingT = 0.3; p.swingK = 'slash';
+      later(0.12, () => { if (G.player === p && !p.dead) { slamFx(p, true); const n = aoeHit(p, 40, 4, { launch: true, kb: 240, lift: 240, stun: 0.6, fling: 0.5 }); if (n) addUlt(p, 6 + n * 2); for (let ty = Math.floor(p.y / TS); ty <= Math.floor((p.y + p.h) / TS); ty++) for (let tx = Math.floor((p.x - 20) / TS); tx <= Math.floor((p.x + p.w + 20) / TS); tx++) if (DESTRUCT[tileAt(tx, ty)]) damageTile(tx, ty, 3); } });
+      popup(p.x + 5, p.y - 16, 'GADA SMASH!', '#ff9a3a', true);
+    } else {                                           // J: wide mace arcs, the third one is THE swing
+      p.combo = ((p.combo || 0) + 1) % 3; const big = p.combo === 2, weak = s.maceOut > 0;
+      p.atkCd = big ? 0.5 : 0.36; p.swingT = 0.2; p.swingK = weak ? 'punch' : 'slash';
+      const hit = meleeSwing(p, weak ? { dmg: 1.2, reach: 16, y0: -20, y1: -4 } : { dmg: big ? 5 : 2.8, reach: big ? 38 : 32, y0: -26, y1: 0, launch: big, tile: big ? 3 : 2 });
+      if (hit) addUlt(p, big ? 8 : 4);
+    }
+  }
+  if (ip.bomb && s.a <= 0) {                           // K: throw the mace — it comes back
+    s.a = 1.8; s.maceOut = 1.5; p.swingT = 0.2; p.swingK = 'punch'; audio.play('whoosh');
+    proj({ kind: 'mace', x: p.x + p.w / 2 + p.face * 6, y: p.y + 8, vx: p.face * 400, vy: -10, dmg: 3, r: 7, life: 2.6, pierce: true, boomerang: true, spin: 22 * p.face });
+    popup(p.x + 5, p.y - 14, 'MACE!', '#ffd23f');
+  }
+}
+function drawGada(p) {
+  const s = n5(p), SK = '#c88a58', KU = '#ebe3bd', KU2 = '#c8c098', VEST = '#1a4a2a', TUR = '#f2f2ea', BAND = '#c02020', MS = '#0a0808';
+  drawFighterBase(p, {
+    SK, TOP: KU, TOP2: KU2, PNT: KU2, SHOE: '#4a2a1a', SLEEVE: KU,
+    body() {
+      px(-4, -17, 8, 12, KU); px(-4, -17, 1, 12, KU2); px(-4, -17, 3, 9, VEST); px(1, -17, 3, 9, VEST); px(-5, -8, 10, 3, KU);
+      if (s.maceOut <= 0 && !(p.swingT > 0 && p.swingK === 'slash') && !(s.whirl > 0)) { px(3, -29, 2, 14, '#6a4a2a'); px(0, -35, 8, 7, '#d8a830'); px(1, -36, 2, 2, '#ffe28a'); px(5, -36, 2, 2, '#ffe28a'); px(-1, -33, 2, 2, '#b88a20'); px(7, -33, 2, 2, '#b88a20'); }   // mace on the shoulder
+    },
+    head() { px(-3, -23, 6, 6, SK); px(-4, -27, 8, 5, TUR); px(-4, -24, 8, 1, BAND); px(-5, -26, 2, 4, TUR); px(0, -19, 5, 2, MS); px(4, -19, 1, 3, MS); px(-1, -19, 1, 3, MS); px(1, -21, 1, 1, '#000'); px(0, -22, 3, 1, MS); },
+    arms() {
+      const k = p.swingT > 0 ? p.swingK : '';
+      if (k === 'slash') { px(1, -17, 6, 3, KU); px(6, -17, 3, 3, SK); px(8, -18, 2, 12, '#6a4a2a'); px(5, -30, 8, 8, '#d8a830'); px(6, -31, 2, 2, '#ffe28a'); px(10, -31, 2, 2, '#ffe28a'); px(13, -27, 2, 2, '#b88a20'); }
+      else { px(-5, -16, 2, 6, KU); px(3, -16, 2, 4, KU); px(3, -13, 3, 2, SK); px(-5, -10, 2, 2, SK); }
+    }
+  });
+}
+
+// ---------------------------------------------------------------- AGENT SILAT
+function updSilat(p, dt, ip) {
+  const s = n5(p); p.atkCd -= dt; p.swingT -= dt; p.fireCd -= dt; s.a -= dt;
+  if (s.raid > 0) {                                    // L: the raid — a full-screen spray, then a spinning finisher
+    s.raid -= dt; s.raidTick -= dt; p.inv = Math.max(p.inv, 0.1); p.vx *= 0.9; p.shootT = 0.06;
+    if (s.raidTick <= 0) {
+      s.raidTick = 0.04; const foes = visibleFoes(p, false), cx = p.x + p.w / 2, cy = p.y + 8;
+      for (let k = 0; k < 2; k++) {
+        const f = foes.length ? foes[(Math.random() * Math.min(foes.length, 6)) | 0] : null;
+        const a = f ? Math.atan2(f.y + f.h * 0.45 - cy, f.x + f.w / 2 - cx) + rnd(-0.06, 0.06) : (p.face > 0 ? 0 : Math.PI) + rnd(-0.2, 0.2);
+        G.bullets.push({ x: cx + p.face * 6, y: cy, vx: Math.cos(a) * 700, vy: Math.sin(a) * 700, life: 0.6, dmg: 1.7 }); G.stats.shots++;
+      }
+      audio.play('shot'); light(cx, cy, 30, 0.05, '255,220,140');
+    }
+    if (s.raid <= 0) { p.swingT = 0.3; p.swingK = 'bigkick'; slamFx(p, true); aoeHit(p, 42, 5, { launch: true, kb: 280, lift: 220, fling: 0.4 }); }
+  }
+  moveRunner(p, dt, ip);
+  if (ip.ult) tryUltimate(p);
+  if (s.raid > 0) return;
+  let firing = false;
+  if (held('bomb') && s.rel <= 0 && p.fireCd <= 0) {   // K (hold): the submachine gun
+    if (s.mag > 0) {
+      firing = true; s.mag--; s.idle = 0; p.fireCd = 0.07; p.shootT = 0.09; pBullet(p, 0.9, 10, 0.5, 700);
+      part('shell', p.x + p.w / 2, p.y + 6, -p.face * rnd(40, 90), rnd(-160, -90), rnd(0.8, 1.2), 1, '#e8c040', { g: 900, vr: rnd(-20, 20) });
+      if (s.mag <= 0) { s.rel = 1.1; popup(p.x + 5, p.y - 14, 'RELOAD', '#ffb070'); }
+    }
+  }
+  if (s.rel > 0) { s.rel -= dt; if (s.rel <= 0) s.mag = 30; }
+  else if (!firing && !held('bomb')) { s.idle += dt; if (s.idle > 0.6 && s.mag < 30) s.mag = Math.min(30, s.mag + dt * 36); }
+  if (!held('bomb') && (held('shoot') || ip.shoot) && p.atkCd <= 0) {
+    if (held('down')) {                                // S+J: low sweep
+      p.atkCd = 0.5; p.swingT = 0.2; p.swingK = 'kick'; const hit = meleeSwing(p, { dmg: 1.8, reach: 24, y0: -8, y1: 0, launch: false });
+      for (const e of G.enemies) if (!e.dead && Math.abs(e.x - p.x) < 28 && Math.abs(e.y + e.h - p.y - p.h) < 6) e.stun = Math.max(e.stun, 0.9);
+      if (hit) addUlt(p, 5);
+    } else {                                           // J: elbow - knee - spinning back-kick
+      p.combo = ((p.combo || 0) + 1) % 3; p.atkCd = p.combo === 2 ? 0.3 : 0.13; p.swingT = 0.12; p.swingK = ['elbow', 'kick', 'bigkick'][p.combo];
+      const hit = meleeSwing(p, { dmg: p.combo === 2 ? 2.8 : 1.5, reach: p.combo === 2 ? 24 : 18, y0: -22, y1: -4, launch: p.combo === 2 });
+      if (hit) addUlt(p, 4);
+    }
+  }
+}
+function drawSilat(p) {
+  const SK = '#c88a60', VEST = '#2c2c36', VEST2 = '#1c1c24', TEE = '#d8d8d0', HB = '#c02020', HR = '#120c0a', SASH = '#d89a30', GUN = '#202026';
+  drawFighterBase(p, {
+    SK, TOP: VEST, TOP2: VEST2, PNT: '#1c1c24', SHOE: '#0a0a0a', SLEEVE: SK,
+    body() { px(-4, -17, 8, 10, TEE); px(-4, -17, 2, 10, VEST); px(2, -17, 2, 10, VEST); px(-4, -17, 1, 10, VEST2); px(-4, -8, 8, 2, SASH); px(-4, -6, 8, 1, '#a87820'); px(-5, -19, 10, 2, VEST); px(-1, -14, 3, 6, GUN); },
+    head() { px(-3, -23, 6, 6, SK); px(-4, -26, 7, 3, HR); px(-4, -25, 3, 3, HR); px(-4, -23, 8, 1, HB); px(-5, -23, 2, 3, HB); px(1, -21, 1, 1, '#000'); px(1, -19, 2, 1, '#7a3a2a'); },
+    arms() {
+      if (p.shootT > 0) { px(1, -15, 6, 2, SK); px(6, -16, 2, 3, SK); px(7, -16, 11, 3, GUN); px(10, -13, 2, 4, GUN); px(15, -17, 2, 1, '#666'); }
+      else { px(-5, -16, 2, 5, SK); px(3, -18, 2, 5, SK); px(3, -19, 3, 2, SK); px(-5, -11, 3, 2, SK); }   // silat guard: one hand high, one low
+    }
+  });
+}
+
+// ---------------------------------------------------------------- UNCLE HONG-BAO
+function updHongbao(p, dt, ip) {
+  const s = n5(p); p.atkCd -= dt; p.swingT -= dt; s.a -= dt; s.b -= dt;
+  if (s.roll > 0) {                                    // L: the all-you-can-eat roll
+    s.roll -= dt; p.vx = p.face * 330; p.inv = Math.max(p.inv, 0.1); p.swingT = 0.1; p.swingK = 'fly';
+    for (const e of G.enemies) if (!e.dead && !e.para && !s.rollHit.has(e) && overlap({ x: p.x - 8, y: p.y - 4, w: p.w + 16, h: p.h + 4 }, e)) {
+      s.rollHit.add(e); damageEnemy(e, 4, p.x, true); if (!e.dead) { e.vx = p.face * 420; e.vy = -280; e.fling = 0.5; e.stun = 0.8; } audio.play('punch'); hitstop(0.04); popup(e.x + 4, e.y - 8, 'BOING!', '#ffd23f');
+    }
+    const b = G.boss; if (b && !b.dead && b.dying <= 0 && !s.rollHit.has(b) && overlap(p, b)) { s.rollHit.add(b); damageBoss(7, p.x); }
+    if (ip.jump && p.onGround) { p.vy = -520; p.onGround = false; }
+    if (p.hitWall) s.roll = 0;
+    if (Math.random() < dt * 25) dust(p.x + p.w / 2 - p.face * 6, p.y + p.h, 1, 4);
+  }
+  p.driveT = s.roll > 0 ? 1 : 0;
+  moveRunner(p, dt, ip);
+  if (ip.ult) tryUltimate(p);
+  if (s.roll > 0) return;
+  if ((held('shoot') || ip.shoot) && p.atkCd <= 0) {
+    if (!p.onGround) {                                 // air J: the flying drop-kick
+      p.atkCd = 0.28; p.swingT = 0.22; p.swingK = 'fly'; if (p.vy < 120) p.vy += 90;
+      const hit = meleeSwing(p, { dmg: 2.4, reach: 22, y0: -16, y1: 2, launch: false }); if (hit) { addUlt(p, 5); p.vy = -260; }
+    } else if (held('down') && s.b <= 0) {             // S+J: the belly bump — a shove with a whole uncle behind it
+      s.b = 0.7; p.atkCd = 0.4; p.swingT = 0.2; p.swingK = 'elbow'; const hit = meleeSwing(p, { dmg: 3.2, reach: 18, y0: -18, y1: -2, launch: true, tile: 2 });
+      if (hit) { addUlt(p, 6); popup(p.x + 5, p.y - 14, 'BUMP!', '#ffd23f'); }
+    } else {                                           // J: kick, kick, spinning back-kick
+      p.combo = ((p.combo || 0) + 1) % 3; p.atkCd = p.combo === 2 ? 0.26 : 0.14; p.swingT = 0.12; p.swingK = p.combo === 2 ? 'bigkick' : 'kick';
+      const hit = meleeSwing(p, { dmg: p.combo === 2 ? 3 : 1.6, reach: p.combo === 2 ? 26 : 22, y0: -18, y1: -2, launch: p.combo === 2 });
+      if (hit) addUlt(p, 4);
+    }
+  }
+  if (ip.bomb && s.a <= 0) {                           // K: a steamed bun, lobbed
+    s.a = 0.55; p.swingT = 0.15; p.swingK = 'punch'; audio.play('whoosh');
+    proj({ kind: 'bun', x: p.x + p.w / 2 + p.face * 6, y: p.y + 6, vx: p.face * 320 + p.vx * 0.3, vy: -100, g: 520, dmg: 2.6, r: 5, life: 1.4, stunHit: 0.5 });
+  }
+}
+function drawHongbao(p) {
+  const SK = '#e8b080', RED = '#c82828', RED2 = '#8a1818', GOLD = '#e8c040', WH = '#f4ecd8';
+  drawFighterBase(p, {
+    SK, TOP: RED, TOP2: RED2, PNT: WH, SHOE: '#111111', SLEEVE: RED,
+    body() {
+      px(-6, -17, 12, 10, RED); px(-7, -13, 14, 6, RED); px(-6, -17, 1, 10, RED2); px(-7, -13, 1, 6, RED2); px(6, -13, 1, 6, '#e05050');
+      px(-1, -17, 2, 10, GOLD); px(-1, -15, 2, 1, RED2); px(-1, -12, 2, 1, RED2); px(-7, -8, 14, 2, '#222');
+    },
+    head() { px(-4, -24, 8, 7, SK); px(-5, -22, 1, 4, SK); px(4, -22, 1, 4, SK); px(-1, -27, 3, 3, '#111'); px(1, -21, 1, 1, '#000'); px(-2, -21, 1, 1, '#000'); px(-1, -19, 4, 1, '#8a2a1a'); px(2, -20, 2, 1, '#d89070'); },
+    arms() {
+      if (p.swingT > 0 && (p.swingK === 'punch' || p.swingK === 'elbow')) { px(1, -16, 7, 3, RED); px(7, -16, 3, 3, SK); }
+      else { px(-8, -16, 3, 6, RED); px(5, -16, 3, 5, RED); px(5, -11, 3, 3, SK); px(-8, -10, 3, 2, SK); }
+    }
+  });
+}
+
+// ---------------------------------------------------------------- ULTIMATES
+function ult5(p) {
+  const s = n5(p);
+  if (p.ch === 'furie') {                              // NO MERCY: a curved bullet for every face on screen
+    G.banner = { t: 0, title: 'NO MERCY', sub: 'SHE DID NOT COME FOR A CONVERSATION' }; audio.play('roar'); p.inv = 2; p.swingT = 0.9; p.swingK = 'elbow'; p.shootT = 0.9;
+    G.timeScale = 0.4; G.slowT = 0.5;
+    const foes = visibleFoes(p, false).slice(0, 9);
+    foes.forEach((f, i) => later(0.1 + i * 0.09, () => { if (G.player !== p || p.dead) return; G.bullets.push({ x: p.x + p.w / 2 + p.face * 8, y: p.y + 8, vx: sign(f.x - p.x || p.face) * 560, vy: 0, life: 1.2, dmg: f === G.boss ? 10 : 7, kind: 'curve', curve: 16, tgt: f }); audio.play('shot'); light(p.x + 5, p.y + 8, 30, 0.05, '255,220,140'); }));
+  } else if (p.ch === 'bey') {                         // SAVIOR OF THE WORLD: the ground itself answers
+    G.timeScale = 0.3; G.slowT = 0.7; G.banner = { t: 0, title: 'SAVIOR OF THE WORLD', sub: 'HE IS NOT HURRYING. THE WORLD IS.' }; audio.play('roar'); p.inv = 1.8; p.swingT = 0.8; p.swingK = 'bigkick'; p.hp = Math.min(PC.hp, p.hp + 1);
+    later(0.5, () => {
+      if (G.player !== p) return; shake(0.8); hitstop(0.1); audio.play('slam');
+      for (const e of G.enemies) if (!e.dead && !e.para && onScreen(e, 0)) { damageEnemy(e, 8, p.x, true); if (!e.dead) { e.vy = -260; e.stun = 1.2; } }
+      const b = G.boss; if (b && !b.dead && b.dying <= 0 && onScreen(b, 0)) damageBoss(18, p.x);
+      for (let i = 0; i < 14; i++) part('smoke', G.cam.x + rnd(0, VW), p.y + p.h, rnd(-30, 30), rnd(-120, -40), rnd(0.6, 1.2), 3, '#b89a6a', { grow: 6, a: 0.7 });
+    });
+  } else if (p.ch === 'gada') {                        // THE WHIRLWIND ROAR
+    s.whirl = 2.2; s.whirlTick = 0; G.banner = { t: 0, title: 'GADA WHIRLWIND', sub: 'THE MACE HAS NOT FINISHED' }; audio.play('roar'); p.inv = 2.4;
+  } else if (p.ch === 'silat') {                       // THE RAID
+    s.raid = 1.3; s.raidTick = 0; s.mag = 30; s.rel = 0; G.banner = { t: 0, title: 'THE RAID', sub: 'FIFTEEN FLOORS. ONE CORRIDOR.' }; audio.play('roar'); p.inv = 1.8;
+  } else if (p.ch === 'hongbao') {                     // ALL-YOU-CAN-EAT: heal one, then roll through the buffet
+    G.banner = { t: 0, title: 'ALL-YOU-CAN-EAT', sub: 'FIRST HE EATS. THEN HE ROLLS.' }; audio.play('roar'); p.hp = Math.min(PC.hp, p.hp + 1); p.inv = 2;
+    popup(p.x + 5, p.y - 16, '+1 LUNCH', '#7dff8a', true); s.roll = 1.6; s.rollHit = new Set();
+  }
+}
+const DRAW5 = { furie: drawFurie, bey: drawBey, gada: drawGada, silat: drawSilat, hongbao: drawHongbao };
+const HUD5 = {
+  furie: p => clamp(1 - n5(p).a / 1.6, 0, 1), bey: p => clamp(1 - n5(p).a / 0.8, 0, 1), gada: p => clamp(1 - n5(p).a / 1.8, 0, 1),
+  silat: p => n5(p).rel > 0 ? 1 - n5(p).rel / 1.1 : n5(p).mag / 30, hongbao: p => clamp(1 - n5(p).a / 0.55, 0, 1)
+};
+
 function slapLaunch(e, dir, power) {
   damageEnemy(e, 3, e.x + e.w / 2 - dir * 20, true);
   e.vx = dir * 520 * power; e.vy = -260 * power; e.vr = dir * 20; e.missile = 0.7; e.missileDir = dir; if (BOLLY.has(G.player.ch)) e.fling = 0.8;
@@ -2118,6 +2452,8 @@ function tryUltimate(p) {
   } else if (p.ch === 'kham') {
     audio.play('roar'); G.banner = { t: 0, title: 'ช้างกูอยู่ไหน!', sub: '"WHERE IS MY ELEPHANT?!" — IT HEARD YOU' };
     later(0.4, () => { spawnBeast('elephant', p.x + p.w / 2 - p.face * 50, p.face, { boss: 18, life: 3.2 }); shake(0.4); audio.play('roar'); });
+  } else if (NEW5.has(p.ch)) {
+    ult5(p);
   } else if (p.ch === 'aamir') {
     startTrain(p);
   } else if (p.ch === 'srk') {
@@ -5600,6 +5936,8 @@ function drawProjs() {
     else if (q.kind === 'hammer') { ctx.rotate(q.rot || 0); ctx.fillStyle = '#6a4a2a'; ctx.fillRect(-1, -6, 2, 10); ctx.fillStyle = '#9a9aa4'; ctx.fillRect(-4, -8, 8, 4); }
     else if (q.kind === 'rose') { ctx.rotate(q.t * 8); ctx.fillStyle = '#3a8a3a'; ctx.fillRect(-5, -0.5, 7, 1); ctx.fillStyle = '#e8203a'; ctx.fillRect(2, -2, 4, 4); }
     else if (q.kind === 'glasses') { ctx.rotate(q.t * 30); ctx.fillStyle = '#000'; ctx.fillRect(-5, -1, 4, 3); ctx.fillRect(1, -1, 4, 3); ctx.fillRect(-1, -1, 2, 1); }
+    else if (q.kind === 'bun') { ctx.rotate(q.t * 10); ctx.fillStyle = '#f8f0e0'; ctx.beginPath(); ctx.arc(0, 0, 4, 0, 6.283); ctx.fill(); ctx.fillStyle = '#d8c8a8'; ctx.fillRect(-1, -4, 2, 2); ctx.fillStyle = '#fff'; ctx.fillRect(-2, -2, 2, 1); }
+    else if (q.kind === 'mace') { ctx.rotate(q.rot || 0); ctx.fillStyle = '#6a4a2a'; ctx.fillRect(-1, -3, 2, 12); ctx.fillStyle = '#d8a830'; ctx.beginPath(); ctx.arc(0, -6, 5, 0, 6.283); ctx.fill(); ctx.fillStyle = '#ffe28a'; ctx.fillRect(-1, -12, 2, 3); ctx.fillRect(-9, -7, 3, 2); ctx.fillRect(6, -7, 3, 2); }
     else if (q.kind === 'shot') { ctx.fillStyle = '#fff2b0'; ctx.fillRect(-3, -1, 6, 2); }
     ctx.restore();
   }
@@ -6397,7 +6735,10 @@ const QUIPS = {
   zhang: ['SOFTNESS WINS.', 'RETURN TO SENDER.', 'TAI CHI, YOUNG MAN.'], vijay: ['I AM WAITING.', 'STYLE RELOAD.', 'NEXT SCENE.'],
   ram: ['ROAR!', 'THE JUNGLE AGREES.', 'FIRE AND FUR.'], singham: ['SINGHAM!', 'THAPPAD!', 'HE PICKED UP A BIKE.'],
   michelle: ['NEXT WEAPON.', 'BROKE ANOTHER ONE.', 'ANY WEAPON.'], phiphop: ['หัวปลีมาแล้ว!', 'MORE ROCKETS.', 'UZI SAYS HI.'],
-  srk: ['ARMS WIDE OPEN!', 'DANCE WITH ME.', 'ROMANCE KILLS.'], aamir: ['JO JEETA WOHI SIKANDAR!', 'ONE MORE ROUND, SIR.', 'PERFECT.'], rajini: ['STYLE!', 'BULLETS BEND FOR ME.', 'MIND IT.'],
+  srk: ['ARMS WIDE OPEN!', 'DANCE WITH ME.', 'ROMANCE KILLS.'], aamir: ['JO JEETA WOHI SIKANDAR!', 'ONE MORE ROUND, SIR.', 'PERFECT.'],
+  furie: ['NO MERCY.', 'REVENGE, SENSIBLY DRESSED.', 'RELOAD? NO. FINISH.'], bey: ['I AM THE SAVIOR OF THE WORLD.', 'MOUSTACHE FIRST.', 'SLOWLY. THEN ALL AT ONCE.'],
+  gada: ['MACE OF JUSTICE!', 'ONE SWING. ONE VILLAGE.', 'THAAP!'], silat: ['FIFTEEN FLOORS. NO LIFT.', 'SILAT. THEN BULLETS.', 'THE CORRIDOR IS MINE.'],
+  hongbao: ['LIGHT ON MY FEET. HEAVY ON YOUR FACE.', 'DUMPLINGS FIRST.', 'A GOOD LUNCH IS A WEAPON.'], rajini: ['STYLE!', 'BULLETS BEND FOR ME.', 'MIND IT.'],
   madong: ['ONE PUNCH.', 'WHO TOUCHED MY COFFEE?', 'I SAID ONE.'], oldboy: ['15 YEARS.', 'NEXT ROOM.', 'MORE HAMMER.'],
   kham: ['WHERE IS MY ELEPHANT?!', 'CRACK!', 'MUAY THAI!'], paimei: ['PATHETIC.', 'YOUR KUNG FU IS WEAK.', '*STROKES BEARD*'],
   lady: ['BE WHITE.', 'THE GRUDGE GROWS.', 'NO TOFU.'], ichi: ['I HEARD THAT.', 'CHŌ OR HAN?', '*TAP TAP*'], ogami: ['*click*', 'CHAN!', 'THE CART HAS GUNS.']
@@ -6407,7 +6748,7 @@ function heroQuip() { const q = QUIPS[G.player.ch]; if (q) popup(G.player.x + 5,
 // =====================================================================
 // POWER TABLE (nerfs): every point of damage the hero causes is scaled by this, per hero
 // =====================================================================
-const HERO_POW = { aamir: 0.95, paimei: 0.86, ichi: 0.83, ogami: 0.88, chiru: 0.9, singham: 0.88, phiphop: 0.88, dong: 0.9, kham: 0.92, ximen: 0.92, sura: 0.94, wah: 0.94, nine: 0.95, oldboy: 0.95, ma: 0.97, rajini: 0.97, ram: 0.97 };
+const HERO_POW = { furie: 1.05, bey: 1.1, gada: 1.0, silat: 1.12, hongbao: 1.08, aamir: 0.95, paimei: 0.86, ichi: 0.83, ogami: 0.88, chiru: 0.9, singham: 0.88, phiphop: 0.88, dong: 0.9, kham: 0.92, ximen: 0.92, sura: 0.94, wah: 0.94, nine: 0.95, oldboy: 0.95, ma: 0.97, rajini: 0.97, ram: 0.97 };
 const heroPow = () => (G && G.player && HERO_POW[G.player.ch]) || 1;
 // =====================================================================
 // CINEMATIC BEATS (the memes)
@@ -6433,7 +6774,7 @@ function startIntro() {
     G.sofa = { x: p.x - 110, y: FLOORY() }; G.cine = { kind: 'introVijay', t: 0, ghost: true };
   } else if (p.ch === 'kham') {
     spawnBeast('elephant', p.x - 90, 1, { ghost: true, life: 2.0 }); G.cine = { kind: 'introKham', t: 0 };
-  } else G.cine = { kind: { juk: 'introJuk', shaolin: 'introShaolin', eagle: 'introEagle', sombat: 'introSombat', sorapong: 'introSorapong', paimei: 'introPaimei', lady: 'introLady', ichi: 'introIchi', ogami: 'introOgami', madong: 'introMadong', oldboy: 'introOldboy', srk: 'introSRK', aamir: 'introAamir', rajini: 'introRajini', singham: 'introSingham', michelle: 'introMichelle', phiphop: 'introPhiphop', zhang: 'introZhang', dong: 'introDong', ma: 'introMa', fei: 'introFei', nine: 'introNine', sura: 'introSura', li: 'introLi', ximen: 'introXimen' }[p.ch], t: 0 };
+  } else G.cine = { kind: { juk: 'introJuk', shaolin: 'introShaolin', eagle: 'introEagle', sombat: 'introSombat', sorapong: 'introSorapong', paimei: 'introPaimei', lady: 'introLady', ichi: 'introIchi', ogami: 'introOgami', madong: 'introMadong', oldboy: 'introOldboy', srk: 'introSRK', aamir: 'introAamir', furie: 'introNew5', bey: 'introNew5', gada: 'introNew5', silat: 'introNew5', hongbao: 'introNew5', rajini: 'introRajini', singham: 'introSingham', michelle: 'introMichelle', phiphop: 'introPhiphop', zhang: 'introZhang', dong: 'introDong', ma: 'introMa', fei: 'introFei', nine: 'introNine', sura: 'introSura', li: 'introLi', ximen: 'introXimen' }[p.ch], t: 0 };
 }
 function startOutro() {
   if (STAGE === 5) return startCar5Outro();       // stage 05: the same car comes back for you
@@ -6532,6 +6873,12 @@ function updCine(dt) {
       if (at(0.7)) { audio.play('skid'); dust(p.x + p.w / 2, p.y + p.h, 8, 8); }
       if (at(0.9)) { p.bikeT = 0; p.swingT = 0.4; p.swingK = 'hook'; popup(p.x + 5, p.y - 16, '"JO JEETA WOHI SIKANDAR!"', '#4aa0ff', true); }
       if (c.t > 1.6) { p.bikeT = 0; G.cine = null; }
+      break;
+    case 'introNew5':
+      p.vx = 0;
+      if (at(0.2)) { audio.play('whoosh'); dust(p.x + p.w / 2, p.y + p.h, 6, 8); }
+      if (at(0.55)) { p.swingT = 0.4; p.swingK = (p.ch === 'gada' || p.ch === 'bey') ? 'slash' : 'punch'; if (p.ch === 'furie' || p.ch === 'silat') p.shootT = 0.4; audio.play('whoosh'); popup(p.x + 5, p.y - 16, '"' + (QUIPS[p.ch] || ['ACTION!'])[0] + '"', heroOf(p).col, true); }
+      if (c.t > 1.5) G.cine = null;
       break;
     case 'introSingham':
       p.vx = 0;
@@ -6929,9 +7276,12 @@ let FLASH = false;
 //   head ×1.4 (pivot at the neck) · legs ×1.28 taller · anything reaching out past the shoulders ×1.35 longer.
 // The map is monotonic, so a sprite never tears; it just changes proportions. Press V to compare with the old look.
 // =====================================================================
-let LOOK = (() => { try { return localStorage.getItem('omr_look') || 'big'; } catch (e) { return 'big'; } })();
+// v27: three presets — HEROIC (default: smaller head, long legs, long reach: reads as an action hero), BIG (the v26 chibi-ish look), CLASSIC.
+const LOOKS = { hero: { H: 1.2, L: 1.42, A: 1.42, name: 'LOOK: HEROIC (LONG LEGS)' }, big: { H: 1.4, L: 1.28, A: 1.35, name: 'LOOK: BIG HEADS + 2.5D' }, classic: { H: 1, L: 1, A: 1, name: 'LOOK: CLASSIC' } };
+let LOOK = (() => { try { const v = localStorage.getItem('omr_look2'); return LOOKS[v] ? v : 'hero'; } catch (e) { return 'hero'; } })();
 let WARP = 0;
-const LK = { H: 1.4, L: 1.28, A: 1.35, neck: -16, hip: -8, sh: 4 };
+const LK = { H: 1.2, L: 1.42, A: 1.42, neck: -16, hip: -8, sh: 4 };
+Object.assign(LK, LOOKS[LOOK === 'classic' ? 'hero' : LOOK]);
 function lkY(y) {
   if (y >= LK.hip) return y * LK.L;
   const yl = LK.hip * LK.L;
@@ -6949,10 +7299,11 @@ function lkRect(x, y, w, h) {                       // → [x, y, w, h] in the n
   return [x0, y0, Math.max(0.5, x1 - x0), Math.max(0.5, y1 - y0)];
 }
 function cycleLook() {
-  LOOK = LOOK === 'big' ? 'classic' : 'big'; try { localStorage.setItem('omr_look', LOOK); } catch (e) {}
-  return LOOK === 'big' ? 'LOOK: BIG HEADS + 2.5D' : 'LOOK: CLASSIC';
+  LOOK = LOOK === 'hero' ? 'big' : LOOK === 'big' ? 'classic' : 'hero'; try { localStorage.setItem('omr_look2', LOOK); } catch (e) {}
+  if (LOOK !== 'classic') Object.assign(LK, LOOKS[LOOK]);
+  return LOOKS[LOOK].name;
 }
-const lookOn = () => LOOK === 'big';
+const lookOn = () => LOOK !== 'classic';
 const WARP_ENEMIES = new Set(['soldier', 'gunner', 'bomber', 'knife', 'shield', 'heavy', 'jiangshi', 'ghost', 'monk']);
 // the volume pass: light from above-left, shade below-right, applied only where the sprite has pixels
 function lkShade(g, W, H, top, bot) {
@@ -7612,7 +7963,7 @@ function drawOgami(p) {
     }
   });
 }
-function drawPlayerRaw(p) { if (p.ch === 'aamir') return drawAamir(p); if (p.ch === 'juk') return drawJuk(p); if (p.ch === 'shaolin') return drawShaolin(p); if (p.ch === 'eagle') return drawEagle(p); if (p.ch === 'sombat') return drawSombat(p); if (p.ch === 'sorapong') return drawSorapong(p); if (p.ch === 'wah' && p.foot) return drawWahFoot(p); if (p.ch === 'paimei') return drawPaimei(p); if (p.ch === 'lady') return drawLady(p); if (p.ch === 'ichi') return drawIchi(p); if (p.ch === 'ogami') return drawOgami(p); if (p.ch === 'madong') return drawMadong(p); if (p.ch === 'oldboy') return drawOldboy(p); if (p.ch === 'kham') return drawKham(p); if (p.ch === 'srk') return drawSRK(p); if (p.ch === 'rajini') return drawRajini(p); if (p.ch === 'singham') return drawSingham(p); if (p.ch === 'michelle') return drawMichelle(p); if (p.ch === 'phiphop') return drawPhiphop(p); if (p.ch === 'wah' && S1HD()) drawBikeHD(p); else if (p.ch === 'zhang') drawZhang(p); else if (p.ch === 'vijay') drawVijay(p); else if (p.ch === 'ram') drawRam(p); else if (p.ch === 'chiru') drawChiru(p); else if (p.ch === 'dong') drawDong(p); else if (p.ch === 'sura') drawSura(p); else if (p.ch === 'li') drawLi(p); else if (p.ch === 'ximen') (S1HD() ? drawXimenHD : drawXimen)(p); else if (p.ch === 'wah') drawBike(p); else if (p.ch === 'fei') drawFei(p); else if (p.ch === 'nine') drawNine(p); else if (p.ch === 'siang') drawSiang(p); else drawMa(p); }
+function drawPlayerRaw(p) { if (DRAW5[p.ch]) return DRAW5[p.ch](p); if (p.ch === 'aamir') return drawAamir(p); if (p.ch === 'juk') return drawJuk(p); if (p.ch === 'shaolin') return drawShaolin(p); if (p.ch === 'eagle') return drawEagle(p); if (p.ch === 'sombat') return drawSombat(p); if (p.ch === 'sorapong') return drawSorapong(p); if (p.ch === 'wah' && p.foot) return drawWahFoot(p); if (p.ch === 'paimei') return drawPaimei(p); if (p.ch === 'lady') return drawLady(p); if (p.ch === 'ichi') return drawIchi(p); if (p.ch === 'ogami') return drawOgami(p); if (p.ch === 'madong') return drawMadong(p); if (p.ch === 'oldboy') return drawOldboy(p); if (p.ch === 'kham') return drawKham(p); if (p.ch === 'srk') return drawSRK(p); if (p.ch === 'rajini') return drawRajini(p); if (p.ch === 'singham') return drawSingham(p); if (p.ch === 'michelle') return drawMichelle(p); if (p.ch === 'phiphop') return drawPhiphop(p); if (p.ch === 'wah' && S1HD()) drawBikeHD(p); else if (p.ch === 'zhang') drawZhang(p); else if (p.ch === 'vijay') drawVijay(p); else if (p.ch === 'ram') drawRam(p); else if (p.ch === 'chiru') drawChiru(p); else if (p.ch === 'dong') drawDong(p); else if (p.ch === 'sura') drawSura(p); else if (p.ch === 'li') drawLi(p); else if (p.ch === 'ximen') (S1HD() ? drawXimenHD : drawXimen)(p); else if (p.ch === 'wah') drawBike(p); else if (p.ch === 'fei') drawFei(p); else if (p.ch === 'nine') drawNine(p); else if (p.ch === 'siang') drawSiang(p); else drawMa(p); }
 function drawBrideSeated(spd) {
   const V = Math.min(6, spd / 60) | 0, fl = Math.round(Math.sin(G.clock * 18) * (spd > 40 ? 1 : 0));
   ctx.globalAlpha = 0.85; px(-17 - V, -25 + fl, 7 + V, 3, '#ffffff'); px(-19 - V, -23 + fl, 4, 2, '#ffffff'); ctx.globalAlpha = 1;   // veil streaming back
@@ -7786,20 +8137,20 @@ function drawMap() {
 }
 function enterSelect() {
   if (G.mode !== 'title') newGame('title');
-  G.mode = 'select'; G.sel = CHAR_KEYS.indexOf(CHOSEN); G.selT = 0;
+  G.mode = 'select'; G.sel = CHAR_KEYS.indexOf(CHOSEN); G.selT = 0; G.selOff = 0;
   G.previews = CHAR_KEYS.map(k => { const q = mkPlayer(0, 0, k); q.onGround = true; q.previewBride = k === 'wah'; return q; });
 }
 const CARD = { x0: 3, w: 40, gap: 3, y: 34, h: 44, cols: 11 };   // v23: 31 heroes -> 11 columns
-function cardRect(i) { const c = i % CARD.cols, r = Math.floor(i / CARD.cols); return { x: CARD.x0 + c * (CARD.w + CARD.gap), y: CARD.y + r * (CARD.h + 4) }; }
+function cardRectOld(i) { const c = i % CARD.cols, r = Math.floor(i / CARD.cols); return { x: CARD.x0 + c * (CARD.w + CARD.gap), y: CARD.y + r * (CARD.h + 4) }; }
 const CARD_ROWS = () => Math.ceil(CHAR_KEYS.length / CARD.cols);
-function cardAt(mx, my) { for (let i = 0; i < CHAR_KEYS.length; i++) { const R = cardRect(i); if (mx >= R.x && mx <= R.x + CARD.w && my >= R.y && my <= R.y + CARD.h) return i; } return -1; }
+function cardAtOld(mx, my) { for (let i = 0; i < CHAR_KEYS.length; i++) { const R = cardRectOld(i); if (mx >= R.x && mx <= R.x + CARD.w && my >= R.y && my <= R.y + CARD.h) return i; } return -1; }
 function drawPreview(k, q, scale, cx, footY) {
   ctx.save(); ctx.translate(cx, footY); ctx.scale(scale, scale);
   q.x = -q.w / 2; q.y = -q.h;
   drawPlayer(q);
   ctx.restore();
 }
-function drawSelect() {
+function drawSelectOld() {
   ctx.fillStyle = 'rgba(8,2,12,0.76)'; ctx.fillRect(0, 0, VW, VH);
   const t = G.clock;
   txt('PICK YOUR UNCLE (OR AUNTIE)', VW / 2, 6, '#ffd23f', 14, 'center');
@@ -7856,10 +8207,10 @@ function drawSelect() {
 // =====================================================================
 const ORIGIN = { shaolin: 'HK', eagle: 'TH', sombat: 'TH', sorapong: 'TH', wah: 'HK', ma: 'HK', fei: 'CN', nine: 'HK', siang: 'TH', sura: 'CN', li: 'CN', ximen: 'CN',
   chiru: 'IN', dong: 'CN', zhang: 'CN', vijay: 'IN', ram: 'IN', singham: 'IN', michelle: 'HK', phiphop: 'TH', srk: 'IN', aamir: 'IN', rajini: 'IN', madong: 'KR', oldboy: 'KR',
-  kham: 'TH', paimei: 'CN', lady: 'KR', ichi: 'JP', ogami: 'JP', juk: 'TH' };
-const ORIGIN_COL = { TH: '#4a8aff', HK: '#ff4a6a', CN: '#ffd23f', IN: '#ff9a3a', KR: '#7ae8ff', JP: '#ffffff' };
-const ORIGIN_NAME = { ALL: 'ALL HEROES', TH: 'THAI · ไทย', HK: 'HONG KONG · 香港', CN: 'CHINA · 中國', IN: 'INDIA · भारत', KR: 'KOREA · 한국', JP: 'JAPAN · 日本' };
-const SEL_FILTERS = ['ALL', 'TH', 'HK', 'CN', 'IN', 'KR', 'JP'];
+  kham: 'TH', paimei: 'CN', lady: 'KR', ichi: 'JP', ogami: 'JP', juk: 'TH', furie: 'VN', bey: 'TR', gada: 'IN', silat: 'ID', hongbao: 'HK' };
+const ORIGIN_COL = { TH: '#4a8aff', HK: '#ff4a6a', CN: '#ffd23f', IN: '#ff9a3a', KR: '#7ae8ff', JP: '#ffffff', VN: '#ff6a6a', TR: '#ff9ac0', ID: '#5affa0' };
+const ORIGIN_NAME = { ALL: 'ALL HEROES', TH: 'THAI · ไทย', HK: 'HONG KONG · 香港', CN: 'CHINA · 中國', IN: 'INDIA · भारत', KR: 'KOREA · 한국', JP: 'JAPAN · 日本', VN: 'VIETNAM · VIỆT NAM', TR: 'TURKEY · TÜRKİYE', ID: 'INDONESIA' };
+const SEL_FILTERS = ['ALL', 'TH', 'HK', 'CN', 'IN', 'KR', 'JP', 'VN', 'TR', 'ID'];
 const selMatch = k => !G.selF || G.selF === 'ALL' || ORIGIN[k] === G.selF;
 function selStep(dir, stride) {                 // move, skipping heroes the filter hides
   const n = CHAR_KEYS.length; let i = G.sel;
@@ -7960,6 +8311,156 @@ function drawSlate() {                             // clapperboard: SCENE / TAKE
   txt('ROLL CAMERA... ACTION!', x + w / 2, y + 92, clap ? '#ff5a3a' : '#8a8a8a', 8, 'center');
   if (clap && !S.clapped) { S.clapped = true; audio.play('clang'); }
 }
+
+// =====================================================================
+// v27 HERO SELECT 2.0 — a movie-poster stage for the selected hero + a portrait roster.
+//   left : spotlight stage, sunburst in the hero's colour, the hero at 4x doing a move loop, poster-style name
+//   right: name, stats, the move list (the active move pulses), ranks, key hints
+//   below: portrait roster (18 per row, scrolls by row when there are more), origin stripe, NEW / lock badges
+// Overrides drawSelect / cardRect / cardAt from the base; selInput() (select.js) keeps handling F / R / mouse.
+// =====================================================================
+const SEL5 = { cols: 18, cw: 25, ch: 37, gap: 1, x0: 4, y0: 181, rows: 2 };
+CARD.cols = SEL5.cols; CARD.w = SEL5.cw; CARD.h = SEL5.ch;
+function cardRect(i) { const c = i % SEL5.cols, r = Math.floor(i / SEL5.cols) - (G && G.selOff || 0); return { x: SEL5.x0 + c * (SEL5.cw + SEL5.gap), y: SEL5.y0 + r * (SEL5.ch + SEL5.gap) }; }
+function cardAt(mx, my) {
+  for (let i = 0; i < CHAR_KEYS.length; i++) {
+    const r = Math.floor(i / SEL5.cols) - (G.selOff || 0); if (r < 0 || r >= SEL5.rows) continue;
+    const R = cardRect(i); if (mx >= R.x && mx <= R.x + SEL5.cw && my >= R.y && my <= R.y + SEL5.ch) return i;
+  }
+  return -1;
+}
+const SEL_SWING = new Set(['aamir', 'fei', 'siang', 'nine', 'sura', 'li', 'ximen', 'chiru', 'dong', 'zhang', 'ram', 'singham', 'michelle', 'srk', 'madong', 'oldboy', 'kham', 'paimei', 'lady', 'ichi', 'ogami', 'bey', 'gada', 'silat', 'hongbao', 'furie']);
+function selAnim(k, q, t, on) {                      // the idle / action loop for one preview figure
+  q.animT = t; q.onGround = true; q.face = 1; q.inv = 0; q.flash = 0;
+  q.vx = on ? 160 : 0; q.runPhase = on ? t * (k === 'wah' ? 14 : 8) : 0;
+  q.boostT = (k === 'wah' && on && (t % 3) > 2.4) ? 0.1 : 0;
+  q.shootT = on && ((k === 'ma' && (t * 10 | 0) % 3 === 0) || (k === 'vijay' && (t * 10 | 0) % 2 === 0) || ((k === 'furie' || k === 'silat') && (t * 3 % 1) < 0.5 && (t * 3 | 0) % 2 === 0)) ? 0.06 : 0;
+  q.hand = (t * 10 | 0) % 2;
+  const cyc = (t * 3 | 0) % 4, act = on && (t * 3 % 1) < 0.4;
+  q.swingT = act && SEL_SWING.has(k) ? 0.1 : 0;
+  q.absorbing = k === 'zhang' && on && (t % 3) > 1.6; q.stored = q.absorbing ? Math.floor(((t % 3) - 1.6) * 6) : 0;
+  q.swingK = k === 'zhang' ? 'palm' : k === 'ram' ? (cyc === 3 ? 'call' : 'butt') : (k === 'ximen' || k === 'gada') ? 'slash' : k === 'bey' ? (cyc === 3 ? 'slash' : 'punch') : k === 'chiru' ? (cyc === 3 ? 'pose' : 'slap') : ['punch', 'kick', 'punch', 'bigkick'][cyc];
+  if (q.swingT > 0) q.vx = 0;
+  if (q.shootT > 0) q.vx = 0;
+  q.dodgeT = (k === 'sura' && on && (t % 2) > 1.6) ? 0.2 : 0; q.drinkT = (k === 'sura' && on && (t % 4) > 3.3) ? 0.3 : -1;
+  q.charge = (k === 'li' && on && (t % 3) > 1.8) ? Math.min(1, ((t % 3) - 1.8)) : 0; q.coughing = (k === 'li' && on && (t % 6) > 5.4) ? 0.3 : 0;
+  q.blowing = (k === 'ximen' && on && (t % 4) > 3.2);
+}
+function wrapTxt(s, n) { const out = []; let cur = ''; for (const w of s.split(' ')) { const nx = (cur + ' ' + w).trim(); if (nx.length > n && cur) { out.push(cur); cur = w; } else cur = nx; } if (cur) out.push(cur); return out; }
+function selChip(x, y, w, label, col, on) {
+  ctx.fillStyle = on ? col : 'rgba(0,0,0,0.55)'; ctx.fillRect(x, y, w, 11);
+  ctx.strokeStyle = on ? '#ffffff' : '#4a3a50'; ctx.lineWidth = 1; ctx.strokeRect(x + 0.5, y + 0.5, w - 1, 10);
+  txt(label, x + w / 2, y + 2, on ? '#10060c' : col, 7, 'center', false);
+}
+function selCorners(x, y, w, h, col, L) {
+  ctx.strokeStyle = col; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(x, y + L); ctx.lineTo(x, y); ctx.lineTo(x + L, y); ctx.moveTo(x + w - L, y); ctx.lineTo(x + w, y); ctx.lineTo(x + w, y + L);
+  ctx.moveTo(x + w, y + h - L); ctx.lineTo(x + w, y + h); ctx.lineTo(x + w - L, y + h); ctx.moveTo(x + L, y + h); ctx.lineTo(x, y + h); ctx.lineTo(x, y + h - L); ctx.stroke();
+}
+const SEL_NEW = new Set(['furie', 'bey', 'gada', 'silat', 'hongbao']);
+function drawSelect() {
+  const t = G.clock, k = CHAR_KEYS[G.sel], C = CHARS[k], locked = !isUnlocked(k), n = CHAR_KEYS.length;
+  const r0 = Math.floor(G.sel / SEL5.cols); G.selOff = G.selOff || 0;
+  if (r0 < G.selOff) G.selOff = r0; if (r0 >= G.selOff + SEL5.rows) G.selOff = r0 - SEL5.rows + 1;
+  // ---------- backdrop
+  const bg = ctx.createLinearGradient(0, 0, 0, VH); bg.addColorStop(0, '#0b0412'); bg.addColorStop(0.7, '#1e0818'); bg.addColorStop(1, '#2a0c1c');
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, VW, VH);
+  for (let i = 0; i < 40; i++) { const x = (i * 97 + t * (8 + (i % 5) * 3)) % VW, y = (i * 53 + 20) % 170 + 20; ctx.fillStyle = 'rgba(255,230,180,' + (0.08 + (i % 4) * 0.03) + ')'; ctx.fillRect(x, y, 1, 1); }   // drifting dust
+  // ---------- header
+  txt('CHOOSE YOUR HERO', 6, 2, '#ffd23f', 14, 'left'); txt('เลือกตัวละคร', 150, 6, '#ffe9b8', 8, 'left');
+  const fl = SEL_FILTERS, cw = 26; let cx0 = VW - 4 - fl.length * (cw + 2);
+  fl.forEach((f, i) => selChip(cx0 + i * (cw + 2), 3, cw, f, f === 'ALL' ? '#ffffff' : ORIGIN_COL[f], (G.selF || 'ALL') === f));
+  txt('HEROES ' + CHAR_KEYS.filter(isUnlocked).length + '/' + n, 6, 16, '#7dff8a', 7, 'left', false);
+  // ---------- stage window (left)
+  const SX = 4, SY = 24, SW = 172, SH = 153;
+  ctx.save(); ctx.beginPath(); ctx.rect(SX, SY, SW, SH); ctx.clip();
+  const sg = ctx.createRadialGradient(SX + SW / 2, SY + SH - 30, 5, SX + SW / 2, SY + SH - 30, SH * 1.0); sg.addColorStop(0, C.col + '55'); sg.addColorStop(0.55, C.col + '16'); sg.addColorStop(1, '#0a0410');
+  ctx.fillStyle = '#0a0410'; ctx.fillRect(SX, SY, SW, SH); ctx.fillStyle = sg; ctx.fillRect(SX, SY, SW, SH);
+  ctx.save(); ctx.translate(SX + SW / 2, SY + SH - 40);                               // sunburst
+  for (let i = 0; i < 18; i++) { const a = i / 18 * 6.283 + t * 0.07, w = 0.09; ctx.fillStyle = C.col + (i % 2 ? '1c' : '0a'); ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.cos(a) * 260, Math.sin(a) * 260); ctx.lineTo(Math.cos(a + w) * 260, Math.sin(a + w) * 260); ctx.fill(); }
+  ctx.restore();
+  const fy = SY + SH - 22;                                                           // floor
+  ctx.fillStyle = 'rgba(0,0,0,0.55)'; ctx.fillRect(SX, fy, SW, SH);
+  ctx.strokeStyle = C.col + '55'; ctx.lineWidth = 1; for (let i = -6; i <= 6; i++) { ctx.beginPath(); ctx.moveTo(SX + SW / 2 + i * 8, fy); ctx.lineTo(SX + SW / 2 + i * 34, SY + SH); ctx.stroke(); }
+  ctx.fillStyle = 'rgba(0,0,0,0.55)'; ctx.beginPath(); ctx.ellipse(SX + SW / 2, fy + 1, 34, 5, 0, 0, 6.283); ctx.fill();
+  const q = G.previews[G.sel]; selAnim(k, q, t, !locked);
+  const sc = k === 'wah' ? 2.5 : k === 'zhang' ? 2.8 : k === 'hongbao' ? 3.7 : 3.9;
+  if (locked) ctx.globalAlpha = 0.28;
+  drawPreview(k, q, sc, SX + SW / 2 + (k === 'wah' ? 8 : 0), fy + 1);
+  ctx.globalAlpha = 1;
+  if (locked) { txt('?', SX + SW / 2, SY + SH / 2 - 30, '#ffd23f', 30, 'center'); }
+  ctx.restore();
+  selCorners(SX, SY, SW, SH, C.col, 10);
+  ctx.fillStyle = 'rgba(0,0,0,0.62)'; ctx.fillRect(SX + 2, SY + SH - 19, SW - 4, 17);                       // poster title strip
+  txt(C.name, SX + SW / 2, SY + SH - 18, locked ? '#8a7a80' : C.col, 10, 'center');
+  txt(C.th, SX + SW / 2, SY + SH - 8, '#d8c8b8', 6, 'center', false);
+  drawOriginTag(k, SX + 5, SY + 5); txt(ORIGIN_NAME[ORIGIN[k]] || '', SX + 20, SY + 6, ORIGIN_COL[ORIGIN[k]] || '#fff', 6, 'left', false);
+  if ((SEL_NEW.has(k) || PROG.fresh.includes(k)) && !locked && Math.floor(t * 3) % 2 === 0) { ctx.fillStyle = '#ff2a4a'; ctx.fillRect(SX + SW - 26, SY + 4, 22, 9); txt('NEW', SX + SW - 15, SY + 5, '#fff', 7, 'center', false); }
+  const pu = 2 + Math.sin(t * 6) * 1.5; txt('◀', SX + 3 - pu + 3, SY + SH / 2 - 10, '#ffffff', 10, 'left'); txt('▶', SX + SW - 12 + pu - 3, SY + SH / 2 - 10, '#ffffff', 10, 'left');
+  // ---------- info panel (right)
+  const IX = 182, IY = 24, IW = 294, IH = 153;
+  ctx.fillStyle = 'rgba(10,4,16,0.82)'; ctx.fillRect(IX, IY, IW, IH); ctx.fillStyle = C.col; ctx.fillRect(IX, IY, 3, IH); ctx.fillRect(IX, IY, IW, 1);
+  { const rw0 = C.tag.length * 5 + 10; txt(C.name, IX + 9, IY + 4, locked ? '#8a7a80' : C.col, C.name.length * 9.7 + rw0 > IW - 16 ? 12 : 16, 'left'); }
+  txt(C.cn + '   ' + C.th, IX + 9, IY + 24, '#e8d8c0', 8, 'left');
+  { const rw = C.tag.length * 5 + 10, rx0 = IX + IW - 5 - rw; ctx.fillStyle = C.col; ctx.fillRect(rx0, IY + 5, rw, 11); txt(C.tag, rx0 + rw / 2, IY + 7, '#10060c', 7, 'center', false); }
+  { const dm = /DIFFICULTY\s*([★☆]{3})/.exec(C.lines[0] || ''), dv = C.diff || (dm ? (dm[1].match(/★/g) || []).length : 0); if (dv) txt('DIFFICULTY ' + '★'.repeat(dv) + '☆'.repeat(3 - dv), IX + IW - 6, IY + 20, '#ffe9b8', 7, 'right', false); }
+  C.stats.forEach(([nm, v], j) => {
+    const sx = IX + 9 + (j % 2) * 140, sy = IY + 34 + (j >> 1) * 10; txt(nm, sx, sy, '#ffb070', 8, 'left', false);
+    for (let b = 0; b < 5; b++) { ctx.fillStyle = b < v ? C.col : '#3a2a34'; ctx.fillRect(sx + 52 + b * 15, sy + 1, 13, 6); if (b < v) { ctx.fillStyle = 'rgba(255,255,255,0.28)'; ctx.fillRect(sx + 52 + b * 15, sy + 1, 13, 2); } }
+  });
+  if (locked) {
+    const u = UNLOCKS[k];
+    txt('LOCKED  ·  ยังไม่ปลดล็อก', IX + 9, IY + 60, G.denyT > 0 && Math.floor(t * 12) % 2 ? '#ffffff' : '#ff5a5a', 8, 'left');
+    wrapTxt('TO UNLOCK: ' + unlockText(k), 62).forEach((l, j) => txt(l, IX + 9, IY + 72 + j * 9, '#ffd23f', 7, 'left'));
+    if (u && u.stage) txt('RANK ' + u.rank + ' ON STAGE 0' + u.stage + ' = ' + rankReq(u.stage, u.rank), IX + 9, IY + 96, '#a89888', 7, 'left');
+  } else {
+    ctx.save(); ctx.beginPath(); ctx.rect(IX + 4, IY + 50, IW - 6, IH - 76); ctx.clip();
+    let yy = IY + 66; const act = Math.floor(t / 1.5) % Math.max(1, C.lines.length - 1) + 1;
+    C.lines.forEach((l, j) => {
+      if (j === 0) { txt(l.replace(/^ROLE:\s*/, '').replace(/\s*·\s*DIFFICULTY.*$/, ''), IX + 9, IY + 54, '#ffffff', 7, 'left', false); return; }
+      const rows = wrapTxt(l, 64);
+      if (j === act) { ctx.fillStyle = C.col + '33'; ctx.fillRect(IX + 5, yy - 1, IW - 9, rows.length * 8 + 1); ctx.fillStyle = C.col; ctx.fillRect(IX + 5, yy - 1, 2, rows.length * 8 + 1); }
+      rows.forEach((r, i) => txt(r, IX + 11 + (i ? 8 : 0), yy + i * 8, j === act ? '#ffffff' : '#cdbdae', 7, 'left', false));
+      yy += rows.length * 8 + 2;
+    });
+    ctx.restore();
+  }
+  // ranks + best time
+  const hr = PROG.ranks[STAGE][k] || null, nr = nextRank(hr), bt = bestFor(k), sbt = stageBestTime(STAGE);
+  ctx.fillStyle = 'rgba(255,255,255,0.08)'; ctx.fillRect(IX + 5, IY + IH - 24, IW - 9, 1);
+  let rx = IX + 9; txt('RANKS', rx, IY + IH - 20, '#ffb070', 7, 'left', false); rx += 32;
+  [1, 2, 3, 4].forEach(s => { const r = (PROG.ranks[s] && PROG.ranks[s][k]) || '-'; txt('0' + s, rx, IY + IH - 20, s === STAGE ? '#ffffff' : '#8a7a70', 7, 'left', false); txt(r, rx + 12, IY + IH - 21, r === '-' ? '#5a4a4a' : rankCol(r), 8, 'left', false); rx += 28; });
+  txt('BEST ' + (bt != null ? fmtTime(bt) : '--:--') + (sbt != null && sbt !== bt ? '   STAGE ' + fmtTime(sbt) : ''), IX + 9, IY + IH - 10, '#7dff8a', 7, 'left', false);
+  if (!locked) txt(nr ? 'NEXT ' + nr + ': ' + rankReq(STAGE, nr) : 'TOP RANK ON 0' + STAGE + '!', IX + IW - 6, IY + IH - 10, '#7dff8a', 7, 'right', false);
+  txt('F FILTER · R RANDOM · V LOOK · ENTER = ACTION!', 80, 16, '#ffe9b8', 7, 'left', false);
+  // ---------- roster
+  for (let i = 0; i < n; i++) {
+    const r = Math.floor(i / SEL5.cols) - G.selOff; if (r < 0 || r >= SEL5.rows) continue;
+    const kk = CHAR_KEYS[i], CC = CHARS[kk], R = cardRect(i), x = R.x, y = R.y, on = G.sel === i, lk = !isUnlocked(kk), dim = !selMatch(kk);
+    ctx.fillStyle = on ? 'rgba(70,16,30,0.95)' : 'rgba(0,0,0,0.6)'; ctx.fillRect(x, y, SEL5.cw, SEL5.ch);
+    if (on) { const g = ctx.createRadialGradient(x + SEL5.cw / 2, y + SEL5.ch - 6, 1, x + SEL5.cw / 2, y + SEL5.ch - 6, 22); g.addColorStop(0, CC.col + '66'); g.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = g; ctx.fillRect(x, y, SEL5.cw, SEL5.ch); }
+    const qq = G.previews[i]; selAnim(kk, qq, t, false);
+    ctx.save(); ctx.beginPath(); ctx.rect(x + 1, y + 1, SEL5.cw - 2, SEL5.ch - 4); ctx.clip();
+    if (lk) ctx.globalAlpha = 0.3;
+    drawPreview(kk, qq, kk === 'wah' ? 0.62 : kk === 'zhang' ? 0.8 : 0.92, x + SEL5.cw / 2 + (kk === 'wah' ? 3 : 0), y + SEL5.ch - 5);
+    ctx.globalAlpha = 1; ctx.restore();
+    ctx.fillStyle = ORIGIN_COL[ORIGIN[kk]] || '#fff'; ctx.fillRect(x, y + SEL5.ch - 3, SEL5.cw, 3);
+    if (lk) { const lx = x + SEL5.cw / 2 - 5, ly = y + 12; ctx.fillStyle = '#b8a8a0'; ctx.fillRect(lx + 2, ly, 6, 2); ctx.fillRect(lx + 2, ly, 2, 5); ctx.fillRect(lx + 6, ly, 2, 5); ctx.fillStyle = '#ffd23f'; ctx.fillRect(lx, ly + 5, 10, 8); ctx.fillStyle = '#5a3a10'; ctx.fillRect(lx + 4, ly + 7, 2, 4); }
+    if (!lk && (SEL_NEW.has(kk) || PROG.fresh.includes(kk))) { ctx.fillStyle = '#ff2a4a'; ctx.fillRect(x + 1, y + 1, 10, 6); txt('NEW', x + 6, y + 1, '#fff', 5, 'center', false); }
+    ctx.strokeStyle = on ? (Math.floor(t * 4) % 2 ? CC.col : '#ffffff') : '#3e2c46'; ctx.lineWidth = on ? 2 : 1; ctx.strokeRect(x + 0.5, y + 0.5, SEL5.cw - 1, SEL5.ch - 1);
+    if (dim) { ctx.fillStyle = 'rgba(4,0,8,0.8)'; ctx.fillRect(x, y, SEL5.cw, SEL5.ch); }
+    if (on && G.randPick > 0) { ctx.strokeStyle = '#ffd23f'; ctx.lineWidth = 2; ctx.strokeRect(x - 1.5, y - 1.5, SEL5.cw + 3, SEL5.ch + 3); }
+  }
+  if (rowsTotal() > SEL5.rows) { txt(G.selOff > 0 ? '▲' : '', VW - 8, SEL5.y0 - 1, '#ffd23f', 7, 'right', false); txt(G.selOff + SEL5.rows < rowsTotal() ? '▼' : '', VW - 8, SEL5.y0 + SEL5.rows * (SEL5.ch + 1) - 7, '#ffd23f', 7, 'right', false); }
+  if (G.uiDoves) for (const d of G.uiDoves) { ctx.fillStyle = '#fff'; const up = Math.sin(d.ph) > 0; ctx.fillRect(d.x - 2, d.y, 5, 2); ctx.fillRect(d.x - 3, d.y + (up ? -3 : 2), 3, 2); ctx.fillRect(d.x, d.y + (up ? -4 : 2), 3, 2); }
+  if (k === 'ma' && (t % 2.5) < 0.04 && Math.random() < 0.6) spawnDovesUI(SX + SW / 2 + 12, SY + SH - 60);
+  // ---------- footer
+  const nu = nextUnlock();
+  txt('STAGE 0' + STAGE + ': ' + STAGE_NAMES[STAGE] + '  (TAB · ESC = MAP)' + (G.selF && G.selF !== 'ALL' ? '   ·   ' + ORIGIN_NAME[G.selF] : ''), 6, VH - 11, '#ffd23f', 7, 'left', false);
+  txt(nu ? 'NEXT HERO: ' + CHARS[nu].name : 'ALL ' + n + ' HEROES UNLOCKED', VW - 6, VH - 11, nu ? '#ffb070' : '#7dff8a', 7, 'right', false);
+  drawSlate();
+}
+function rowsTotal() { return Math.ceil(CHAR_KEYS.length / SEL5.cols); }
 
 function spawnDovesUI(x, y) { G.uiDoves = G.uiDoves || []; for (let i = 0; i < 5; i++) G.uiDoves.push({ x, y, vx: rnd(-60, 60), vy: rnd(-90, -40), ph: rnd(0, 6), t: 1.6 }); audio.play('coo'); }
 function updUIDoves(dt) { if (!G.uiDoves) return; for (let i = G.uiDoves.length - 1; i >= 0; i--) { const d = G.uiDoves[i]; d.t -= dt; d.ph += dt * 18; d.x += d.vx * dt; d.y += d.vy * dt; if (d.t <= 0) G.uiDoves.splice(i, 1); } }
@@ -8304,9 +8805,9 @@ function drawHUD() {
   else if (p.ch === 'sura') { ctx.fillStyle = '#2a2a2a'; ctx.fillRect(8, 19, 58, 4); ctx.fillStyle = p.buzz > 60 ? '#ff8a3a' : (p.buzz >= 15 ? '#ffb84a' : '#6a4a2a'); ctx.fillRect(8, 19, 58 * p.buzz / 100, 4); ctx.fillStyle = '#ffffff'; ctx.fillRect(8 + 58 * 0.15, 18, 1, 6); ctx.fillRect(8 + 58 * 0.6, 18, 1, 6); txt(p.buzz > 60 ? 'BUZZ!!' : 'BUZZ', 70, 16, '#ffb84a', 8, 'left', false); }
   else if (p.ch === 'li') { const r = clamp(1 - p.fanCd / 5, 0, 1); ctx.fillStyle = '#2a2a2a'; ctx.fillRect(8, 19, 40, 4); ctx.fillStyle = r >= 1 ? '#cfe8ff' : '#5a6a80'; ctx.fillRect(8, 19, 40 * r, 4); txt(p.coughing > 0 ? 'COUGH...' : (p.charge >= 1 ? 'CHARGED!' : 'KNIVES'), 52, 16, p.coughing > 0 ? '#9a9aaa' : '#cfe8ff', 8, 'left', false); }
   else if (p.ch === 'ximen') { const r = clamp(1 - p.lungeCd / 2.6, 0, 1); ctx.fillStyle = '#2a2a2a'; ctx.fillRect(8, 19, 40, 4); ctx.fillStyle = r >= 1 ? '#ffffff' : '#6a6a7a'; ctx.fillRect(8, 19, 40 * r, 4); txt('LUNGE', 52, 16, r >= 1 ? '#ffffff' : '#6a6a6a', 8, 'left', false); }
-  else if (['srk', 'rajini', 'madong', 'oldboy', 'kham', 'paimei', 'lady', 'ichi', 'ogami', 'aamir'].includes(p.ch)) {
-    const r = p.ch === 'aamir' ? clamp(1 - (p.bikeCd || 0) / 3.2, 0, 1) : p.ch === 'paimei' ? clamp(1 - p.stanceCd / 2.5, 0, 1) : p.ch === 'lady' ? p.grudge / 100 : p.ch === 'ichi' ? clamp(1 - p.whirlCd / 2.2, 0, 1) : p.ch === 'ogami' ? clamp(1 - p.passCd / 2.4, 0, 1) : p.ch === 'srk' ? clamp(1 - p.armsCd / 6, 0, 1) : p.ch === 'rajini' ? clamp(1 - p.glassCd / 2.5, 0, 1) : p.ch === 'madong' ? clamp(1 - p.chargeCd / 2.2, 0, 1) : p.ch === 'oldboy' ? clamp(1 - p.rushCd / 3.5, 0, 1) : clamp(1 - p.breakCd / 2, 0, 1);
-    ctx.fillStyle = '#2a2a2a'; ctx.fillRect(8, 19, 28, 4); ctx.fillStyle = r >= 1 ? heroOf(p).col : '#6a5a5a'; ctx.fillRect(8, 19, 28 * r, 4); txt({ paimei: 'STANCE', lady: 'GRUDGE ' + Math.round(p.grudge), ichi: 'LISTEN', ogami: 'CUT', srk: 'ARMS', aamir: 'BIKE', rajini: 'SHADES', madong: 'CHARGE', oldboy: p.rageT > 0 ? 'RAGE!' : 'CORRIDOR', kham: 'BREAK' }[p.ch], 8, 24, heroOf(p).col, 8, 'left', false);
+  else if (['srk', 'rajini', 'madong', 'oldboy', 'kham', 'paimei', 'lady', 'ichi', 'ogami', 'aamir', 'furie', 'bey', 'gada', 'silat', 'hongbao'].includes(p.ch)) {
+    const r = HUD5[p.ch] ? HUD5[p.ch](p) : p.ch === 'aamir' ? clamp(1 - (p.bikeCd || 0) / 3.2, 0, 1) : p.ch === 'paimei' ? clamp(1 - p.stanceCd / 2.5, 0, 1) : p.ch === 'lady' ? p.grudge / 100 : p.ch === 'ichi' ? clamp(1 - p.whirlCd / 2.2, 0, 1) : p.ch === 'ogami' ? clamp(1 - p.passCd / 2.4, 0, 1) : p.ch === 'srk' ? clamp(1 - p.armsCd / 6, 0, 1) : p.ch === 'rajini' ? clamp(1 - p.glassCd / 2.5, 0, 1) : p.ch === 'madong' ? clamp(1 - p.chargeCd / 2.2, 0, 1) : p.ch === 'oldboy' ? clamp(1 - p.rushCd / 3.5, 0, 1) : clamp(1 - p.breakCd / 2, 0, 1);
+    ctx.fillStyle = '#2a2a2a'; ctx.fillRect(8, 19, 28, 4); ctx.fillStyle = r >= 1 ? heroOf(p).col : '#6a5a5a'; ctx.fillRect(8, 19, 28 * r, 4); txt({ paimei: 'STANCE', lady: 'GRUDGE ' + Math.round(p.grudge), ichi: 'LISTEN', ogami: 'CUT', srk: 'ARMS', aamir: 'BIKE', furie: 'SLIDE', bey: 'BLADE', gada: 'MACE', silat: 'MAG', hongbao: 'BUN', rajini: 'SHADES', madong: 'CHARGE', oldboy: p.rageT > 0 ? 'RAGE!' : 'CORRIDOR', kham: 'BREAK' }[p.ch], 8, 24, heroOf(p).col, 8, 'left', false);
     ctx.fillStyle = '#2a2a2a'; ctx.fillRect(40, 19, 28, 4); ctx.fillStyle = p.ult >= 100 ? (Math.floor(G.clock * 8) % 2 ? '#ffd23f' : '#ff5a3a') : '#a8862a'; ctx.fillRect(40, 19, 28 * p.ult / 100, 4);
     txt(p.ult >= 100 ? 'ULT! L' : 'ULT', 72, 16, '#ffd23f', 8, 'left', false); }
   else if (p.ch === 'singham' || p.ch === 'michelle' || p.ch === 'phiphop') {
@@ -8349,6 +8850,11 @@ function drawHUD() {
     phiphop: 'MOVE A/D  JUMP W/CTRL  UZI J  RPG K (↑/↓ AIM)  GRENADE S+J  BARRAGE L',
     srk: 'MOVE A/D  JUMP W/CTRL  DANCE J  ARMS WIDE OPEN K  ROSE S+J  DANCE NUMBER L',
     aamir: 'MOVE A/D  JUMP W/CTRL  JAB-JAB-HOOK J  BICYCLE K  HAYMAKER S+J  TRAIN DARE L',
+    furie: 'MOVE A/D  JUMP W/CTRL  PISTOL J  SLIDE K  HEADSHOT S+J  NO MERCY L',
+    bey: 'MOVE A/D  JUMP W/CTRL  HEAVY FISTS J  SWORD K  STOMP S+J  DIVE AIR+J  SAVIOR L',
+    gada: 'MOVE A/D  JUMP W/CTRL  MACE J  THROW K  GROUND SMASH S+J  WHIRLWIND L',
+    silat: 'MOVE A/D  JUMP W/CTRL  SILAT J  SMG HOLD K  SWEEP S+J  THE RAID L',
+    hongbao: 'MOVE A/D  JUMP W/CTRL  KICKS J  BUN K  BELLY BUMP S+J  AIR+J DROP-KICK  BUFFET L',
     rajini: 'MOVE A/D  BIG JUMP W/CTRL  BENDING SHOT J  SHADES K  3-WAY S+J  STYLE L',
     madong: 'MOVE A/D  JUMP W/CTRL  ONE PUNCH J  SHOULDER CHARGE K  THROW A MAN S+J  1-2-3 L',
     oldboy: 'MOVE A/D  JUMP W/CTRL  HAMMER J  CORRIDOR K  THROW HAMMER S+J  15 YEARS L',
@@ -8462,6 +8968,9 @@ function drawWin() {
     phiphop: [['ROCKETS FIRED', String(s.rockets)], ['BARRAGES', String(s.ults)]],
     srk: [['HITS LANDED', String(s.melee)], ['DANCE NUMBERS', String(s.ults)]],
     aamir: [['HITS LANDED', String(s.melee)], ['TRAINS DARED', String(s.ults)]],
+    furie: [['SHOTS FIRED', String(s.shots)], ['NO MERCY', String(s.ults)]], bey: [['BLOWS LANDED', String(s.melee)], ['WORLDS SAVED', String(s.ults)]],
+    gada: [['SWINGS LANDED', String(s.melee)], ['WHIRLWINDS', String(s.ults)]], silat: [['ROUNDS FIRED', String(s.shots)], ['RAIDS', String(s.ults)]],
+    hongbao: [['HITS LANDED', String(s.melee)], ['BUFFETS', String(s.ults)]],
     rajini: [['BENDING BULLETS', String(s.shots)], ['STYLE MOMENTS', String(s.ults)]],
     madong: [['PUNCHES LANDED', String(s.melee)], ['SCREEN QUAKES', String(s.ults)]],
     oldboy: [['HAMMER HITS', String(s.melee)], ['RAGES', String(s.ults)]],

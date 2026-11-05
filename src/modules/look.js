@@ -5,9 +5,12 @@
 //   head ×1.4 (pivot at the neck) · legs ×1.28 taller · anything reaching out past the shoulders ×1.35 longer.
 // The map is monotonic, so a sprite never tears; it just changes proportions. Press V to compare with the old look.
 // =====================================================================
-let LOOK = (() => { try { return localStorage.getItem('omr_look') || 'big'; } catch (e) { return 'big'; } })();
+// v27: three presets — HEROIC (default: smaller head, long legs, long reach: reads as an action hero), BIG (the v26 chibi-ish look), CLASSIC.
+const LOOKS = { hero: { H: 1.2, L: 1.42, A: 1.42, name: 'LOOK: HEROIC (LONG LEGS)' }, big: { H: 1.4, L: 1.28, A: 1.35, name: 'LOOK: BIG HEADS + 2.5D' }, classic: { H: 1, L: 1, A: 1, name: 'LOOK: CLASSIC' } };
+let LOOK = (() => { try { const v = localStorage.getItem('omr_look2'); return LOOKS[v] ? v : 'hero'; } catch (e) { return 'hero'; } })();
 let WARP = 0;
-const LK = { H: 1.4, L: 1.28, A: 1.35, neck: -16, hip: -8, sh: 4 };
+const LK = { H: 1.2, L: 1.42, A: 1.42, neck: -16, hip: -8, sh: 4 };
+Object.assign(LK, LOOKS[LOOK === 'classic' ? 'hero' : LOOK]);
 function lkY(y) {
   if (y >= LK.hip) return y * LK.L;
   const yl = LK.hip * LK.L;
@@ -25,10 +28,11 @@ function lkRect(x, y, w, h) {                       // → [x, y, w, h] in the n
   return [x0, y0, Math.max(0.5, x1 - x0), Math.max(0.5, y1 - y0)];
 }
 function cycleLook() {
-  LOOK = LOOK === 'big' ? 'classic' : 'big'; try { localStorage.setItem('omr_look', LOOK); } catch (e) {}
-  return LOOK === 'big' ? 'LOOK: BIG HEADS + 2.5D' : 'LOOK: CLASSIC';
+  LOOK = LOOK === 'hero' ? 'big' : LOOK === 'big' ? 'classic' : 'hero'; try { localStorage.setItem('omr_look2', LOOK); } catch (e) {}
+  if (LOOK !== 'classic') Object.assign(LK, LOOKS[LOOK]);
+  return LOOKS[LOOK].name;
 }
-const lookOn = () => LOOK === 'big';
+const lookOn = () => LOOK !== 'classic';
 const WARP_ENEMIES = new Set(['soldier', 'gunner', 'bomber', 'knife', 'shield', 'heavy', 'jiangshi', 'ghost', 'monk']);
 // the volume pass: light from above-left, shade below-right, applied only where the sprite has pixels
 function lkShade(g, W, H, top, bot) {
