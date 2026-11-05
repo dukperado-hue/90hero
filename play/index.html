@@ -5785,9 +5785,10 @@ function freeCage(c, dir) {
   const k = pickDouble(); c.who = k;
   later(0.35, () => swapHero(k, c));
 }
+const helpAge = () => G.time - (G.helpT0 || 0);        // seconds since the control hints were last (re)started: run start or a stunt-double swap
 function swapHero(k, c) {
   const p = G.player; if (!p || p.dead || G.mode !== 'play' || G.cine) return;
-  G.actor = k;
+  G.actor = k; G.helpT0 = G.time;
   const np = mkPlayer(p.x + p.w / 2 - (k === 'wah' ? 10 : PC.w / 2), p.y + p.h - PC.standH, k);
   np.inv = 1.0; np.face = p.face; np.vx = p.vx * 0.5; np.bombs = Math.max(p.bombs, 3);
   G.player = np; G.wbike = null; if (k === 'wah' && typeof wahDismount === 'function') { /* starts on the bike */ }
@@ -8945,7 +8946,7 @@ function drawHUD() {
     lady: 'PISTOL J  REVENGE STAB K  THE GLARE S+J  VENGEANCE L  · HITS + WOUNDS = GRUDGE',
     ichi: 'CANE-SWORD J  LISTEN K  DICE S+J  DARKNESS L  · HE IS BLIND (BONK)',
     ogami: 'CUT J  PASS-THROUGH CUT K  CART GUNS S+J  BABY CART L' }[p.ch];
-  if (G.time < 14 && G.mode === 'play' && !G.cine) { ctx.globalAlpha = clamp((14 - G.time) / 3, 0, 1); txt(help, VW / 2, VH - 11, '#ffe9b8', 8, 'center'); ctx.globalAlpha = 1; }
+  if (helpAge() < 14 && G.mode === 'play' && !G.cine) { ctx.globalAlpha = clamp((14 - helpAge()) / 3, 0, 1); txt(help, VW / 2, VH - 11, '#ffe9b8', 8, 'center'); ctx.globalAlpha = 1; }
   txt(audio.on ? 'M:MUSIC ON' : 'M:MUSIC OFF', 118, 7, 'rgba(255,233,184,0.45)', 8, 'left', false);
   txt(heroOf(p).card || heroOf(p).name, 118, 16, heroOf(p).col, 8, 'left');
   if (p.ch === 'wah' && p.foot) { txt('ON FOOT  PISTOL ' + p.ammo + '/6', 176, 16, p.reloadT > 0 ? '#6a6a6a' : '#7dff8a', 8, 'left', false); txt(G.wbike ? 'S+K: BIKE RAM' : 'BIKE ' + Math.ceil(G.wbikeCd || 0) + 's', 286, 16, G.wbike && G.wbike.st === 'park' ? '#ffd23f' : '#6a6a6a', 8, 'left', false); }

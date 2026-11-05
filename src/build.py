@@ -540,5 +540,12 @@ s = s.replace(' (แนวล้อ)', '')            # the parody tag is gone e
 rep("while (acc >= STEP && n < 24) { step(STEP, G.pin); G.pin = {}; acc -= STEP; n++; }",
     "while (acc >= STEP && n < 24) { const frozen = G.hitstop > 0; step(STEP, G.pin); if (!frozen) G.pin = {}; acc -= STEP; n++; }")
 
+# ======================= v29: help bar re-appears after a stunt-double swap (known issue from HANDOFF_v26 s9.5) =======================
+# The control-hint bar was shown while G.time < 14 only, so a hero swap later in the run left the new hero with no hint.
+rep("  if (G.time < 14 && G.mode === 'play' && !G.cine) { ctx.globalAlpha = clamp((14 - G.time) / 3, 0, 1);",
+    "  if (helpAge() < 14 && G.mode === 'play' && !G.cine) { ctx.globalAlpha = clamp((14 - helpAge()) / 3, 0, 1);")
+rep("function swapHero(k, c) {\n  const p = G.player; if (!p || p.dead || G.mode !== 'play' || G.cine) return;\n  G.actor = k;",
+    "const helpAge = () => G.time - (G.helpT0 || 0);        // seconds since the control hints were last (re)started: run start or a stunt-double swap\nfunction swapHero(k, c) {\n  const p = G.player; if (!p || p.dead || G.mode !== 'play' || G.cine) return;\n  G.actor = k; G.helpT0 = G.time;")
+
 open(OUT, 'w').write(s)
 print('v21 written', len(s))
