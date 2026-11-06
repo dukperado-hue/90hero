@@ -75,10 +75,10 @@ function updSweeper(b, dt) {
     }
     case 'dust_tele': b.vx = approach(b.vx, 0, 900 * dt); b.face = sign(dx) || b.face; if (b.t <= 0) { b.state = 'dust_go'; b.t = 0.3; audio.play('whoosh'); shake(0.12); dustWave(bcx + b.face * 16, b.face, 300 * sp); if (b.phase >= 2) later(0.3, () => { if (b && !b.dead) dustWave(bcx + b.face * 16, b.face, 340 * sp); }); if (b.phase === 3) dustWave(bcx - b.face * 16, -b.face, 300); } break;
     case 'dust_go': if (b.t <= 0) { b.state = 'rec'; b.t = 1.25 / sp; } break;
-    case 'dash_tele': b.vx = approach(b.vx, 0, 900 * dt); b.face = sign(dx) || b.face; if (b.t <= 0) { b.state = 'dash'; b.t = 0.7; b.hitDash = false; b.vx = b.face * 560 * sp; audio.play('whoosh'); } break;
+    case 'dash_tele': b.vx = approach(b.vx, 0, 900 * dt); b.face = sign(dx) || b.face; if (b.t <= 0) { b.state = 'dash'; b.t = 0.7; b.hitDash = false; b.vx = b.face * 470 * sp; audio.play('whoosh'); } break;
     case 'dash':
       if (Math.random() < dt * 40) dust(bcx - b.face * 10, b.y + b.h, 1, 4);
-      if (!b.hitDash) { const q = swpHurtCheck(b, q => Math.abs((q.x + q.w / 2) - (bcx + b.face * 8)) < 20 && Math.abs((q.y + q.h) - (b.y + b.h)) < 34); if (q) { b.hitDash = true; hurtP(q, 2, bcx); shake(0.2); audio.play('slam'); } }
+      if (!b.hitDash) { const q = swpHurtCheck(b, q => Math.abs((q.x + q.w / 2) - (bcx + b.face * 8)) < 20 && Math.abs((q.y + q.h) - (b.y + b.h)) < 34); if (q) { b.hitDash = true; hurtP(q, 1, bcx); shake(0.2); audio.play('slam'); } }
       if (b.t <= 0 || b.x <= b.x0 + 1 || b.x >= b.x1 - b.w - 1) { if (b.t > 0) { shake(0.3); audio.play('slam'); } b.state = 'rec'; b.t = 1.4 / sp; }
       break;
     case 'spin':
@@ -105,7 +105,7 @@ function updSweeper(b, dt) {
       break;
     }
     case 'drop': {
-      if (!b.hitDash) { const q = swpHurtCheck(b, q => overlap(q, b)); if (q) { b.hitDash = true; hurtP(q, 2, bcx); } }
+      if (!b.hitDash) { const q = swpHurtCheck(b, q => overlap(q, b)); if (q) { b.hitDash = true; hurtP(q, 1, bcx); } }
       break;
     }
   }
@@ -114,7 +114,7 @@ function sweeperLand(b) {
   b.fell = false; b.hitDash = false; const cx = b.x + b.w / 2;
   shake(0.8); hitstop(0.05); audio.play('slam'); audio.play('clang'); dust(cx, b.y + b.h, 16, 20); part('ring', cx, b.y + b.h - 2, 0, 0, 0.4, 120, '#ffe9b8');
   dustWave(cx, 1, 320); dustWave(cx, -1, 320);
-  { const q = swpHurtCheck(b, q => Math.abs((q.x + q.w / 2) - cx) < 26 && q.onGround); if (q) hurtP(q, 2, cx); }
+  { const q = swpHurtCheck(b, q => Math.abs((q.x + q.w / 2) - cx) < 26 && q.onGround); if (q) hurtP(q, 1, cx); }
   if (b.phase === 3) { later(0.3, () => { if (!b.dead) { dustWave(cx, 1, 340); dustWave(cx, -1, 340); } }); }
   b.state = 'rec'; b.t = 1.6; b.recLong = true; b.pop = 0.25;
   popup(cx - 12, b.y - 8, 'SORRY.', '#ffe9b8', false, 'sry' + b.atk);

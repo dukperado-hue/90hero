@@ -659,5 +659,34 @@ rep("  if (b.type === 'baron') return updBaron(b, dt);", "  if (b.type === 'baro
 rep("  if (b.type === 'baron') return drawBaron(b);", "  if (b.type === 'baron') return drawBaron(b);\n  if (b.type === 'sweeper') return drawSweeper(b);")
 rep("  2: { S: [120, 0], A: [165, 1], B: [240, 3] },  // 18 GOLDEN MEN + THE HUNDRED in 3 waves (no boss)", "  2: { S: [180, 0], A: [240, 1], B: [330, 3] },  // 18 GOLDEN MEN + THE HUNDRED + ELITES + THE SWEEPING MONK")
 rep("if (below.length < (e.tier === 2 ? 2 : 2) || below.length === 0) {", "if (below.length === 0) {")      # the pyramid only comes apart when EVERY man under you is down
+
+# ===== v34e: dummies are props not enemies; Singham renamed; Singham UP+J upper slap; Tom-Yum air knee; weaker Sweeping Monk =====
+_n = s.count("G.enemies.filter(e => !e.dead && !e.para"); assert _n >= 4, _n
+s = s.replace("G.enemies.filter(e => !e.dead && !e.para", "G.enemies.filter(e => !e.dead && !e.isDummy && !e.para")        # auto-aim / visibleFoes ignore the training dummies
+_a = "const alive = G.enemies.filter(e => !e.dead && e.x + e.w > L.x0 * TS"; assert s.count(_a) == 1
+s = s.replace(_a, "const alive = G.enemies.filter(e => !e.dead && !e.isDummy && e.x + e.w > L.x0 * TS")                 # ambush locks never wait for a dummy
+_a = "G.enemies.find(e => !e.dead && !e.para"; s = s.replace(_a, "G.enemies.find(e => !e.dead && !e.isDummy && !e.para")
+for _a, _b in (("title: 'SINGHAM'", "title: 'LION BHAI'"), ("'THAPPAD!', 'SINGHAM!', 'SLAP!'", "'THAPPAD!', 'LION BHAI!', 'SLAP!'"), ("'\"SINGHAM!\"  (THE LION ROARS)'", "'\"THE LION ROARS!\"'"),
+               ("'\"SINGHAM!\"'", "'\"THE LION ROARS!\"'"), ("singham: ['SINGHAM!', 'THAPPAD!'", "singham: ['LION BHAI!', 'THAPPAD!'"), ("was: 'SINGHAM'", "was: 'CHACHA LION'"),
+               ("'\"AATA MAJHI SATAKLI.\"'", "'\"NOW THE LION IS ANGRY.\"'"), ("'AATA MAJHI SATAKLI!'", "'THE LION IS ANGRY!'")):
+    _c = s.count(_a); print('rename', _a[:30], _c); s = s.replace(_a, _b)
+import re as _re
+s, _k = _re.subn(r"(singham: \{ name: 'LION BHAI', was: )'[^']*'(, cn: '[^']*', th: )'[^']*'", r"\1'CHACHA LION'\2'สิงห์ตำรวจ (แนวล้อ)'", s); print('thai', _k)
+print('left SINGHAM caps:', s.count('SINGHAM'), 'AATA:', s.count('AATA'))
+rep("    } else {                                                   // PRIMARY: the slap that sends men flying into each other",
+    "    } else if (held('up')) {                                   // UP+J: the upper slap — a quick backhand straight up that pops men into the air\n"
+    "      p.atkCd = 0.28; p.swingT = 0.2; p.swingK = 'upslap'; let hit = false;\n"
+    "      const box = { x: fx - 14, y: p.y - 40, w: 28, h: p.h + 40 };\n"
+    "      for (const e of G.enemies) if (!e.dead && overlap(box, e)) { damageEnemy(e, 2.2, fx, false); if (!e.dead) { e.vy = -430; e.vx = p.face * 40; e.stun = 0.9; } hit = true; addUlt(p, 5); }\n"
+    "      const b = G.boss; if (b && !b.dead && b.dying <= 0 && b.state !== 'enter' && b.state !== 'roar' && overlap(box, b)) { damageBoss(2.4, fx); hit = true; }\n"
+    "      for (const br of G.barrels) if (!br.dead && overlap(box, br)) { br.vy = -320; br.vx = p.face * 40; br.kicked = true; if (br.lit < 0) { br.lit = 0.85; br.chain = ++G.chainSeq; } hit = true; }\n"
+    "      if (hit) { audio.play('slap'); hitstop(0.05); shake(0.12); popup(fx, p.y - 22, 'UPPER SLAP!', '#ffd23f'); } else audio.play('whoosh');\n"
+    "    } else {                                                   // PRIMARY: the slap that sends men flying into each other")
+rep("SLAP J  LAUNCH SLAP K", "SLAP J  UP+J UPPER SLAP  LAUNCH SLAP K")
+rep("if (held('down') && p.kneeCd <= 0) { p.kneeCd = 1.4; p.kneeT = 0.45; p.vy = -300; p.passed = new Set(); audio.play('whoosh'); }",
+    "if ((held('down') || !p.onGround) && p.kneeCd <= 0) { p.kneeCd = 1.0; p.kneeT = 0.45; p.vy = p.onGround ? -300 : -120; p.passed = new Set(); audio.play('whoosh'); if (!p.onGround) popup(p.x + 5, p.y - 16, 'FLYING KNEE!', '#ffd23f', false, 'airk'); }")
+rep("BREAKER K  KNEE S+J", "BREAKER K  KNEE S+J OR J IN AIR")
+s = s.replace("'SINGHAM-STYLE ENTRY!'", "'LION-STYLE ENTRY!'")
+s = s.replace('// SINGHAM (parody)', '// LION BHAI (parody)')
 open(OUT, 'w').write(s)
 print('v21 written', len(s))

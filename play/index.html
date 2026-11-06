@@ -97,7 +97,7 @@ const CHARS = {
   ram: { name: 'ROAR BHAI', was: 'RAM', cn: 'BEAST COMMANDER', th: 'ราม จรัญ', tag: 'BEAST SUMMONER', col: '#ff8a1a',
     lines: ['J  RIFLE (PIERCES 2) · CLOSE = RIFLE BUTT', 'S+J IN THE AIR  POUNCE, GRAB, BODY SLAM', 'K  CALL THE JUNGLE: TIGER + BEAR + WOLF PACK AT ONCE', 'L  BEAST RAMPAGE · NEEDS THE BEAST GAUGE'],
     stats: [['SPEED', 3], ['POWER', 5], ['RANGE', 3], ['SAFETY', 3]] },
-  singham: { name: 'LION BHAI', was: 'SINGHAM', cn: 'THE LION COP', th: 'ซิงแฮม', tag: 'SLAP COP', col: '#e8c040',
+  singham: { name: 'LION BHAI', was: 'CHACHA LION', cn: 'THE LION COP', th: 'สิงห์ตำรวจ (แนวล้อ)', tag: 'SLAP COP', col: '#e8c040',
     lines: ['J  SLAP: THEY FLY INTO EACH OTHER', 'K  LAUNCH SLAP: STRAIGHT UP, HARD LANDING', 'S+J  SERVICE REVOLVER', 'L  LIFTS A MOTORCYCLE AND THROWS IT'],
     stats: [['SPEED', 3], ['POWER', 5], ['RANGE', 2], ['SAFETY', 3]] },
   michelle: { name: 'ARSENAL JIE', was: 'MICHELLE', cn: '楊', th: 'มิเชล', tag: 'WEAPON MASTER', col: '#ff9ad0',
@@ -1856,7 +1856,7 @@ function updSombat(p, dt, ip) {
     if (p.six >= 1) {
       p.six = 0; G.stats.supers++; G.timeScale = 0.3; G.slowT = 0.8; audio.play('clang');
       G.banner = { t: 0, title: 'SIX SHOOTER', sub: 'หกนัด  ·  SIX TARGETS' };
-      const T = G.enemies.filter(e => !e.dead && !e.para && onScreen(e, 0)).sort((a, b) => Math.abs(a.x - p.x) - Math.abs(b.x - p.x)).slice(0, 6);
+      const T = G.enemies.filter(e => !e.dead && !e.isDummy && !e.para && onScreen(e, 0)).sort((a, b) => Math.abs(a.x - p.x) - Math.abs(b.x - p.x)).slice(0, 6);
       const bo = G.boss && !G.boss.dead && G.boss.dying <= 0 ? G.boss : null; while (T.length < 6 && bo) T.push(bo);
       T.forEach((f, i) => later(0.12 + i * 0.09, () => { if (G.player !== p) return; G.bullets.push({ x: p.x + p.w / 2, y: p.y + 7, vx: sign(f.x - p.x || p.face) * 700, vy: 0, life: 1.1, dmg: f === G.boss ? 7 : 9, kind: 'curve', curve: 18, tgt: f, snipe: true, aimHead: true }); audio.play('shot'); p.shootT = 0.06; }));
       p.ammo = SB.mag; p.reloading = false;
@@ -2658,7 +2658,7 @@ function updChiru(p, dt, ip) {
     if (p.massCd <= 0) {                        // MASS SLAP: everyone in the row goes over like dominoes
       p.massCd = 5; p.swingT = 0.3; p.swingK = 'slap'; audio.play('slap'); shake(0.2); hitstop(0.08);
       popup(p.x + 5, p.y - 16, 'MASS SLAP!!', '#ffd23f', true);
-      const fx = p.x + p.w / 2, row = G.enemies.filter(e => !e.dead && !e.para && sign(e.x + e.w / 2 - fx) === p.face && Math.abs(e.x + e.w / 2 - fx) < 230 && Math.abs((e.y + e.h) - (p.y + p.h)) < 34).sort((a, b) => Math.abs(a.x - fx) - Math.abs(b.x - fx));
+      const fx = p.x + p.w / 2, row = G.enemies.filter(e => !e.dead && !e.isDummy && !e.para && sign(e.x + e.w / 2 - fx) === p.face && Math.abs(e.x + e.w / 2 - fx) < 230 && Math.abs((e.y + e.h) - (p.y + p.h)) < 34).sort((a, b) => Math.abs(a.x - fx) - Math.abs(b.x - fx));
       row.forEach((e, i) => later(i * 0.09, () => { if (!e.dead) { slapLaunch(e, p.face, 0.8); audio.play('punch'); } }));
       G.stats.slaps += row.length; addUlt(p, 10 + row.length * 4);
       const b = G.boss; if (b && !b.dead && b.dying <= 0 && sign(b.x + 12 - fx) === p.face && Math.abs(b.x + 12 - fx) < 230) later(row.length * 0.09, () => damageBoss(10, fx));
@@ -2683,7 +2683,7 @@ function tryUltimate(p) {
     });
   } else if (p.ch === 'paimei') {
     G.banner = { t: 0, title: 'FIVE-POINT PALM', sub: 'FIVE STEPS. THEN THE HEART.' }; audio.play('roar'); p.swingT = 0.6; p.swingK = 'palm';
-    const cx = p.x + p.w / 2, near = G.enemies.filter(e => !e.dead && !e.para && Math.hypot(e.x - cx, e.y - p.y) < 160).sort((a, b) => Math.abs(a.x - cx) - Math.abs(b.x - cx)).slice(0, 5);
+    const cx = p.x + p.w / 2, near = G.enemies.filter(e => !e.dead && !e.isDummy && !e.para && Math.hypot(e.x - cx, e.y - p.y) < 160).sort((a, b) => Math.abs(a.x - cx) - Math.abs(b.x - cx)).slice(0, 5);
     near.forEach((e, i) => later(i * 0.08, () => { if (!e.dead) { e.fpT = 3; sparks(e.x + 5, e.y + 8, 5, 1, '#ffffff'); popup(e.x + 5, e.y - 10, '•', '#ffffff'); audio.play('punch'); } }));
     const b = G.boss; if (b && !b.dead && b.dying <= 0 && Math.abs(b.x - cx) < 200) { b.fpT = 3; popup(b.x + b.w / 2, b.y - 20, b.hp <= b.maxHp * 0.25 ? 'FIVE STEPS. THEN NOTHING.' : 'THE HEART IS MARKED', '#ffffff', true); }
   } else if (p.ch === 'lady') {
@@ -2715,7 +2715,7 @@ function tryUltimate(p) {
   } else if (p.ch === 'rajini') {
     p.styleT = 1.2; p.styleTick = 0; p.styleN = 12; G.timeScale = 0.25; G.slowT = 1.0; audio.play('roar'); G.banner = { t: 0, title: 'STYLE', sub: 'TWELVE BULLETS. TWELVE ADDRESSES.' };
   } else if (p.ch === 'singham') {
-    p.liftT = 0.7; p.inv = 0.9; audio.play('roar'); G.banner = { t: 0, title: 'SINGHAM', sub: 'THE LION COP PICKS UP A MOTORCYCLE' };
+    p.liftT = 0.7; p.inv = 0.9; audio.play('roar'); G.banner = { t: 0, title: 'LION BHAI', sub: 'THE LION COP PICKS UP A MOTORCYCLE' };
   } else if (p.ch === 'michelle') {
     p.rushT = 1.0; p.rushTick = 0; p.inv = 1.2; audio.play('roar'); G.banner = { t: 0, title: 'THE WEAPON RACK', sub: 'EVERY WEAPON. ONE AFTER ANOTHER.' };
   } else if (p.ch === 'phiphop') {
@@ -2792,7 +2792,7 @@ function reflectShot(p, x, y, tgt, dmg, sp) {        // a bullet sent back, curv
   G.bullets.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 0.9, dmg, kind: 'reflect', home: true, ult: 2 });
 }
 function visibleFoes(p, frontFirst) {
-  const cx = p.x + p.w / 2, list = G.enemies.filter(e => !e.dead && !e.para && onScreen(e, 0));
+  const cx = p.x + p.w / 2, list = G.enemies.filter(e => !e.dead && !e.isDummy && !e.para && onScreen(e, 0));
   const b = G.boss; if (b && !b.dead && b.dying <= 0 && b.state !== 'enter' && b.state !== 'roar' && onScreen(b, 0)) list.push(b);
   list.sort((a, c) => (Math.abs(a.x - cx) * (frontFirst && sign(a.x - cx) !== p.face ? 2.5 : 1)) - (Math.abs(c.x - cx) * (frontFirst && sign(c.x - cx) !== p.face ? 2.5 : 1)));
   return list;
@@ -2989,7 +2989,7 @@ function updRam(p, dt, ip) {
       p.canPounce = false; p.pounceT = 0.7; p.vy = Math.min(p.vy, -150); p.grabbed = null; p.bossSlam = false; p.swingT = 0.7; p.swingK = 'fly'; p.atkCd = 0.25; G.stats.pounces++; audio.play('whoosh');
       return;
     }
-    const near = G.enemies.find(e => !e.dead && !e.para && sign(e.x + e.w / 2 - (p.x + p.w / 2)) === p.face && Math.abs(e.x + e.w / 2 - (p.x + p.w / 2)) < 22 && Math.abs(e.y + e.h - (p.y + p.h)) < 20);
+    const near = G.enemies.find(e => !e.dead && !e.isDummy && !e.para && sign(e.x + e.w / 2 - (p.x + p.w / 2)) === p.face && Math.abs(e.x + e.w / 2 - (p.x + p.w / 2)) < 22 && Math.abs(e.y + e.h - (p.y + p.h)) < 20);
     if (near) {                                            // rifle butt up close
       p.atkCd = 0.4; p.swingT = 0.16; p.swingK = 'butt';
       if (meleeSwing(p, { dmg: 3.5, reach: 22, y0: -20, y1: -2, launch: true, tile: 2 })) addBeast(p, 6);
@@ -3024,7 +3024,7 @@ function pounceLand(p) {
 
 function maOffhand(p, tip) {
   let best = null, bd = 1e9;
-  const cand = G.enemies.filter(e => !e.dead && !e.para && onScreen(e, 0)).map(e => ({ x: e.x + e.w / 2, y: e.y + e.h / 2 }));
+  const cand = G.enemies.filter(e => !e.dead && !e.isDummy && !e.para && onScreen(e, 0)).map(e => ({ x: e.x + e.w / 2, y: e.y + e.h / 2 }));
   if (G.boss && !G.boss.dead && G.boss.dying <= 0 && onScreen(G.boss, 0)) cand.push({ x: G.boss.x + G.boss.w / 2, y: G.boss.y + G.boss.h / 2 });
   for (const c of cand) { const dx = c.x - tip.x, dy = c.y - tip.y; if (Math.abs(dy) < 22 || Math.abs(dy) < Math.abs(dx) * 0.25) continue; const d = Math.hypot(dx, dy); if (d < 260 && d < bd) { bd = d; best = { dx: dx / d, dy: dy / d }; } }
   if (!best) return false;
@@ -3904,7 +3904,7 @@ function updLocks(dt) {
     return;
   }
   const L = LOCKS[G.lock.i];
-  const alive = G.enemies.filter(e => !e.dead && e.x + e.w > L.x0 * TS && e.x < L.x1 * TS && e.y + e.h > 4 * TS).length;
+  const alive = G.enemies.filter(e => !e.dead && !e.isDummy && e.x + e.w > L.x0 * TS && e.x < L.x1 * TS && e.y + e.h > 4 * TS).length;
   // anti-stall: nobody died for 12 s, so anyone hiding (off-screen, stuck, out of reach) parachutes back in next to the hero
   if (G.lock.kills !== G.stats.kills) { G.lock.kills = G.stats.kills; G.lock.idle = 0; } else G.lock.idle = (G.lock.idle || 0) + dt;
   if (G.lock.idle > 12 && alive > 0 && !p.dead) {
@@ -6517,7 +6517,7 @@ function drawProjs() {
 const proj = o => { (G.projs = G.projs || []).push(Object.assign({ t: 0, hitSet: new Set() }, o)); };
 
 // =====================================================================
-// SINGHAM (parody) — the lion cop: slaps that send men flying into each other, a launch slap,
+// LION BHAI (parody) — the lion cop: slaps that send men flying into each other, a launch slap,
 // the service revolver, and the ultimate: lift a motorcycle over his head and throw it
 // =====================================================================
 function updSingham(p, dt, ip) {
@@ -6529,7 +6529,7 @@ function updSingham(p, dt, ip) {
       let vx = p.face * 330, vy = -260;
       if (f) { const dx = f.x + f.w / 2 - cx; vx = clamp(dx * 1.4, -420, 420) || p.face * 300; vy = -240 - Math.abs(dx) * 0.15; }
       proj({ kind: 'bike', x: cx, y: cy, vx, vy, g: 700, dmg: 30, boom: 58, r: 10, spin: sign(vx) * 9, life: 3, noSelf: true });
-      audio.play('throw'); audio.play('roar'); popup(cx, p.y - 26, 'AATA MAJHI SATAKLI!', '#ffd23f', true); shake(0.2);
+      audio.play('throw'); audio.play('roar'); popup(cx, p.y - 26, 'THE LION IS ANGRY!', '#ffd23f', true); shake(0.2);
     }
     return;
   }
@@ -6541,6 +6541,13 @@ function updSingham(p, dt, ip) {
       p.gunCd = 0.55; p.atkCd = 0.3; p.shootT = 0.1; p.swingK = 'gun'; p.swingT = 0.15; G.stats.shots++;
       const tip = gunTip(p); G.bullets.push({ x: p.x + p.w / 2, y: tip.y, vx: p.face * 640, vy: 0, life: 0.6, dmg: 4, kind: 'rifle', ult: 3 });
       G.muzzles.push({ x: tip.x, y: tip.y, dx: p.face, dy: 0, t: 0.06 }); audio.play('shot'); shake(0.05);
+    } else if (held('up')) {                                   // UP+J: the upper slap — a quick backhand straight up that pops men into the air
+      p.atkCd = 0.28; p.swingT = 0.2; p.swingK = 'upslap'; let hit = false;
+      const box = { x: fx - 14, y: p.y - 40, w: 28, h: p.h + 40 };
+      for (const e of G.enemies) if (!e.dead && overlap(box, e)) { damageEnemy(e, 2.2, fx, false); if (!e.dead) { e.vy = -430; e.vx = p.face * 40; e.stun = 0.9; } hit = true; addUlt(p, 5); }
+      const b = G.boss; if (b && !b.dead && b.dying <= 0 && b.state !== 'enter' && b.state !== 'roar' && overlap(box, b)) { damageBoss(2.4, fx); hit = true; }
+      for (const br of G.barrels) if (!br.dead && overlap(box, br)) { br.vy = -320; br.vx = p.face * 40; br.kicked = true; if (br.lit < 0) { br.lit = 0.85; br.chain = ++G.chainSeq; } hit = true; }
+      if (hit) { audio.play('slap'); hitstop(0.05); shake(0.12); popup(fx, p.y - 22, 'UPPER SLAP!', '#ffd23f'); } else audio.play('whoosh');
     } else {                                                   // PRIMARY: the slap that sends men flying into each other
       p.atkCd = 0.32; p.swingT = 0.14; p.swingK = 'slap';
       const box = { x: p.face > 0 ? fx : fx - 24, y: p.y - 2, w: 24, h: p.h + 2 }; let hit = false;
@@ -6548,7 +6555,7 @@ function updSingham(p, dt, ip) {
       const b = G.boss; if (b && !b.dead && b.dying <= 0 && b.state !== 'enter' && b.state !== 'roar' && overlap(box, b)) { damageBoss(2.8, fx); hit = true; addUlt(p, 5); }
       meleeSwing(p, { dmg: 0, reach: 24, y0: -20, y1: -2, quiet: true });
       for (const br of G.barrels) if (!br.dead && overlap(box, br)) { br.vx = p.face * 300; br.vy = -200; br.kicked = true; if (br.lit < 0) { br.lit = 0.85; br.chain = ++G.chainSeq; } hit = true; }
-      if (hit) { audio.play('slap'); hitstop(0.05); shake(0.1); popup(fx + p.face * 20, p.y - 4, ['THAPPAD!', 'SINGHAM!', 'SLAP!'][Math.random() * 3 | 0], '#ffd23f'); } else audio.play('whoosh');
+      if (hit) { audio.play('slap'); hitstop(0.05); shake(0.1); popup(fx + p.face * 20, p.y - 4, ['THAPPAD!', 'LION BHAI!', 'SLAP!'][Math.random() * 3 | 0], '#ffd23f'); } else audio.play('whoosh');
     }
   }
   if (ip.bomb) {                                               // SECONDARY: the launch slap — straight up, they come down hard
@@ -6797,7 +6804,7 @@ function updMadong(p, dt, ip) {
   if ((held('shoot') || ip.shoot) && p.atkCd <= 0) {
     if (held('down') && p.throwCd <= 0) {                     // RANGED: grab the man next to you and throw him
       p.throwCd = 0.9; p.atkCd = 0.35; p.swingT = 0.25; p.swingK = 'throw';
-      const near = G.enemies.find(e => !e.dead && !e.para && e.type !== 'heavy' && Math.abs(e.x + e.w / 2 - (p.x + p.w / 2)) < 26 && Math.abs(e.y + e.h - (p.y + p.h)) < 20);
+      const near = G.enemies.find(e => !e.dead && !e.isDummy && !e.para && e.type !== 'heavy' && Math.abs(e.x + e.w / 2 - (p.x + p.w / 2)) < 26 && Math.abs(e.y + e.h - (p.y + p.h)) < 20);
       if (near) { slapLaunch(near, p.face, 1.5); popup(near.x + 5, near.y - 8, 'YEET', '#ffd23f'); audio.play('throw'); }
       else { proj({ kind: 'rock', x: p.x + p.w / 2, y: p.y + 6, vx: p.face * 330, vy: -160, g: 700, dmg: 4, r: 4, life: 1.5 }); audio.play('throw'); }
     } else {                                                   // PRIMARY: one punch, one man (regular men drop in one hit)
@@ -6867,7 +6874,7 @@ function updKham(p, dt, ip) {
   moveRunner(p, dt, ip);
   p.atkCd -= dt; p.swingT -= dt; p.comboT -= dt; p.breakCd -= dt; p.kneeCd -= dt;
   if ((held('shoot') || ip.shoot) && p.atkCd <= 0) {
-    if (held('down') && p.kneeCd <= 0) { p.kneeCd = 1.4; p.kneeT = 0.45; p.vy = -300; p.passed = new Set(); audio.play('whoosh'); }
+    if ((held('down') || !p.onGround) && p.kneeCd <= 0) { p.kneeCd = 1.0; p.kneeT = 0.45; p.vy = p.onGround ? -300 : -120; p.passed = new Set(); audio.play('whoosh'); if (!p.onGround) popup(p.x + 5, p.y - 16, 'FLYING KNEE!', '#ffd23f', false, 'airk'); }
     else if (held('up')) {                                      // UP+J: SOK KLAB — the rising elbow straight up (hits what's overhead, cracks the ceiling)
       p.atkCd = 0.26; p.swingT = 0.18; p.swingK = 'upper'; if (p.onGround) p.vy = -240; audio.play('whoosh');
       const box = { x: p.x - 8, y: p.y - 46, w: p.w + 16, h: 50 }; let hit = false;
@@ -6887,7 +6894,7 @@ function updKham(p, dt, ip) {
   }
   if (ip.bomb) {                                              // SECONDARY: BONE BREAKER — grab, then crack-crack-crack
     if (p.breakCd <= 0) {
-      const t = G.enemies.find(e => !e.dead && !e.para && sign(e.x + e.w / 2 - (p.x + p.w / 2)) === p.face && Math.abs(e.x + e.w / 2 - (p.x + p.w / 2)) < 26 && Math.abs(e.y + e.h - (p.y + p.h)) < 20);
+      const t = G.enemies.find(e => !e.dead && !e.isDummy && !e.para && sign(e.x + e.w / 2 - (p.x + p.w / 2)) === p.face && Math.abs(e.x + e.w / 2 - (p.x + p.w / 2)) < 26 && Math.abs(e.y + e.h - (p.y + p.h)) < 20);
       const b = G.boss, nearBoss = b && !b.dead && b.dying <= 0 && overlap({ x: p.x - 14, y: p.y, w: p.w + 28, h: p.h }, b);
       if (t || nearBoss) {
         p.breakCd = 2; p.swingT = 0.4; p.swingK = 'punch'; G.stats.bones = (G.stats.bones || 0) + 1;
@@ -6939,7 +6946,7 @@ function updPaimei(p, dt, ip) {
 }
 function fivePointMark(p) {      // the 4th palm: a light touch. three seconds later, the heart.
   const cx = p.x + p.w / 2;
-  const e = G.enemies.filter(e => !e.dead && !e.para && !(e.fpT > 0) && Math.sign(e.x + e.w / 2 - cx) === p.face && Math.abs(e.x + e.w / 2 - cx) < 30 && Math.abs(e.y + e.h - (p.y + p.h)) < 24)[0];
+  const e = G.enemies.filter(e => !e.dead && !e.isDummy && !e.para && !(e.fpT > 0) && Math.sign(e.x + e.w / 2 - cx) === p.face && Math.abs(e.x + e.w / 2 - cx) < 30 && Math.abs(e.y + e.h - (p.y + p.h)) < 24)[0];
   if (e) { e.fpT = 3; sparks(e.x + 5, e.y + 8, 6, 1, '#ffffff'); popup(e.x + 5, e.y - 12, 'FIVE-POINT PALM', '#ffffff'); }
   const b = G.boss;
   if (b && !b.dead && b.dying <= 0 && !(b.fpT > 0) && b.state !== 'enter' && Math.abs(b.x + b.w / 2 - cx) < 40 && Math.abs(b.y + b.h - (p.y + p.h)) < 40) {
@@ -7042,7 +7049,7 @@ function ogamiCartShield(p, dt, shield) {    // the baby cart: armour plate in f
   p.cartGunT = (p.cartGunT || 0) - dt;
   if (shield && p.cartGunT <= 0) {
     p.cartGunT = 0.45;
-    const t = G.enemies.find(e => !e.dead && !e.para && sign(e.x - p.x) === p.face && Math.abs(e.x - p.x) < 260 && Math.abs(e.y - p.y) < 60);
+    const t = G.enemies.find(e => !e.dead && !e.isDummy && !e.para && sign(e.x - p.x) === p.face && Math.abs(e.x - p.x) < 260 && Math.abs(e.y - p.y) < 60);
     if (t) { for (let i = 0; i < 3; i++) { const a = Math.atan2(t.y + 8 - (p.y + p.h - 9), t.x + t.w / 2 - (p.cartX + 7)) + (i - 1) * 0.06; G.bullets.push({ x: p.cartX + 7, y: p.y + p.h - 9, vx: Math.cos(a) * 560, vy: Math.sin(a) * 560, life: 0.5, dmg: 1.1, ult: 1 }); } audio.play('shot'); G.muzzles.push({ x: p.cartX + 7 + p.face * 7, y: p.y + p.h - 9, dx: p.face, dy: 0, t: 0.05 }); }
   }
 }
@@ -7305,7 +7312,7 @@ const QUIPS = {
   li: ['NEVER MISSES.', '*COUGH* …STILL HIT.', 'ONE KNIFE.'], ximen: ['*BLOWS THE BLADE*', 'SNOW FALLS.', 'TOO SLOW.'],
   chiru: ['MASS!', 'MEGA!', 'THEY FLEW.'], dong: ['INVINCIBLE.', 'NEEDLEWORK.', 'THE EAST RISES.'],
   zhang: ['SOFTNESS WINS.', 'RETURN TO SENDER.', 'TAI CHI, YOUNG MAN.'], vijay: ['I AM WAITING.', 'STYLE RELOAD.', 'NEXT SCENE.'],
-  ram: ['ROAR!', 'THE JUNGLE AGREES.', 'FIRE AND FUR.'], singham: ['SINGHAM!', 'THAPPAD!', 'HE PICKED UP A BIKE.'],
+  ram: ['ROAR!', 'THE JUNGLE AGREES.', 'FIRE AND FUR.'], singham: ['LION BHAI!', 'THAPPAD!', 'HE PICKED UP A BIKE.'],
   michelle: ['NEXT WEAPON.', 'BROKE ANOTHER ONE.', 'ANY WEAPON.'], phiphop: ['หัวปลีมาแล้ว!', 'MORE ROCKETS.', 'UZI SAYS HI.'],
   srk: ['ARMS WIDE OPEN!', 'DANCE WITH ME.', 'ROMANCE KILLS.'], aamir: ['JO JEETA WOHI SIKANDAR!', 'ONE MORE ROUND, SIR.', 'PERFECT.'],
   furie: ['NO MERCY.', 'REVENGE, SENSIBLY DRESSED.', 'RELOAD? NO. FINISH.'], bey: ['I AM THE SAVIOR OF THE WORLD.', 'MOUSTACHE FIRST.', 'SLOWLY. THEN ALL AT ONCE.'],
@@ -7414,7 +7421,7 @@ function updCine(dt) {
         H.x += (c.t < 1.0 ? 250 : 300) * dt;
         if (Math.random() < dt * 30) dust(H.x - 10, H.y, 1, 3);
         if (c.ghost) { p.x = H.x - p.w / 2 - 1; p.y = H.y - 17 - p.h; p.vx = p.vy = 0; p.onGround = false; p.face = 1; }
-        if (at(0.95)) { c.ghost = false; p.vy = -330; p.vx = 70; G.timeScale = 0.3; G.slowT = 0.45; p.swingT = 1.2; p.swingK = p.ch === 'singham' ? 'upslap' : 'pose'; audio.play('roar'); popup(p.x + 5, p.y - 20, p.ch === 'singham' ? '"SINGHAM!"' : 'MASS ENTRY!', '#ffd23f', true); }
+        if (at(0.95)) { c.ghost = false; p.vy = -330; p.vx = 70; G.timeScale = 0.3; G.slowT = 0.45; p.swingT = 1.2; p.swingK = p.ch === 'singham' ? 'upslap' : 'pose'; audio.play('roar'); popup(p.x + 5, p.y - 20, p.ch === 'singham' ? '"THE LION ROARS!"' : 'MASS ENTRY!', '#ffd23f', true); }
         if (H.x > G.cam.x + VW + 40) G.horse = null;
       }
       if (c.t > 1.4 && p.onGround) { G.cine = null; p.swingT = 0; }
@@ -7427,7 +7434,7 @@ function updCine(dt) {
         const stopX = p.x - 10;
         if (J.vx > 0) { J.x += J.vx * dt; if (J.x > stopX - 60) J.vx = Math.max(0, J.vx - 1400 * dt); if (Math.random() < dt * 40) dust(J.x - 14, J.y, 1, 3); if (J.vx <= 0) { audio.play('slam'); shake(0.2); dust(J.x + 20, J.y, 10, 10); } }
         if (c.ghost) { p.x = J.x + 14; p.y = J.y - 18 - p.h; p.vx = p.vy = 0; p.onGround = false; p.face = 1; }
-        if (J.vx <= 0 && c.ghost) { c.ghost = false; p.vy = -380; p.vx = 90; G.timeScale = 0.3; G.slowT = 0.5; p.swingT = 1.0; p.swingK = 'upslap'; audio.play('roar'); popup(p.x + 5, p.y - 20, 'SINGHAM-STYLE ENTRY!', '#ffb040', true); }
+        if (J.vx <= 0 && c.ghost) { c.ghost = false; p.vy = -380; p.vx = 90; G.timeScale = 0.3; G.slowT = 0.5; p.swingT = 1.0; p.swingK = 'upslap'; audio.play('roar'); popup(p.x + 5, p.y - 20, 'LION-STYLE ENTRY!', '#ffb040', true); }
       }
       if (!c.ghost && p.onGround && c.t > 0.6) { if (!c.landed) { c.landed = true; shake(0.3); dust(p.x + 5, p.y + p.h, 14, 14); audio.play('stomp'); popup(p.x + 5, p.y - 14, '"AALA RE AALA!"', '#ffe9b8'); } }
       if (c.landed && c.t > 1.6) { G.cine = null; p.swingT = 0; }
@@ -7459,7 +7466,7 @@ function updCine(dt) {
       break;
     case 'introSingham':
       p.vx = 0;
-      if (at(0.3)) { p.swingT = 0.6; p.swingK = 'upslap'; audio.play('roar'); popup(p.x + 5, p.y - 16, '"SINGHAM!"  (THE LION ROARS)', '#e8c040', true); shake(0.25); }
+      if (at(0.3)) { p.swingT = 0.6; p.swingK = 'upslap'; audio.play('roar'); popup(p.x + 5, p.y - 16, '"THE LION ROARS!"', '#e8c040', true); shake(0.25); }
       if (c.t > 1.4) G.cine = null;
       break;
     case 'introMichelle':
@@ -7620,7 +7627,7 @@ function updCine(dt) {
       break;
     case 'outroGen':
       p.vx = approach(p.vx, c.t > 0.7 ? 80 : 0, 900 * dt); p.face = 1;
-      if (at(0.2)) { popup(p.x + 5, p.y - 16, { juk: 'SITS DOWN. SOMETHING IS STILL SMOKING.', shaolin: 'JUGGLES THE BALL ALL THE WAY HOME.', sombat: 'BLOWS THE SMOKE OFF THE BARREL.', sorapong: 'SHEATHES THE BLADE. DOESN\'T LOOK BACK.', paimei: 'TURNS AWAY. NOT IMPRESSED.', lady: 'EATS THE TOFU. FINALLY.', ichi: 'WALKS INTO THE FLAG POLE.', ogami: 'PUSHES THE CART HOME.', madong: 'DUSTS OFF HIS HANDS.', oldboy: 'PUTS THE HAMMER DOWN. FINALLY.', kham: 'HUGS THE ELEPHANT.', srk: 'ARMS WIDE OPEN. (ONE LAST TIME.)', rajini: 'FLIPS THE SHADES BACK ON. STYLE.', singham: '"AATA MAJHI SATAKLI."', michelle: 'BOWS. PUTS THE SWORD AWAY.', phiphop: 'BLOWS THE SMOKE OFF THE UZI.', zhang: '"以柔克剛."', vijay: 'SUNGLASSES ON. DOES NOT LOOK BACK.', ram: 'ROAR!! (THE TIGER AGREES)', chiru: 'MASS! (strikes a pose)', dong: '"天下無敵."', fei: '"天下第一!"', sura: '"ร้านไหนยังเปิด?" ฮิก!', li: '"例不虛發." …แค่ก', ximen: 'ฟู่ว… (blows the blade clean)' }[p.ch] || '"收工."  (WORK DONE.)', heroOf(p).col); if (p.ch === 'ximen') { p.blowing = true; audio.play('blow'); } if (p.ch === 'fei') { p.swingT = 0.4; p.swingK = 'bigkick'; } }
+      if (at(0.2)) { popup(p.x + 5, p.y - 16, { juk: 'SITS DOWN. SOMETHING IS STILL SMOKING.', shaolin: 'JUGGLES THE BALL ALL THE WAY HOME.', sombat: 'BLOWS THE SMOKE OFF THE BARREL.', sorapong: 'SHEATHES THE BLADE. DOESN\'T LOOK BACK.', paimei: 'TURNS AWAY. NOT IMPRESSED.', lady: 'EATS THE TOFU. FINALLY.', ichi: 'WALKS INTO THE FLAG POLE.', ogami: 'PUSHES THE CART HOME.', madong: 'DUSTS OFF HIS HANDS.', oldboy: 'PUTS THE HAMMER DOWN. FINALLY.', kham: 'HUGS THE ELEPHANT.', srk: 'ARMS WIDE OPEN. (ONE LAST TIME.)', rajini: 'FLIPS THE SHADES BACK ON. STYLE.', singham: '"NOW THE LION IS ANGRY."', michelle: 'BOWS. PUTS THE SWORD AWAY.', phiphop: 'BLOWS THE SMOKE OFF THE UZI.', zhang: '"以柔克剛."', vijay: 'SUNGLASSES ON. DOES NOT LOOK BACK.', ram: 'ROAR!! (THE TIGER AGREES)', chiru: 'MASS! (strikes a pose)', dong: '"天下無敵."', fei: '"天下第一!"', sura: '"ร้านไหนยังเปิด?" ฮิก!', li: '"例不虛發." …แค่ก', ximen: 'ฟู่ว… (blows the blade clean)' }[p.ch] || '"收工."  (WORK DONE.)', heroOf(p).col); if (p.ch === 'ximen') { p.blowing = true; audio.play('blow'); } if (p.ch === 'fei') { p.swingT = 0.4; p.swingK = 'bigkick'; } }
       if (c.t > 0.7) c.ghost = true;
       if (c.t > 1.7) G.fade = Math.min(1, (c.t - 1.7) / 0.6);
       if (c.t > 2.4) { G.cine = null; win(); }
@@ -10034,7 +10041,7 @@ function breakDummy(e) {
 // the courtyard's training dummies (stage 2 only, placed outside the ambush zones)
 {
   const _ng = newGame;
-  newGame = function () { const r = _ng.apply(this, arguments); if (STAGE === 2) for (const tx of [8, 15, 56, 96, 134, 184, 189]) G.enemies.push(mkDummy(tx)); return r; };
+  newGame = function () { const r = _ng.apply(this, arguments); if (STAGE === 2) for (const tx of [8, 15, 56, 96, 184, 189]) G.enemies.push(mkDummy(tx)); return r; };
 }
 
 // v34 BOSS — 掃地僧 THE SWEEPING MONK (stage 02 finale). A parody of the legendary old sweeper-monk of the wuxia novels:
@@ -10114,10 +10121,10 @@ function updSweeper(b, dt) {
     }
     case 'dust_tele': b.vx = approach(b.vx, 0, 900 * dt); b.face = sign(dx) || b.face; if (b.t <= 0) { b.state = 'dust_go'; b.t = 0.3; audio.play('whoosh'); shake(0.12); dustWave(bcx + b.face * 16, b.face, 300 * sp); if (b.phase >= 2) later(0.3, () => { if (b && !b.dead) dustWave(bcx + b.face * 16, b.face, 340 * sp); }); if (b.phase === 3) dustWave(bcx - b.face * 16, -b.face, 300); } break;
     case 'dust_go': if (b.t <= 0) { b.state = 'rec'; b.t = 1.25 / sp; } break;
-    case 'dash_tele': b.vx = approach(b.vx, 0, 900 * dt); b.face = sign(dx) || b.face; if (b.t <= 0) { b.state = 'dash'; b.t = 0.7; b.hitDash = false; b.vx = b.face * 560 * sp; audio.play('whoosh'); } break;
+    case 'dash_tele': b.vx = approach(b.vx, 0, 900 * dt); b.face = sign(dx) || b.face; if (b.t <= 0) { b.state = 'dash'; b.t = 0.7; b.hitDash = false; b.vx = b.face * 470 * sp; audio.play('whoosh'); } break;
     case 'dash':
       if (Math.random() < dt * 40) dust(bcx - b.face * 10, b.y + b.h, 1, 4);
-      if (!b.hitDash) { const q = swpHurtCheck(b, q => Math.abs((q.x + q.w / 2) - (bcx + b.face * 8)) < 20 && Math.abs((q.y + q.h) - (b.y + b.h)) < 34); if (q) { b.hitDash = true; hurtP(q, 2, bcx); shake(0.2); audio.play('slam'); } }
+      if (!b.hitDash) { const q = swpHurtCheck(b, q => Math.abs((q.x + q.w / 2) - (bcx + b.face * 8)) < 20 && Math.abs((q.y + q.h) - (b.y + b.h)) < 34); if (q) { b.hitDash = true; hurtP(q, 1, bcx); shake(0.2); audio.play('slam'); } }
       if (b.t <= 0 || b.x <= b.x0 + 1 || b.x >= b.x1 - b.w - 1) { if (b.t > 0) { shake(0.3); audio.play('slam'); } b.state = 'rec'; b.t = 1.4 / sp; }
       break;
     case 'spin':
@@ -10144,7 +10151,7 @@ function updSweeper(b, dt) {
       break;
     }
     case 'drop': {
-      if (!b.hitDash) { const q = swpHurtCheck(b, q => overlap(q, b)); if (q) { b.hitDash = true; hurtP(q, 2, bcx); } }
+      if (!b.hitDash) { const q = swpHurtCheck(b, q => overlap(q, b)); if (q) { b.hitDash = true; hurtP(q, 1, bcx); } }
       break;
     }
   }
@@ -10153,7 +10160,7 @@ function sweeperLand(b) {
   b.fell = false; b.hitDash = false; const cx = b.x + b.w / 2;
   shake(0.8); hitstop(0.05); audio.play('slam'); audio.play('clang'); dust(cx, b.y + b.h, 16, 20); part('ring', cx, b.y + b.h - 2, 0, 0, 0.4, 120, '#ffe9b8');
   dustWave(cx, 1, 320); dustWave(cx, -1, 320);
-  { const q = swpHurtCheck(b, q => Math.abs((q.x + q.w / 2) - cx) < 26 && q.onGround); if (q) hurtP(q, 2, cx); }
+  { const q = swpHurtCheck(b, q => Math.abs((q.x + q.w / 2) - cx) < 26 && q.onGround); if (q) hurtP(q, 1, cx); }
   if (b.phase === 3) { later(0.3, () => { if (!b.dead) { dustWave(cx, 1, 340); dustWave(cx, -1, 340); } }); }
   b.state = 'rec'; b.t = 1.6; b.recLong = true; b.pop = 0.25;
   popup(cx - 12, b.y - 8, 'SORRY.', '#ffe9b8', false, 'sry' + b.atk);
@@ -10638,7 +10645,7 @@ function drawHUD() {
     zhang: 'MOVE A/D (SLOW)  JUMP W/CTRL  PALM J  HOLD K = ABSORB, RELEASE = RETURN  ULT L',
     vijay: 'MOVE A/D  JUMP W/CTRL  DUAL GUNS J  SLIDE K (RELOADS)  AIM UP ↑  ULT L',
     ram: 'MOVE A/D  JUMP W/CTRL  RIFLE J  S+J IN AIR = POUNCE  CALL BEAST K  RAMPAGE L',
-    singham: 'MOVE A/D  JUMP W/CTRL  SLAP J  LAUNCH SLAP K  REVOLVER S+J  THROW A BIKE L',
+    singham: 'MOVE A/D  JUMP W/CTRL  SLAP J  UP+J UPPER SLAP  LAUNCH SLAP K  REVOLVER S+J  THROW A BIKE L',
     michelle: 'MOVE A/D  JUMP W/CTRL  WEAPON J  SWAP K  THROW S+J  WEAPON RACK L  · WALL-RUN',
     phiphop: 'MOVE A/D  JUMP W/CTRL  UZI J  RPG K (↑/↓ AIM)  GRENADE S+J  BARRAGE L',
     srk: 'MOVE A/D  JUMP W/CTRL  DANCE J  ARMS WIDE OPEN K  ROSE S+J  DANCE NUMBER L',
@@ -10653,7 +10660,7 @@ function drawHUD() {
     rajini: 'MOVE A/D  BIG JUMP W/CTRL  BENDING SHOT J  SHADES K  3-WAY S+J  STYLE L',
     madong: 'MOVE A/D  JUMP W/CTRL  ONE PUNCH J  SHOULDER CHARGE K  THROW A MAN S+J  1-2-3 L',
     oldboy: 'MOVE A/D  JUMP W/CTRL  HAMMER J  CORRIDOR K  THROW HAMMER S+J  15 YEARS L',
-    kham: 'MOVE A/D  JUMP W/CTRL  ELBOW-KNEE J  UP+J RISING ELBOW  BREAKER K  KNEE S+J  ELEPHANT L',
+    kham: 'MOVE A/D  JUMP W/CTRL  ELBOW-KNEE J  UP+J RISING ELBOW  BREAKER K  KNEE S+J OR J IN AIR  ELEPHANT L',
     paimei: 'PALMS J  SWORD-TIP STANCE K  QI PALM S+J  4TH PALM = FIVE-POINT MARK · HOLD J = RISING CRANE  · B = GORE 18+/BLOOD/OFF',
     lady: 'PISTOL J  REVENGE STAB K  THE GLARE S+J  VENGEANCE L  · HITS + WOUNDS = GRUDGE',
     ichi: 'CANE-SWORD J  LISTEN K  DICE S+J  DARKNESS L  · HE IS BLIND (BONK)',

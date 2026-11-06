@@ -57,5 +57,5 @@ function breakDummy(e) {
 // the courtyard's training dummies (stage 2 only, placed outside the ambush zones)
 {
   const _ng = newGame;
-  newGame = function () { const r = _ng.apply(this, arguments); if (STAGE === 2) for (const tx of [8, 15, 56, 96, 134, 184, 189]) G.enemies.push(mkDummy(tx)); return r; };
+  newGame = function () { const r = _ng.apply(this, arguments); if (STAGE === 2) for (const tx of [8, 15, 56, 96, 184, 189]) G.enemies.push(mkDummy(tx)); return r; };
 }
