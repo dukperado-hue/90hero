@@ -214,7 +214,7 @@
   "name": "T2 stage 02 clear recorded (forced C)",
   "ok": true,
   "info": {
-   "time": 91.51,
+   "time": 84.77,
    "rank": "C"
   }
  },
@@ -223,21 +223,20 @@
   "ok": true,
   "info": {
    "mode": "win",
-   "time": 84.64,
-   "deaths": 0,
-   "rank": "S",
-   "expected": "S",
+   "time": 81.52,
+   "deaths": 1,
+   "rank": "A",
+   "expected": "A",
    "prog": {
     "prevHero": "C",
     "prevStage": "C",
-    "heroBest": "S",
+    "heroBest": "A",
     "newRank": true,
     "unlocked": [
      "nine",
      "li",
      "dong",
      "srk",
-     "oldboy",
      "gada",
      "hongbao",
      "ajumma"
@@ -249,8 +248,8 @@
   "name": "T3 better rank replaces saved rank",
   "ok": true,
   "info": {
-   "got": "S",
-   "saved": "S"
+   "got": "A",
+   "saved": "A"
   }
  },
  {
@@ -271,7 +270,6 @@
     "li",
     "dong",
     "srk",
-    "oldboy",
     "gada",
     "hongbao",
     "ajumma"
@@ -281,7 +279,6 @@
     "li",
     "dong",
     "srk",
-    "oldboy",
     "gada",
     "hongbao",
     "ajumma"
@@ -305,7 +302,6 @@
    "li",
    "dong",
    "srk",
-   "oldboy",
    "gada",
    "hongbao",
    "ajumma"
@@ -316,7 +312,7 @@
   "ok": true,
   "info": {
    "run": "C",
-   "saved": "S"
+   "saved": "A"
   }
  },
  {
@@ -338,7 +334,7 @@
    "ranks": {
     "1": {},
     "2": {
-     "wah": "S"
+     "wah": "A"
     },
     "3": {},
     "4": {},
@@ -355,7 +351,6 @@
     "juk",
     "li",
     "nine",
-    "oldboy",
     "shaolin",
     "sombat",
     "sorapong",
@@ -369,7 +364,7 @@
  {
   "name": "T6 best time (original key) kept",
   "ok": true,
-  "info": "84.6416666666801"
+  "info": "81.51666666667761"
  },
  {
   "name": "T5 unlocked UNCLE NINE can be selected and plays",
@@ -385,7 +380,7 @@
     "mode": "play",
     "x": 788,
     "deaths": 0,
-    "time": 4.9250000000000345
+    "time": 4.933333333333368
    }
   }
  },
@@ -399,7 +394,7 @@
   "info": {
    "1": {},
    "2": {
-    "wah": "S"
+    "wah": "A"
    },
    "3": {
     "vijay": "A"
@@ -413,7 +408,7 @@
   "name": "T8 stage 01 completes with wah",
   "ok": true,
   "info": {
-   "time": 119.85,
+   "time": 129.58,
    "deaths": 7
   }
  },
@@ -440,7 +435,7 @@
   "name": "T8 stage 03 completes with fei",
   "ok": true,
   "info": {
-   "time": 139.84,
+   "time": 144.16,
    "deaths": 5
   }
  },
@@ -467,16 +462,16 @@
   "name": "T8 stage 03 completes with vijay",
   "ok": true,
   "info": {
-   "time": 146.25,
-   "deaths": 5
+   "time": 147,
+   "deaths": 4
   }
  },
  {
   "name": "T2 stage 03 rank recorded (vijay)",
   "ok": true,
   "info": {
-   "rank": "C",
-   "saved": "C",
+   "rank": "B",
+   "saved": "B",
    "unlocked": [
     "shaolin",
     "eagle",
@@ -486,7 +481,10 @@
     "wah",
     "fei",
     "vijay",
-    "ximen"
+    "ximen",
+    "siang",
+    "furie",
+    "pob"
    ]
   }
  },

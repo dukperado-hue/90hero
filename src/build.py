@@ -509,6 +509,15 @@ rep("    case 'introSingham':", """    case 'introNew5':
     case 'introSingham':""")
 rep("const r = p.ch === 'aamir' ? clamp(1 - (p.bikeCd || 0) / 3.2, 0, 1) : ", "const r = HUD5[p.ch] ? HUD5[p.ch](p) : p.ch === 'aamir' ? clamp(1 - (p.bikeCd || 0) / 3.2, 0, 1) : ")
 rep("'ichi', 'ogami', 'aamir'].includes(p.ch)) {", "'ichi', 'ogami', 'aamir', 'furie', 'bey', 'gada', 'silat', 'hongbao', 'pob', 'ajumma'].includes(p.ch)) {")
+rep("  const hint = (tx, ty, s, sw) => { const v = typeof sw === 'string' ? { wah: sw } : (sw || {}); E.hints.push({ x: tx * TS, y: ty * TS, s: v[CHOSEN] || s, g: v.wahFoot || s }); };",
+"""  const hint = (tx, ty, s, sw) => { const v = typeof sw === 'string' ? { wah: sw } : (sw || {}); let t = v[CHOSEN] || s;
+    if (!v[CHOSEN] && /SHOOT/.test(t) && !['ma', 'furie', 'silat', 'phiphop'].includes(CHOSEN)) {   // non-gun heroes without a hand-written hint: build one from their own move card
+      const C = CHARS[CHOSEN]; let jl = 'J  ATTACK'; if (C && C.lines) for (const ln of C.lines.slice(1)) { const m = ln.split('  ·  ').find(z => /^J\\s/.test(z)); if (m) { jl = m; break; } }
+      t = /^J \\/ CLICK/.test(t) ? jl.replace(/^J\\s+/, 'J = ') + '  ·  K = SPECIAL  ·  L = ULTIMATE' : t.replace(/SHOOT/g, 'HIT');
+    }
+    if (!v[CHOSEN] && /DYNAMITE/.test(t) && !['ma', 'phiphop'].includes(CHOSEN)) t = 'K = YOUR SPECIAL MOVE  ·  L = ULTIMATE WHEN THE BAR IS FULL';
+    E.hints.push({ x: tx * TS, y: ty * TS, s: t, g: v.wahFoot || t }); };""")
+rep("  let dt = Math.min(0.1, (now - lastT) / 1000); lastT = now;", "  let dt = Math.min(0.25, (now - lastT) / 1000); lastT = now;")
 rep("srk: 'ARMS', aamir: 'BIKE',", "srk: 'ARMS', aamir: 'BIKE', furie: 'SLIDE', bey: 'BLADE', gada: 'MACE', silat: 'MAG', hongbao: 'BUN', pob: 'ORGAN', ajumma: 'RUSH',")
 rep("TRAIN DARE L',", """TRAIN DARE L',
     furie: 'MOVE A/D  JUMP W/CTRL  PISTOL J  SLIDE K  HEADSHOT S+J  NO MERCY L',
@@ -548,8 +557,9 @@ s = s.replace(' (แนวล้อ)', '')            # the parody tag is gone e
 # ======================= v29: input pressed during hit-stop is no longer swallowed =======================
 # step() returns early while G.hitstop > 0, but the frame loop cleared the one-shot input table (G.pin) after every step, so a K/J/jump press that
 # landed inside a 10-140 ms freeze was silently dropped (root cause of the flaky "hongbao K reacts" test; real for players too). Keep it until a real step ran.
+rep("        if (n >= 24) acc = 0;", "        if (n >= 36) acc = 0;")
 rep("while (acc >= STEP && n < 24) { step(STEP, G.pin); G.pin = {}; acc -= STEP; n++; }",
-    "while (acc >= STEP && n < 24) { const frozen = G.hitstop > 0; step(STEP, G.pin); if (!frozen) G.pin = {}; acc -= STEP; n++; }")
+    "while (acc >= STEP && n < 36) { const frozen = G.hitstop > 0; step(STEP, G.pin); if (!frozen) G.pin = {}; acc -= STEP; n++; }")
 
 # ======================= v29: help bar re-appears after a stunt-double swap (known issue from HANDOFF_v26 s9.5) =======================
 # The control-hint bar was shown while G.time < 14 only, so a hero swap later in the run left the new hero with no hint.

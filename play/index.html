@@ -396,7 +396,13 @@ function buildLevel() {
   const en = (type, tx, row) => E.enemies.push(mkEnemy(type, tx, row));
   const br = (tx, row) => E.barrels.push(mkBarrel(tx, row));
   const cp = (tx) => E.checkpoints.push({ x: tx * TS, y: 18 * TS, on: false });
-  const hint = (tx, ty, s, sw) => { const v = typeof sw === 'string' ? { wah: sw } : (sw || {}); E.hints.push({ x: tx * TS, y: ty * TS, s: v[CHOSEN] || s, g: v.wahFoot || s }); };
+  const hint = (tx, ty, s, sw) => { const v = typeof sw === 'string' ? { wah: sw } : (sw || {}); let t = v[CHOSEN] || s;
+    if (!v[CHOSEN] && /SHOOT/.test(t) && !['ma', 'furie', 'silat', 'phiphop'].includes(CHOSEN)) {   // non-gun heroes without a hand-written hint: build one from their own move card
+      const C = CHARS[CHOSEN]; let jl = 'J  ATTACK'; if (C && C.lines) for (const ln of C.lines.slice(1)) { const m = ln.split('  ·  ').find(z => /^J\s/.test(z)); if (m) { jl = m; break; } }
+      t = /^J \/ CLICK/.test(t) ? jl.replace(/^J\s+/, 'J = ') + '  ·  K = SPECIAL  ·  L = ULTIMATE' : t.replace(/SHOOT/g, 'HIT');
+    }
+    if (!v[CHOSEN] && /DYNAMITE/.test(t) && !['ma', 'phiphop'].includes(CHOSEN)) t = 'K = YOUR SPECIAL MOVE  ·  L = ULTIMATE WHEN THE BAR IS FULL';
+    E.hints.push({ x: tx * TS, y: ty * TS, s: t, g: v.wahFoot || t }); };
   if (STAGE === 2) { LOCKS = LOCKS2; return buildStage2(E, set, fill, en, br, cp, hint); }
   if (STAGE === 3) { return buildStage3X(E, set, fill, en, br, cp, hint); }
   if (STAGE === 4) { LOCKS = []; stage4LoadArt(); return buildStage4(E, set, fill, en, br, cp, hint); }
@@ -10553,7 +10559,7 @@ function drawXimenHD(p) {
 let lastT = performance.now(), acc = 0;
 function startGame() { newGame('play'); audio.unlock(); acc = 0; startIntro(); }
 function frame(now) {
-  let dt = Math.min(0.1, (now - lastT) / 1000); lastT = now;
+  let dt = Math.min(0.25, (now - lastT) / 1000); lastT = now;
   pollPad();
   const ip = {}; for (const k in pressed) { ip[k] = true; delete pressed[k]; }
   for (const k of ['left', 'right', 'up', 'down']) TAP[k] = !!(ip[k] && !keys[k]);
@@ -10598,8 +10604,8 @@ function frame(now) {
       if (!G.paused) {
         for (const k in ip) G.pin[k] = true;
         acc += dt * G.timeScale; let n = 0;
-        while (acc >= STEP && n < 24) { const frozen = G.hitstop > 0; step(STEP, G.pin); if (!frozen) G.pin = {}; acc -= STEP; n++; }
-        if (n >= 24) acc = 0;
+        while (acc >= STEP && n < 36) { const frozen = G.hitstop > 0; step(STEP, G.pin); if (!frozen) G.pin = {}; acc -= STEP; n++; }
+        if (n >= 36) acc = 0;
       }
     }
   }
