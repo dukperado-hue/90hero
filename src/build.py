@@ -605,5 +605,8 @@ rep("\nfunction spawnDovesUI(x, y) {", "\n" + tweaks30_js + "\nfunction spawnDov
 om31_js = open(ROOT + '/modules/onemore31.js').read()
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + om31_js + "\nfunction spawnDovesUI(x, y) {")
 
+rep("  if (STAGE === 5) return startCar5();", "  if (STAGE === 5) return startCar5();\n  if (STAGE === 7) return startBoat7();\n")
+rep("    case 'outroCar5': cineCar5Out(c, p, dt); break;\n", "    case 'outroCar5': cineCar5Out(c, p, dt); break;\n    case 'introBoat7': cineBoat7(c, p, dt); break;\n")
+
 open(OUT, 'w').write(s)
 print('v21 written', len(s))

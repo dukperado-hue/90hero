@@ -5890,7 +5890,7 @@ const S7IMG = {};
 (() => { for (const [k, src] of [['market', typeof S7_MARKET_SRC !== 'undefined' && S7_MARKET_SRC], ['arun', typeof S7_ARUN_SRC !== 'undefined' && S7_ARUN_SRC], ['tu', typeof S7_TU_SRC !== 'undefined' && S7_TU_SRC], ['ratch', typeof S7_RATCH_SRC !== 'undefined' && S7_RATCH_SRC]]) if (src) { const im = new Image(); im.onload = () => { S7IMG[k] = im; }; im.src = src; } })();
 const s7zone = tx => tx < S7.arun ? 'market' : tx < S7.tu ? 'arun' : tx < S7.ave ? 'tu' : 'ave';
 function buildStage7(E, set, fill, en, br, cp, hint) {
-  LOCKS = LOCKS7; S7.arena = 'idle'; S7.eleph = null; S7.elephDone = false; S7.boats = []; S7.tuk = [];
+  LOCKS = LOCKS7; S7.arena = 'idle'; S7.boat = null; S7.eleph = null; S7.elephDone = false; S7.boats = []; S7.tuk = [];
   fill(0, LW - 1, 18, LH - 1, T.G);
   fill(0, 1, 0, 17, T.S); fill(LW - 2, LW - 1, 0, LH - 1, T.S);
   // ---------- A. THE FLOATING MARKET ----------
@@ -5946,6 +5946,47 @@ function updStage7(dt) {
     G.cam.lock = { x0: S7.gate * TS, x1: (S7.door + 2) * TS };
     later(0.8, spawnBaron);
   }
+}
+
+// ---------------- the opening: you arrive by long-tail boat, somebody on the bank starts shooting, the boat hits a fruit stall ----------------
+function startBoat7() {
+  const p = G.player;
+  S7.boat = { x: 0 * TS, y: 18 * TS, t: 0, crash: false, wreck: false, bang: 0 };
+  p.inv = 6; G.cine = { kind: 'introBoat7', t: 0, ghost: true };
+  audio.play('rev'); popup(24, 18 * TS - 56, 'แป๊ก แป๊ก แป๊ก แป๊ก', '#ffd23f', true);
+}
+function cineBoat7(c, p, dt) {
+  const B = S7.boat; if (!B) { G.cine = null; return; }
+  if (!B.crash) {
+    B.t += dt; B.x += 130 * dt; B.bang -= dt;
+    p.x = B.x + 22; p.y = B.y - 7 - p.h; p.vx = p.vy = 0; p.face = 1; p.crouch = false;
+    if (Math.random() < dt * 40) part('smoke', B.x - 6, B.y - 2, rnd(-60, -20), rnd(-60, -20), 0.5, 3, '#e8f4ff', { grow: 5, a: 0.6 });
+    if (B.bang <= 0 && B.x > 2 * TS) {                                                  // gunfire from the bank
+      B.bang = 0.55; audio.play('shot'); popup(B.x + 70, B.y - 36, ['BANG!', 'PANG!', 'BANG BANG!'][(Math.random() * 3) | 0], '#ffe9a0');
+      for (let k = 0; k < 4; k++) part('spark', B.x + 120 - k * 30, B.y - 24 + rnd(-6, 6), -rnd(220, 320), rnd(-10, 10), 0.25, 1, '#ffe9a0');
+    }
+    if (Math.floor(B.t * 2) !== Math.floor((B.t - dt) * 2) && B.t > 0.6 && B.t < 1.8) popup(p.x + 4, p.y - 12, ['*DUCKS*', '*DUCKS AGAIN*'][Math.floor(B.t) % 2], '#9ae8ff');
+    if (B.x > 15 * TS) {                                                                 // CRASH
+      B.crash = true; B.wreck = true; c.ghost = false;
+      for (let tx = 17; tx <= 21; tx++) for (let ty = 15; ty <= 18; ty++) { const t = tileAt(tx, ty); if (t === T.C || t === T.B) damageTile(tx, ty, 99); }
+      shake(0.55); hitstop(0.08); audio.play('boom'); explode((B.x + 60), B.y - 10, 28, 0, { noDmg: true });
+      debris(B.x + 60, B.y - 10, 16, ['#e84a2a', '#ffb020', '#8ac83a', '#6a4a22'], 1.2);
+      p.vx = 170; p.vy = -340; p.onGround = false; p.y = B.y - 24 - p.h;
+      popup(p.x + 5, p.y - 20, ['"I\'M FINE."', '"MY HAIR!"', '"EXCUSE ME, AUNTY."'][(Math.random() * 3) | 0], heroOf(p).col, true);
+      later(0.5, heroQuip);
+    }
+  } else if (c.t > 2.6 + 1.2 || (B.crash && p.onGround && (c.land = (c.land || 0) + dt) > 0.7)) { G.cine = null; p.inv = 1; }
+}
+function drawBoat7(B) {
+  const x = Math.round(B.x), y = Math.round(B.y), tilt = B.wreck ? -0.18 : Math.sin(G.clock * 9) * 0.02;
+  ctx.save(); ctx.translate(x + 30, y); ctx.rotate(tilt); ctx.translate(-30, 0);
+  ctx.fillStyle = '#3a2a1a'; ctx.fillRect(-2, -8, 66, 8); ctx.fillStyle = '#7a4a28'; ctx.fillRect(-4, -10, 70, 4); ctx.fillStyle = '#c8402a'; ctx.fillRect(-4, -10, 70, 1.5);
+  ctx.fillStyle = '#e8c040'; ctx.fillRect(14, -9, 30, 1);
+  ctx.fillStyle = '#7a5a30'; ctx.fillRect(-14, -16, 4, 8);                                        // the engine on its pivot, with the long propeller shaft behind
+  ctx.fillStyle = '#9a9aa4'; ctx.fillRect(-12, -17, 6, 6); ctx.fillStyle = '#6a6a74'; ctx.fillRect(-34, -11 + (B.wreck ? 3 : 0), 24, 2);
+  ctx.fillStyle = '#5a5a64'; ctx.fillRect(-36, -13 + (B.wreck ? 3 : 0), 3, 6);
+  if (!B.wreck) { ctx.fillStyle = '#4a7ac8'; ctx.fillRect(10, -22, 38, 3); ctx.fillStyle = '#6a98e0'; ctx.fillRect(10, -22, 38, 1); ctx.fillStyle = '#2a2a30'; ctx.fillRect(12, -19, 1, 9); ctx.fillRect(46, -19, 1, 9); }   // sun canopy
+  ctx.restore();
 }
 // ---------------- THE TRUCK BARON ----------------
 function spawnBaron() {
@@ -6077,6 +6118,7 @@ function drawStage7Mid(cam) {
     ctx.fillStyle = '#9ac8e8'; ctx.fillRect(x + 52, y - 32, 14, 9); ctx.fillStyle = '#e8c040'; ctx.fillRect(x + 4, y - 20, 40, 3);
     ctx.fillStyle = '#0a0a0e'; ctx.beginPath(); ctx.arc(x + 14, y - 3, 7, 0, 6.283); ctx.arc(x + 56, y - 3, 7, 0, 6.283); ctx.fill(); ctx.fillStyle = '#6a6a72'; ctx.beginPath(); ctx.arc(x + 14, y - 3, 3, 0, 6.283); ctx.arc(x + 56, y - 3, 3, 0, 6.283); ctx.fill();
   }
+  if (S7.boat) drawBoat7(S7.boat);
   if (S7.eleph) {                                                                    // the schoolkid on the elephant
     const el = S7.eleph, x = Math.round(el.x), y = el.y, b = Math.round(Math.abs(Math.sin(el.t * 5)) * 1.5), g = '#8a8a90', g2 = '#6a6a72';
     ctx.fillStyle = g2; ctx.fillRect(x + 4, y - 8, 7, 8); ctx.fillRect(x + 22, y - 8, 7, 8); ctx.fillStyle = g; ctx.fillRect(x + 12, y - 8 + (b > 0 ? 1 : 0), 7, 8); ctx.fillRect(x + 28, y - 8, 7, 8);
@@ -7223,7 +7265,9 @@ const heroPow = () => (G && G.player && HERO_POW[G.player.ch]) || 1;
 // =====================================================================
 function startIntro() {
   const p = G.player;
-  if (STAGE === 5) return startCar5();          // stage 05: everybody arrives the same way — down the hill, through the shacks, in a car
+  if (STAGE === 5) return startCar5();
+  if (STAGE === 7) return startBoat7();
+          // stage 05: everybody arrives the same way — down the hill, through the shacks, in a car
   if (p.ch === 'wah') {
     G.bride = { x: p.x + 2, y: p.y, vx: 0, vy: 0, st: 'seat', t: 0, face: 1, onGround: false };
     G.cine = { kind: 'introWah', t: 0 };
@@ -7334,6 +7378,7 @@ function updCine(dt) {
       break;
     case 'introCar5': cineCar5(c, p, dt); break;
     case 'outroCar5': cineCar5Out(c, p, dt); break;
+    case 'introBoat7': cineBoat7(c, p, dt); break;
     case 'introAamir':
       p.vx = 0;
       if (c.t < 0.05) { p.bikeT = 0.9; p.bikeHit = new Set(); }
