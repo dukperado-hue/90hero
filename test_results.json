@@ -214,7 +214,7 @@
   "name": "T2 stage 02 clear recorded (forced C)",
   "ok": true,
   "info": {
-   "time": 81.95,
+   "time": 85.83,
    "rank": "C"
   }
  },
@@ -223,21 +223,17 @@
   "ok": true,
   "info": {
    "mode": "win",
-   "time": 80.14,
-   "deaths": 1,
-   "rank": "A",
-   "expected": "A",
+   "time": 86.05,
+   "deaths": 2,
+   "rank": "B",
+   "expected": "B",
    "prog": {
     "prevHero": "C",
     "prevStage": "C",
-    "heroBest": "A",
+    "heroBest": "B",
     "newRank": true,
     "unlocked": [
      "nine",
-     "li",
-     "dong",
-     "srk",
-     "gada",
      "hongbao"
     ]
    }
@@ -247,8 +243,8 @@
   "name": "T3 better rank replaces saved rank",
   "ok": true,
   "info": {
-   "got": "A",
-   "saved": "A"
+   "got": "B",
+   "saved": "B"
   }
  },
  {
@@ -266,49 +262,20 @@
     "vijay",
     "ximen",
     "nine",
-    "li",
-    "dong",
-    "srk",
-    "gada",
     "hongbao"
    ],
    "thisRun": [
     "nine",
-    "li",
-    "dong",
-    "srk",
-    "gada",
     "hongbao"
    ]
   }
- },
- {
-  "name": "T5 unlock: Rank A+ on stage 02 unlocks DAGGER LI; Rank A with AH WAH unlocks DONGFANG",
-  "ok": true,
-  "info": [
-   "shaolin",
-   "eagle",
-   "sombat",
-   "sorapong",
-   "juk",
-   "wah",
-   "fei",
-   "vijay",
-   "ximen",
-   "nine",
-   "li",
-   "dong",
-   "srk",
-   "gada",
-   "hongbao"
-  ]
  },
  {
   "name": "T4 worse rank does not overwrite best",
   "ok": true,
   "info": {
    "run": "C",
-   "saved": "A"
+   "saved": "B"
   }
  },
  {
@@ -330,7 +297,7 @@
    "ranks": {
     "1": {},
     "2": {
-     "wah": "A"
+     "wah": "B"
     },
     "3": {},
     "4": {},
@@ -338,18 +305,14 @@
     "6": {}
    },
    "unlocked": [
-    "dong",
     "eagle",
     "fei",
-    "gada",
     "hongbao",
     "juk",
-    "li",
     "nine",
     "shaolin",
     "sombat",
     "sorapong",
-    "srk",
     "vijay",
     "wah",
     "ximen"
@@ -359,7 +322,7 @@
  {
   "name": "T6 best time (original key) kept",
   "ok": true,
-  "info": "80.14166666667651"
+  "info": "85.83333333334771"
  },
  {
   "name": "T5 unlocked UNCLE NINE can be selected and plays",
@@ -375,7 +338,7 @@
     "mode": "play",
     "x": 788,
     "deaths": 0,
-    "time": 4.883333333333366
+    "time": 4.841666666666697
    }
   }
  },
@@ -389,7 +352,7 @@
   "info": {
    "1": {},
    "2": {
-    "wah": "A"
+    "wah": "B"
    },
    "3": {
     "vijay": "A"
@@ -403,8 +366,8 @@
   "name": "T8 stage 01 completes with wah",
   "ok": true,
   "info": {
-   "time": 100.19,
-   "deaths": 6
+   "time": 140.48,
+   "deaths": 10
   }
  },
  {
@@ -430,7 +393,7 @@
   "name": "T8 stage 03 completes with fei",
   "ok": true,
   "info": {
-   "time": 162.91,
+   "time": 142.51,
    "deaths": 5
   }
  },
@@ -457,7 +420,7 @@
   "name": "T8 stage 03 completes with vijay",
   "ok": true,
   "info": {
-   "time": 129.23,
+   "time": 131.67,
    "deaths": 5
   }
  },

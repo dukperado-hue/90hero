@@ -115,7 +115,8 @@ const SLOT_DEFAULT = ['ATTACK', 'SPECIAL', 'SKILL', 'ULTIMATE'];
 const SLOT_OVR = {                                   // hand-written labels (<= 10 chars) where the move text is too long to parse; null = parse
   furie: ['PISTOL', 'SLIDE', 'HEADSHOT', 'NO MERCY'], bey: ['HEAVY', 'CURVED', 'STOMP', 'SAVIOR'],
   gada: ['MACE ARCS', 'THROW', 'GROUND', 'WHIRLWIND'], silat: ['ELBOW-KNEE', 'HOLD SMG', 'SWEEP', 'THE RAID'],
-  hongbao: ['KICK COMBO', 'BUN TOSS', 'BELLY BUMP', 'ROLL']
+  hongbao: ['KICK COMBO', 'BUN TOSS', 'BELLY BUMP', 'ROLL'],
+  kham: ['ELBOW-KNEE', 'BONE BREAK', 'FLYING KNEE', 'ELEPHANT'], phiphop: ['UZI', 'RPG', 'GRENADE', 'BARRAGE'], siang: ['PUNCH-KICK', 'BANG FAI']
 };
 function selSlots(C) {                               // 4 x {key,label,real}: from the hero's own move text, else a generic label
   const want = ['J', 'K', 'S+J', 'L'], out = [null, null, null, null];
