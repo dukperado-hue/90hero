@@ -554,8 +554,8 @@ rep("function swapHero(k, c) {\n  const p = G.player; if (!p || p.dead || G.mode
     "const helpAge = () => G.time - (G.helpT0 || 0);        // seconds since the control hints were last (re)started: run start or a stunt-double swap\nfunction swapHero(k, c) {\n  const p = G.player; if (!p || p.dead || G.mode !== 'play' || G.cine) return;\n  G.actor = k; G.helpT0 = G.time;")
 
 # ---- v29b: Gemini chibi sprites ----
-_spr_png = {k: _b64.b64encode(open(ROOT + '/assets/%s_sprites.png' % k, 'rb').read()).decode() for k in ('shaolin', 'hongbao', 'singham', 'chiru', 'srk', 'rajini', 'aamir', 'vijay', 'ram', 'gada', 'pob') if os.path.exists(ROOT + '/assets/%s_sprites.png' % k)}
-_spr_meta = {k: _json.loads(open(ROOT + '/assets/%s_sprites.json' % k).read()) for k in ('shaolin', 'hongbao', 'singham', 'chiru', 'srk', 'rajini', 'aamir', 'vijay', 'ram', 'gada', 'pob') if os.path.exists(ROOT + '/assets/%s_sprites.png' % k)}
+_spr_png = {k: _b64.b64encode(open(ROOT + '/assets/%s_sprites.png' % k, 'rb').read()).decode() for k in ('aamir', 'bey', 'chiru', 'dong', 'eagle', 'fei', 'furie', 'gada', 'hongbao', 'ichi', 'juk', 'kham', 'lady', 'li', 'ma', 'madong', 'michelle', 'nine', 'ogami', 'oldboy', 'paimei', 'phiphop', 'pob', 'rajini', 'ram', 'shaolin', 'siang', 'silat', 'singham', 'sombat', 'sorapong', 'srk', 'sura', 'vijay', 'wah', 'ximen', 'zhang') if os.path.exists(ROOT + '/assets/%s_sprites.png' % k)}
+_spr_meta = {k: _json.loads(open(ROOT + '/assets/%s_sprites.json' % k).read()) for k in ('aamir', 'bey', 'chiru', 'dong', 'eagle', 'fei', 'furie', 'gada', 'hongbao', 'ichi', 'juk', 'kham', 'lady', 'li', 'ma', 'madong', 'michelle', 'nine', 'ogami', 'oldboy', 'paimei', 'phiphop', 'pob', 'rajini', 'ram', 'shaolin', 'siang', 'silat', 'singham', 'sombat', 'sorapong', 'srk', 'sura', 'vijay', 'wah', 'ximen', 'zhang') if os.path.exists(ROOT + '/assets/%s_sprites.png' % k)}
 sprites29_js = open(ROOT + '/modules/sprites29.js').read().replace('/*SPR_META*/', _json.dumps(_spr_meta)).replace('/*SPR_PNG*/', _json.dumps(_spr_png))
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + sprites29_js + "\nfunction spawnDovesUI(x, y) {")
 
