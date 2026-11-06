@@ -617,7 +617,7 @@ import base64 as _b64
 _gm = open(ROOT + '/art/golden/meta.json').read()
 lab34_js = lab34_js.replace('/*GOLD_META*/', _gm).replace('/*GOLD_PNG*/', _b64.b64encode(open(ROOT + '/art/golden/atlas_gold.png', 'rb').read()).decode()).replace('/*GOLD_FLESH*/', _b64.b64encode(open(ROOT + '/art/golden/atlas_flesh.png', 'rb').read()).decode())
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + lab34_js + "\nfunction spawnDovesUI(x, y) {")
-rep("monk: { w: 10, h: 21, hp: 8 }", "monk: { w: 12, h: 30, hp: 12 }")
+rep("monk: { w: 10, h: 21, hp: 8 }", "monk: { w: 12, h: 30, hp: 22 }, dummy: { w: 14, h: 28, hp: 9 }")
 rep("GOLD SKIN: BULLETS GLANCE OFF  ·  FISTS AND FIRE HIT FULL", "GOLD ARMOUR: BULLETS CRACK IT  ·  CRACKED GOLD TAKES FULL DAMAGE")
 coop32_js = open(ROOT + '/modules/coop32.js').read()
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + coop32_js + "\nfunction spawnDovesUI(x, y) {")
@@ -644,5 +644,19 @@ rep("dismember(e, dir, killCause(e, explosive));", "const _kc = killCause(e, exp
 rep("const vx0 = e.vx; moveBody(e, dt);\n    if (e.hitWall) e.vx = -vx0 * 0.3;", "const vx0 = e.vx, vy0 = e.vy; moveBody(e, dt);\n    if (e.hitWall) e.vx = -vx0 * 0.3;")
 rep("if (e.dead) { ctx.globalAlpha = clamp(1 - (e.deadT - 4.5) / 1.5, 0, 1); ctx.translate(0, -e.h / 2); ctx.rotate(e.rot); ctx.translate(0, e.h / 2); }",
     "if (e.dead) { ctx.globalAlpha = clamp(1 - (e.deadT - 4.5) / 1.5, 0, 1); ctx.translate(0, -e.h / 2); ctx.rotate(e.rot); ctx.translate(0, e.h / 2);\n    if (e.dy) { if (e.deadT < e.dy.stg) ctx.scale(1, 1 - e.dy.sq * (e.deadT / e.dy.stg)); else if (e.landT != null) { const q = Math.max(0, 1 - (e.deadT - e.landT) / 0.45); ctx.translate(Math.sin(e.deadT * 70) * 0.9 * q, 0); } } }")
+
+# ===== v34b: tougher chibi Golden Men + elites after the hundred + training dummies + boss 掃地僧 THE SWEEPING MONK =====
+import json as _json
+_sw_meta = open(ROOT + '/art/sweeper/meta.json').read()
+_sw_png = base64.b64encode(open(ROOT + '/art/sweeper/atlas.png', 'rb').read()).decode()
+dummy34_js = open(ROOT + '/modules/dummy34.js', encoding='utf-8').read()
+sweeper34_js = open(ROOT + '/modules/sweeper34.js', encoding='utf-8').read().replace('/*SWP_META*/', _sw_meta).replace('/*SWP_PNG*/', _sw_png)
+rep("\nfunction spawnDovesUI(x, y) {", "\n" + dummy34_js + "\n" + sweeper34_js + "\nfunction spawnDovesUI(x, y) {")
+rep("  { x0: 140, x1: 178, trig: 146, waves: [\n    [['hundred', 0]]\n  ] }\n];",
+    "  { x0: 140, x1: 178, trig: 146, waves: [\n    [['hundred', 0]]\n  ] },\n  { x0: 140, x1: 178, trig: 147, waves: [\n    [['monk', 152, 'elite'], ['monk', 172, 'elite']],\n    [['monk', 150, 'elite'], ['monk', 162, 'elite'], ['monk', 174, 'elite']]\n  ] }\n];")
+rep("if (STAGE === 2 && LOCKS.every((_, i) => G.lockDone[i])) { G.exitOpen = true;", "if (STAGE === 2 && LOCKS.every((_, i) => G.lockDone[i])) { if (!G.sweepDone) { sweeperIntro(); return; } G.exitOpen = true;")
+rep("  if (b.type === 'baron') return updBaron(b, dt);", "  if (b.type === 'baron') return updBaron(b, dt);\n  if (b.type === 'sweeper') return updSweeper(b, dt);")
+rep("  if (b.type === 'baron') return drawBaron(b);", "  if (b.type === 'baron') return drawBaron(b);\n  if (b.type === 'sweeper') return drawSweeper(b);")
+rep("  2: { S: [120, 0], A: [165, 1], B: [240, 3] },  // 18 GOLDEN MEN + THE HUNDRED in 3 waves (no boss)", "  2: { S: [180, 0], A: [240, 1], B: [330, 3] },  // 18 GOLDEN MEN + THE HUNDRED + ELITES + THE SWEEPING MONK")
 open(OUT, 'w').write(s)
 print('v21 written', len(s))

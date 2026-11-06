@@ -9,3 +9,11 @@ First subject: the Golden Man (金人, stage 2). Reuse this recipe for the next 
 5. **Tests are bot runs, not human playtests**: `tests/lab34.js`.
 
 Not done yet: bullet-proofing numbers are a first guess; other enemy types still use the old code-drawn look.
+
+## Lab #1b — chibi Golden Men, elites, Sweeping Monk (v34b)
+- Heroes are big-head chibi, so villains are drawn big-head chibi too (`art/golden/make_atlas.py`, 16 frames incl. `kick`, `jump`, `low`, `taunt`). Crowd monks reuse the same atlas at 0.37 scale.
+- Toughness: monk hp 22, armour 8 (elite: hp 34, armour 12). Bullets chip armour (x0.6), melee x0.6 while plated, super-armour while attacking, cracked for 4 s.
+- Death: killEnemy wrapper → stagger (`hit`) → airborne `fall` → landing thud (dust, `land`) → `dead` frame. Applies to monk + crowd.
+- Elites (`form:'elite'` via `dropIn`): lock #5 after the Hundred; crouch → flying kick (`jwind`/`jkick`).
+- Training dummies (`modules/dummy34.js`): harmless `dummy` enemy type, wobble on hit, +ULT per hit, drop pickups.
+- Boss 掃地僧 (`modules/sweeper34.js`, `art/sweeper/make_atlas.py`): 3 phases, dust waves, dash, spin, roof-beam run with falling tiles + drop slam. Gemini sheet prompt: describe him generically ("elderly bald temple groundskeeper with a bamboo broom") — naming the novel got the request refused.

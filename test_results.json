@@ -216,7 +216,7 @@
   "name": "T2 stage 02 clear recorded (forced C)",
   "ok": true,
   "info": {
-   "time": 97.13,
+   "time": 176.81,
    "rank": "C"
   }
  },
@@ -225,38 +225,30 @@
   "ok": true,
   "info": {
    "mode": "win",
-   "time": 92.77,
-   "deaths": 1,
-   "rank": "A",
-   "expected": "A",
+   "time": 149.89,
+   "deaths": 5,
+   "rank": "C",
+   "expected": "C",
    "prog": {
     "prevHero": "C",
     "prevStage": "C",
-    "heroBest": "A",
-    "newRank": true,
-    "unlocked": [
-     "nine",
-     "li",
-     "dong",
-     "srk",
-     "gada",
-     "hongbao",
-     "ajumma"
-    ]
+    "heroBest": "C",
+    "newRank": false,
+    "unlocked": []
    }
   }
  },
  {
   "name": "T3 better rank replaces saved rank",
-  "ok": true,
+  "ok": false,
   "info": {
-   "got": "A",
-   "saved": "A"
+   "got": "C",
+   "saved": "C"
   }
  },
  {
   "name": "T5 unlock: Rank B+ on stage 02 unlocks UNCLE NINE",
-  "ok": true,
+  "ok": false,
   "info": {
    "unlocked": [
     "shaolin",
@@ -267,54 +259,17 @@
     "wah",
     "fei",
     "vijay",
-    "ximen",
-    "nine",
-    "li",
-    "dong",
-    "srk",
-    "gada",
-    "hongbao",
-    "ajumma"
+    "ximen"
    ],
-   "thisRun": [
-    "nine",
-    "li",
-    "dong",
-    "srk",
-    "gada",
-    "hongbao",
-    "ajumma"
-   ]
+   "thisRun": []
   }
- },
- {
-  "name": "T5 unlock: Rank A+ on stage 02 unlocks DAGGER LI; Rank A with AH WAH unlocks DONGFANG",
-  "ok": true,
-  "info": [
-   "shaolin",
-   "eagle",
-   "sombat",
-   "sorapong",
-   "juk",
-   "wah",
-   "fei",
-   "vijay",
-   "ximen",
-   "nine",
-   "li",
-   "dong",
-   "srk",
-   "gada",
-   "hongbao",
-   "ajumma"
-  ]
  },
  {
   "name": "T4 worse rank does not overwrite best",
   "ok": true,
   "info": {
    "run": "C",
-   "saved": "A"
+   "saved": "C"
   }
  },
  {
@@ -337,7 +292,7 @@
    "ranks": {
     "1": {},
     "2": {
-     "wah": "A"
+     "wah": "C"
     },
     "3": {},
     "4": {},
@@ -346,19 +301,12 @@
     "7": {}
    },
    "unlocked": [
-    "ajumma",
-    "dong",
     "eagle",
     "fei",
-    "gada",
-    "hongbao",
     "juk",
-    "li",
-    "nine",
     "shaolin",
     "sombat",
     "sorapong",
-    "srk",
     "vijay",
     "wah",
     "ximen"
@@ -368,29 +316,7 @@
  {
   "name": "T6 best time (original key) kept",
   "ok": true,
-  "info": "92.76666666668656"
- },
- {
-  "name": "T5 unlocked UNCLE NINE can be selected and plays",
-  "ok": true,
-  "info": {
-   "st": {
-    "mode": "play",
-    "ch": "nine",
-    "stage": 2
-   },
-   "r": {
-    "x0": 64,
-    "mode": "play",
-    "x": 788,
-    "deaths": 0,
-    "time": 4.933333333333368
-   }
-  }
- },
- {
-  "name": "T5 NEW tag cleared after picking the hero",
-  "ok": true
+  "info": "149.89166666669468"
  },
  {
   "name": "two tabs: a save from tab B merges instead of erasing tab A's result",
@@ -398,7 +324,7 @@
   "info": {
    "1": {},
    "2": {
-    "wah": "A"
+    "wah": "C"
    },
    "3": {
     "vijay": "A"
@@ -413,8 +339,8 @@
   "name": "T8 stage 01 completes with wah",
   "ok": true,
   "info": {
-   "time": 119.05,
-   "deaths": 6
+   "time": 104.24,
+   "deaths": 7
   }
  },
  {
@@ -440,8 +366,8 @@
   "name": "T8 stage 03 completes with fei",
   "ok": true,
   "info": {
-   "time": 141.54,
-   "deaths": 6
+   "time": 143.64,
+   "deaths": 5
   }
  },
  {
@@ -467,16 +393,16 @@
   "name": "T8 stage 03 completes with vijay",
   "ok": true,
   "info": {
-   "time": 149.75,
-   "deaths": 6
+   "time": 126.2,
+   "deaths": 4
   }
  },
  {
   "name": "T2 stage 03 rank recorded (vijay)",
   "ok": true,
   "info": {
-   "rank": "C",
-   "saved": "C",
+   "rank": "B",
+   "saved": "B",
    "unlocked": [
     "shaolin",
     "eagle",
@@ -486,7 +412,10 @@
     "wah",
     "fei",
     "vijay",
-    "ximen"
+    "ximen",
+    "siang",
+    "furie",
+    "pob"
    ]
   }
  },
