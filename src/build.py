@@ -658,5 +658,6 @@ rep("if (STAGE === 2 && LOCKS.every((_, i) => G.lockDone[i])) { G.exitOpen = tru
 rep("  if (b.type === 'baron') return updBaron(b, dt);", "  if (b.type === 'baron') return updBaron(b, dt);\n  if (b.type === 'sweeper') return updSweeper(b, dt);")
 rep("  if (b.type === 'baron') return drawBaron(b);", "  if (b.type === 'baron') return drawBaron(b);\n  if (b.type === 'sweeper') return drawSweeper(b);")
 rep("  2: { S: [120, 0], A: [165, 1], B: [240, 3] },  // 18 GOLDEN MEN + THE HUNDRED in 3 waves (no boss)", "  2: { S: [180, 0], A: [240, 1], B: [330, 3] },  // 18 GOLDEN MEN + THE HUNDRED + ELITES + THE SWEEPING MONK")
+rep("if (below.length < (e.tier === 2 ? 2 : 2) || below.length === 0) {", "if (below.length === 0) {")      # the pyramid only comes apart when EVERY man under you is down
 open(OUT, 'w').write(s)
 print('v21 written', len(s))

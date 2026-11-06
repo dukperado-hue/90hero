@@ -74,7 +74,7 @@ function goldCrack(e, why) {
     ctx.filter = 'none'; ctx.imageSmoothingEnabled = sm; ctx.restore();
   }
   const _de = drawEnemy;
-  drawEnemy = function (e) { if (e.type === 'monk' && goldOK() && !e.gibbed) return drawGolden(e, e.form === 'pyr' ? 0.37 : 0.5); if (e.type === 'crowd' && goldOK() && !e.gibbed) return drawGolden(e, 0.37); return _de.call(this, e); };
+  drawEnemy = function (e) { if (e.type === 'monk' && goldOK() && !e.gibbed) return drawGolden(e); if (e.type === 'crowd' && goldOK() && !e.gibbed) return drawGolden(e, 0.37); return _de.call(this, e); };
   const _step = step;
   step = function (dt, ip) {
     _step.apply(this, arguments);
@@ -124,6 +124,7 @@ function goldCrack(e, why) {
   updMonk = function (e, dt) {
     if (e.form === 'elite') { e.form = 'line'; e.elite = true; e.hp = e.maxHp = 28; e.armMax = 9; e.armor = 9; e.jcd = rnd(0.8, 2); }
     if (e.form === 'pyr' || e.dead) return _um.apply(this, arguments);
+    if (e.state === 'engage' && e.onGround && e.vx * e.face < -5 && !e.elite) e.vx = 0;                // no backing away: they hold their ground instead of walking backwards
     if (!e.elite) {                                    // regular golden men: quicker on their feet and quicker to re-attack (the first version was sluggish)
       e.cd -= dt * 0.4; const r0 = _um.apply(this, arguments);
       if (e.state === 'engage' && Math.abs(e.vx) > 5) e.vx = clamp(e.vx * 1.3, -90, 90);
@@ -143,11 +144,12 @@ function goldCrack(e, why) {
     if (e.state === 'engage' && Math.abs(e.vx) > 5) e.vx = clamp(e.vx * 1.32, -98, 98);
     return r;
   };
-  // the pyramid: its six men are drawn/boxed at the old height (22) so the top ones stay reachable
+  // the pyramid: six men stacked 3-2-1, tiers overlapping 6px so the top man is still reachable
   const _sp = spawnPyramid;
   spawnPyramid = function () {
     const n0 = G.enemies.length; _sp.apply(this, arguments);
-    for (let i = n0; i < G.enemies.length; i++) { const e = G.enemies[i]; if (e.form !== 'pyr') continue; e.h = 22; e.y = 18 * TS - 22 * (e.tier + 1) + e.tier * 2; }
+    const seg = G.enemies.splice(n0).filter(e => e.form === 'pyr').sort((a, b) => b.tier - a.tier);   // draw the top tier first so the lower men's heads stay in front
+    for (const e of seg) { e.y = 18 * TS - e.h - 24 * e.tier; G.enemies.push(e); }                      // same size as every other golden man; tiers overlap a little so the top is reachable
   };
   const _ng = newGame; newGame = function () { _ng.apply(this, arguments); G.tethers = []; };
 }
