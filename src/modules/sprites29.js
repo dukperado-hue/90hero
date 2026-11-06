@@ -5,6 +5,7 @@ const SPR = {};
 for (const k in SPR_PNG) { const im = new Image(); im.src = 'data:image/png;base64,' + SPR_PNG[k]; SPR[k] = { im, f: SPR_META[k] }; }
 function drawSpriteHero(p) {
   const S = SPR[p.ch]; if (!S || !S.im.complete || !S.im.naturalWidth) return false;
+  if (p.ch === 'wah' && !p.foot) { drawBikeHD(p); return true; }   // Uncle Wah rides: the motorcycle IS his body; the chibi sprite is only for when he is on foot
   if (p.inv > 0 && !p.dead && Math.floor(p.inv * 22) % 2 === 0) return true;
   const fx = Math.round(p.x + p.w / 2), fy = Math.round(p.y + p.h), F = S.f;
   const k = (p.swingT > 0 || p.superT > 0) ? (p.superT > 0 ? ['kick', 'bigkick', 'kick', 'fly'][p.kickFrame % 4] : p.swingK) : '';
