@@ -23,7 +23,9 @@ function drawSpriteHero(p) {
   const sm = ctx.imageSmoothingEnabled; ctx.imageSmoothingEnabled = false;
   ctx.drawImage(S.im, fr.x, fr.y, fr.w, fr.h, -fr.ax, -fr.h + bob + (n === 'jump' ? -2 : 0), fr.w, fr.h);
   if (p.flash > 0) { ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = 0.6; ctx.drawImage(S.im, fr.x, fr.y, fr.w, fr.h, -fr.ax, -fr.h, fr.w, fr.h); }
-  ctx.imageSmoothingEnabled = sm; ctx.restore(); return true;
+  ctx.imageSmoothingEnabled = sm; ctx.restore();
+  if (p.ch === 'pob' && typeof drawPobFx === 'function') drawPobFx(p);
+  return true;
 }
 for (const k in SPR) DRAW5[k] = drawSpriteHero;
 

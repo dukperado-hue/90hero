@@ -4,7 +4,7 @@
 // =====================================================================
 const ORIGIN = { shaolin: 'HK', eagle: 'TH', sombat: 'TH', sorapong: 'TH', wah: 'HK', ma: 'HK', fei: 'CN', nine: 'HK', siang: 'TH', sura: 'CN', li: 'CN', ximen: 'CN',
   chiru: 'IN', dong: 'CN', zhang: 'CN', vijay: 'IN', ram: 'IN', singham: 'IN', michelle: 'HK', phiphop: 'TH', srk: 'IN', rajini: 'IN', madong: 'KR', oldboy: 'KR',
-  kham: 'TH', paimei: 'CN', lady: 'KR', ichi: 'JP', ogami: 'JP', juk: 'TH', furie: 'VN', bey: 'TR', gada: 'IN', silat: 'ID', hongbao: 'HK' };
+  kham: 'TH', paimei: 'CN', lady: 'KR', ichi: 'JP', ogami: 'JP', juk: 'TH', furie: 'VN', bey: 'TR', gada: 'IN', silat: 'ID', hongbao: 'HK', pob: 'TH' };
 const ORIGIN_COL = { TH: '#4a8aff', HK: '#ff4a6a', CN: '#ffd23f', IN: '#ff9a3a', KR: '#7ae8ff', JP: '#ffffff', VN: '#ff6a6a', TR: '#ff9ac0', ID: '#5affa0' };
 const ORIGIN_NAME = { ALL: 'ALL HEROES', TH: 'THAI · ไทย', HK: 'HONG KONG · 香港', CN: 'CHINA · 中國', IN: 'INDIA · भारत', KR: 'KOREA · 한국', JP: 'JAPAN · 日本', VN: 'VIETNAM · VIỆT NAM', TR: 'TURKEY · TÜRKİYE', ID: 'INDONESIA' };
 const SEL_FILTERS = ['ALL', 'TH', 'HK', 'CN', 'IN', 'KR', 'JP', 'VN', 'TR', 'ID'];

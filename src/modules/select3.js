@@ -7,8 +7,8 @@
 //     so changing a hero's moves in CHARS changes the strip. Sprites are the real in-game sprites.
 //   * top: mini roster (click / hover to jump) and country filter chips.
 // =====================================================================
-const SEL_SWING = new Set(['aamir', 'fei', 'siang', 'nine', 'sura', 'li', 'ximen', 'chiru', 'dong', 'zhang', 'ram', 'singham', 'michelle', 'srk', 'madong', 'oldboy', 'kham', 'paimei', 'lady', 'ichi', 'ogami', 'bey', 'gada', 'silat', 'hongbao', 'furie']);
-const SEL_NEW = new Set(['furie', 'bey', 'gada', 'silat', 'hongbao']);
+const SEL_SWING = new Set(['aamir', 'fei', 'siang', 'nine', 'sura', 'li', 'ximen', 'chiru', 'dong', 'zhang', 'ram', 'singham', 'michelle', 'srk', 'madong', 'oldboy', 'kham', 'paimei', 'lady', 'ichi', 'ogami', 'bey', 'gada', 'silat', 'hongbao', 'furie', 'pob']);
+const SEL_NEW = new Set(['furie', 'bey', 'gada', 'silat', 'hongbao', 'pob']);
 const GUN_HEROES = new Set(['ma', 'vijay', 'furie', 'silat', 'sombat', 'lady', 'rajini']);
 function selAnim(k, q, t, on) {                      // idle / action loop for one preview figure
   q.animT = t; q.onGround = true; q.face = 1; q.inv = 0; q.flash = 0;
@@ -114,7 +114,7 @@ function selBg(o, x, y, w, h, t) {
 const SLOT_DEFAULT = ['ATTACK', 'SPECIAL', 'SKILL', 'ULTIMATE'];
 const SLOT_OVR = {                                   // hand-written labels (<= 10 chars) where the move text is too long to parse; null = parse
   furie: ['PISTOL', 'SLIDE', 'HEADSHOT', 'NO MERCY'], bey: ['HEAVY', 'CURVED', 'STOMP', 'SAVIOR'],
-  gada: ['MACE ARCS', 'THROW', 'GROUND', 'WHIRLWIND'], silat: ['ELBOW-KNEE', 'HOLD SMG', 'SWEEP', 'THE RAID'],
+  gada: ['MACE ARCS', 'THROW', 'GROUND', 'WHIRLWIND'], silat: ['ELBOW-KNEE', 'HOLD SMG', 'SWEEP', 'THE RAID'], pob: ['CLAW', 'ORGAN WHIP', 'GRAB', 'FEAST'],
   hongbao: ['KICK COMBO', 'BUN TOSS', 'BELLY BUMP', 'ROLL'],
   kham: ['ELBOW-KNEE', 'BONE BREAK', 'FLYING KNEE', 'ELEPHANT'], phiphop: ['UZI', 'RPG', 'GRENADE', 'BARRAGE'], siang: ['PUNCH-KICK', 'BANG FAI']
 };

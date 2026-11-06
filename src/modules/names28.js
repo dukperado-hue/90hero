@@ -7,7 +7,7 @@ const NEW_NAMES = {                                   // key -> [in-game name, s
   singham: ['UNCLE THAPPAD-JI', 'U.THAPPAD'], srk: ['UNCLE NACH-JI', 'U.NACH'], rajini: ['UNCLE STYLE-MAAMA', 'U.STYLE'], aamir: ['UNCLE AKHADA-JI', 'U.AKHADA'],
   madong: ['UNCLE AJEOSSI FIST', 'U.FIST'], oldboy: ['UNCLE AJEOSSI HAMMER', 'U.HAMMER'], lady: ['AUNTIE HAN', 'A.HAN'],
   ichi: ['UNCLE BLIND OJISAN', 'U.BLIND'], ogami: ['UNCLE BABY-CART OJISAN', 'U.CART'],
-  furie: ['AUNTIE CO-BA', 'A.CO-BA'], bey: ['UNCLE THUNDER-DAYI', 'U.DAYI'], gada: ['UNCLE GADA-JI', 'U.GADA'], silat: ['UNCLE OM SILAT', 'U.SILAT']
+  furie: ['AUNTIE CO-BA', 'A.CO-BA'], bey: ['UNCLE THUNDER-DAYI', 'U.DAYI'], gada: ['UNCLE GADA-JI', 'U.GADA'], silat: ['UNCLE OM SILAT', 'U.SILAT'], pob: ['AUNTIE POB', 'A.POB']
 };
 for (const k in NEW_NAMES) { CHARS[k].name = NEW_NAMES[k][0]; CHARS[k].card = NEW_NAMES[k][1]; }
 for (const k of CHAR_KEYS) { CHARS[k].thHidden = CHARS[k].th; CHARS[k].th = ''; }          // Thai labels are kept as data only, never drawn
