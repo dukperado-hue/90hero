@@ -604,6 +604,8 @@ tweaks30_js = open(ROOT + '/modules/tweaks30.js').read()
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + tweaks30_js + "\nfunction spawnDovesUI(x, y) {")
 om31_js = open(ROOT + '/modules/onemore31.js').read()
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + om31_js + "\nfunction spawnDovesUI(x, y) {")
+pol31_js = open(ROOT + '/modules/polish31.js').read()
+rep("\nfunction spawnDovesUI(x, y) {", "\n" + pol31_js + "\nfunction spawnDovesUI(x, y) {")
 
 # Uncle Wah on his bike: match the brown-jacket / striped-tee look of his chibi sprite and poster (was blue denim)
 _i = s.index('function drawBikeHD(p) {'); _j = s.index('\nfunction ', _i + 10); _seg = s[_i:_j]
