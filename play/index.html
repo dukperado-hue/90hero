@@ -258,7 +258,6 @@ const audio = (() => {
   const last = {};
   function unlock() {
     if (ac) { if (ac.state === 'suspended') ac.resume(); return; }
-    if (!/[?&]sound=1/.test(location.search)) return;
     try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return; }
     const comp = ac.createDynamicsCompressor(); comp.threshold.value = -12; comp.ratio.value = 6; comp.connect(ac.destination);
     const master = ac.createGain(); master.gain.value = 0.6; master.connect(comp);

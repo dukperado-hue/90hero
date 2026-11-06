@@ -635,7 +635,7 @@ rep('Arcade action, 29 uncles and aunts, 3 districts. Keyboard, gamepad or touch
 rep('ONE MORE RUN — STAGE 01: THE OLD FACTORY  (first playable prototype)', 'NEIGHBORHOOD OF CHAOS — 38 uncles and aunts, 7 districts, 2-player local co-op')
 rep('   Pure HTML5 canvas + WebAudio. No external assets, no dependencies.\n   All art is drawn procedurally, all sound is synthesised.', '   Single-file HTML5 canvas + WebAudio. Characters and effects are drawn in code, sound is synthesised;\n   a few stage backdrops are embedded images.')
 # TEMP MUTE (user request): no AudioContext is created unless the URL has ?sound=1. Delete this rep to restore sound.
-rep("    try { ac = new (window.AudioContext", "    if (!/[?&]sound=1/.test(location.search)) return;\n    try { ac = new (window.AudioContext")
+# (sound is ON again — the temporary mute was removed)
 # ===== v34 — enemy death animation (stagger -> fall -> thud -> lie down), by cause x enemy type =====
 death34_js = open(ROOT + '/modules/death34.js', encoding='utf-8').read()
 rep("e.rot += e.vr * dt;", "deathRot(e, dt, vy0);")   # must run before the module is inlined (the module contains the same text)
