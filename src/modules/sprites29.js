@@ -25,6 +25,8 @@ function drawSpriteHero(p) {
   if (p.flash > 0) { ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = 0.6; ctx.drawImage(S.im, fr.x, fr.y, fr.w, fr.h, -fr.ax, -fr.h, fr.w, fr.h); }
   ctx.imageSmoothingEnabled = sm; ctx.restore();
   if (p.ch === 'pob' && typeof drawPobFx === 'function') drawPobFx(p);
+  if (p.ch === 'ajumma' && typeof drawAjummaFx === 'function') drawAjummaFx(p);
+  if (p.ch === 'zhang') drawZhangFx(p); else if (p.ch === 'michelle') drawMichelleFx(p);
   return true;
 }
 for (const k in SPR) DRAW5[k] = drawSpriteHero;

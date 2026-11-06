@@ -301,13 +301,15 @@ function ult5(p) {
     s.raid = 1.3; s.raidTick = 0; s.mag = 30; s.rel = 0; G.banner = { t: 0, title: 'THE RAID', sub: 'FIFTEEN FLOORS. ONE CORRIDOR.' }; audio.play('roar'); p.inv = 1.8;
   } else if (p.ch === 'pob') {                         // ORGAN FEAST
     s.feast = 2.0; s.tick = 0; G.banner = { t: 0, title: 'ORGAN FEAST', sub: 'SHE HAS NOT EATEN SINCE 1932' }; audio.play('roar'); p.inv = 2.2;
+  } else if (p.ch === 'ajumma') {                      // AJUMMA RUSH
+    s.rush = 2.2; s.rushHit = new Set(); G.banner = { t: 0, title: 'AJUMMA RUSH', sub: 'THE SALE ENDS IN FIVE MINUTES' }; audio.play('roar'); p.inv = 2.4;
   } else if (p.ch === 'hongbao') {                     // ALL-YOU-CAN-EAT: heal one, then roll through the buffet
     G.banner = { t: 0, title: 'ALL-YOU-CAN-EAT', sub: 'FIRST HE EATS. THEN HE ROLLS.' }; audio.play('roar'); p.hp = Math.min(PC.hp, p.hp + 1); p.inv = 2;
     popup(p.x + 5, p.y - 16, '+1 LUNCH', '#7dff8a', true); s.roll = 1.6; s.rollHit = new Set();
   }
 }
-const DRAW5 = { furie: drawFurie, bey: drawBey, gada: drawGada, silat: drawSilat, hongbao: drawHongbao, pob: p => drawPob(p) };
+const DRAW5 = { furie: drawFurie, bey: drawBey, gada: drawGada, silat: drawSilat, hongbao: drawHongbao, pob: p => drawPob(p), ajumma: p => drawAjumma(p) };
 const HUD5 = {
   furie: p => clamp(1 - n5(p).a / 1.6, 0, 1), bey: p => clamp(1 - n5(p).a / 0.8, 0, 1), gada: p => clamp(1 - n5(p).a / 1.8, 0, 1),
-  silat: p => n5(p).rel > 0 ? 1 - n5(p).rel / 1.1 : n5(p).mag / 30, hongbao: p => clamp(1 - n5(p).a / 0.55, 0, 1), pob: p => clamp(1 - n5(p).a / 0.7, 0, 1)
+  silat: p => n5(p).rel > 0 ? 1 - n5(p).rel / 1.1 : n5(p).mag / 30, hongbao: p => clamp(1 - n5(p).a / 0.55, 0, 1), pob: p => clamp(1 - n5(p).a / 0.7, 0, 1), ajumma: p => clamp(1 - n5(p).a / 0.6, 0, 1)
 };

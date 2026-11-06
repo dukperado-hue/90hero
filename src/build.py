@@ -459,7 +459,7 @@ rep("      if (k === 'punch') { px(1, -16, 5, 2, SK); px(5, -18, 2, 4, SK); }   
 rep("ELBOW-KNEE J  BONE BREAKER K  FLYING KNEE S+J", "ELBOW-KNEE J  UP+J RISING ELBOW  BREAKER K  KNEE S+J")
 
 # ======================= v27: FIVE NEW HEROES + HERO SELECT 2.0 + LOOK PRESETS =======================
-heroes5_js = open(ROOT + '/modules/heroes5.js').read() + '\n' + open(ROOT + '/modules/pob.js').read()
+heroes5_js = open(ROOT + '/modules/heroes5.js').read() + '\n' + open(ROOT + '/modules/pob.js').read() + '\n' + open(ROOT + '/modules/ajumma.js').read()
 sel2_js = open(ROOT + '/modules/select3.js').read()
 rep("\nfunction slapLaunch(e, dir, power) {", "\n" + heroes5_js + "\nfunction slapLaunch(e, dir, power) {")
 rep("  madong: { name: 'FIST HYUNG',", """  furie: { name: 'AUNTIE FURIE', card: 'A.FURIE', cn: '怒姨', th: 'ป้าฟิวรี่ (แนวล้อ)', tag: 'GUN-FU ASSASSIN', col: '#e04aff', role: 'GUN-FU / PRECISION', diff: 2,
@@ -477,25 +477,29 @@ rep("  madong: { name: 'FIST HYUNG',", """  furie: { name: 'AUNTIE FURIE', card:
   hongbao: { name: 'UNCLE HONG-BAO', card: 'HONG-BAO', cn: '洪包叔', th: 'ลุงอั่งเปา (แนวล้อ)', tag: 'THE NIMBLE FAT UNCLE', col: '#ff5a4a', role: 'ACROBAT / BRAWLER', diff: 2,
     lines: ['ROLE: ACROBAT / BRAWLER   ·   DIFFICULTY ★★☆', 'J  KICK - KICK - SPINNING KICK  ·  AIR J  FLYING DROP-KICK', 'S+J  BELLY BUMP (BIG SHOVE)  ·  K  LOB A STEAMED BUN (STUNS)', 'L  ALL-YOU-CAN-EAT: +1 HEART, THEN ROLL THROUGH EVERYONE'],
     stats: [['SPEED', 5], ['POWER', 3], ['RANGE', 2], ['SAFETY', 3]] },
+  ajumma: { name: 'AUNTIE AJUMMA', card: 'AJUMMA', cn: '大嬸', th: 'อาจุมม่า', tag: 'THE INHERITANCE-RUSH SCOOTER AUNTIE', col: '#ff7ab8', role: 'TANK / THROWER', diff: 1,
+    lines: ['ROLE: TANK / THROWER   ·   DIFFICULTY ★☆☆', 'J  UMBRELLA WHACK x3  ·  S+J  SCOOTER HORN BUMP', 'K  KIMCHI TOSS: SPLAT + STINK CLOUD THAT STUNS', 'L  AJUMMA RUSH: FLOORS THE SCOOTER, A CROWD CHARGES BEHIND'],
+    stats: [['SPEED', 1], ['POWER', 3], ['RANGE', 3], ['SAFETY', 5]] },
   pob: { name: 'AUNTIE POB', card: 'POB', cn: '鬼婆', th: 'ป้าปอบ', tag: 'THE ORGAN-PULLING GHOST AUNTIE', col: '#9ad0a0', role: 'WHIP / GRABBER', diff: 3,
     lines: ['ROLE: WHIP / GRABBER   ·   DIFFICULTY ★★★', 'J  CLAW - CLAW - BIG CLAW  ·  S+J  GRAB AND SLAM', 'K  ORGAN WHIP, ROTATING: GUT PULLS THEM IN · LIVER SLAPS FAR · HEART BEATS, THEN BURSTS', 'L  ORGAN FEAST: A SPINNING RING OF ENTRAILS'],
     stats: [['SPEED', 3], ['POWER', 3], ['RANGE', 5], ['SAFETY', 2]] },
   madong: { name: 'FIST HYUNG',""")
-rep("'ichi', 'ogami', 'juk', 'aamir'];", "'ichi', 'ogami', 'juk', 'aamir', 'furie', 'bey', 'gada', 'silat', 'hongbao', 'pob'];")
-rep("aamir: ['CHACHA PERFECT', 'C.PERFECT'],", "aamir: ['CHACHA PERFECT', 'C.PERFECT'], furie: ['AUNTIE FURIE', 'A.FURIE'], bey: ['UNCLE THUNDER-BEY', 'T-BEY'], gada: ['MACE-RAJA', 'MACE-RAJA'], silat: ['AGENT SILAT', 'SILAT'], hongbao: ['UNCLE HONG-BAO', 'HONG-BAO'], pob: ['AUNTIE POB', 'POB'],")
-rep("  aamir: { stage: 4, rank: 'B' },", "  aamir: { stage: 4, rank: 'B' },\n  furie: { stage: 3, rank: 'B' }, bey: { stage: 1, rank: 'A' }, gada: { stage: 2, rank: 'A' }, silat: { stage: 3, rank: 'A' }, hongbao: { stage: 2, rank: 'B' }, pob: { stage: 3, rank: 'B' },")
-rep("'ogami', 'ram'];", "'ogami', 'ram', 'furie', 'bey', 'gada', 'silat', 'hongbao', 'pob'];")
-rep("const RUNCFG = { aamir: {", "const RUNCFG = { furie: { run: 205, jump: 455 }, bey: { run: 150, jump: 420 }, gada: { run: 176, jump: 440 }, silat: { run: 215, jump: 470 }, hongbao: { run: 222, jump: 480 }, pob: { run: 208, jump: 462 }, aamir: {")
-rep("  else if (p.ch === 'aamir') updAamir(p, dt, ip);", "  else if (p.ch === 'aamir') updAamir(p, dt, ip);\n  else if (p.ch === 'furie') updFurie(p, dt, ip);\n  else if (p.ch === 'bey') updBey(p, dt, ip);\n  else if (p.ch === 'gada') updGada(p, dt, ip);\n  else if (p.ch === 'silat') updSilat(p, dt, ip);\n  else if (p.ch === 'hongbao') updHongbao(p, dt, ip);\n  else if (p.ch === 'pob') updPob(p, dt, ip);")
+rep("'ichi', 'ogami', 'juk', 'aamir'];", "'ichi', 'ogami', 'juk', 'aamir', 'furie', 'bey', 'gada', 'silat', 'hongbao', 'pob', 'ajumma'];")
+rep("aamir: ['CHACHA PERFECT', 'C.PERFECT'],", "aamir: ['CHACHA PERFECT', 'C.PERFECT'], furie: ['AUNTIE FURIE', 'A.FURIE'], bey: ['UNCLE THUNDER-BEY', 'T-BEY'], gada: ['MACE-RAJA', 'MACE-RAJA'], silat: ['AGENT SILAT', 'SILAT'], hongbao: ['UNCLE HONG-BAO', 'HONG-BAO'], pob: ['AUNTIE POB', 'POB'], ajumma: ['AUNTIE AJUMMA', 'AJUMMA'],")
+rep("  aamir: { stage: 4, rank: 'B' },", "  aamir: { stage: 4, rank: 'B' },\n  furie: { stage: 3, rank: 'B' }, bey: { stage: 1, rank: 'A' }, gada: { stage: 2, rank: 'A' }, silat: { stage: 3, rank: 'A' }, hongbao: { stage: 2, rank: 'B' }, pob: { stage: 3, rank: 'B' }, ajumma: { stage: 2, rank: 'B' },")
+rep("'ogami', 'ram'];", "'ogami', 'ram', 'furie', 'bey', 'gada', 'silat', 'hongbao', 'pob', 'ajumma'];")
+rep("const RUNCFG = { aamir: {", "const RUNCFG = { furie: { run: 205, jump: 455 }, bey: { run: 150, jump: 420 }, gada: { run: 176, jump: 440 }, silat: { run: 215, jump: 470 }, hongbao: { run: 222, jump: 480 }, pob: { run: 208, jump: 462 }, ajumma: { run: 128, jump: 400 }, aamir: {")
+rep("  else if (p.ch === 'aamir') updAamir(p, dt, ip);", "  else if (p.ch === 'aamir') updAamir(p, dt, ip);\n  else if (p.ch === 'furie') updFurie(p, dt, ip);\n  else if (p.ch === 'bey') updBey(p, dt, ip);\n  else if (p.ch === 'gada') updGada(p, dt, ip);\n  else if (p.ch === 'silat') updSilat(p, dt, ip);\n  else if (p.ch === 'hongbao') updHongbao(p, dt, ip);\n  else if (p.ch === 'pob') updPob(p, dt, ip);\n  else if (p.ch === 'ajumma') updAjumma(p, dt, ip);")
 rep("function drawPlayerRaw(p) { if (p.ch === 'aamir') return drawAamir(p);", "function drawPlayerRaw(p) { if (DRAW5[p.ch]) return DRAW5[p.ch](p); if (p.ch === 'aamir') return drawAamir(p);")
 rep("  } else if (p.ch === 'aamir') {\n    startTrain(p);", "  } else if (NEW5.has(p.ch)) {\n    ult5(p);\n  } else if (p.ch === 'aamir') {\n    startTrain(p);")
 rep("aamir: ['JO JEETA WOHI SIKANDAR!', 'ONE MORE ROUND, SIR.', 'PERFECT.'],", """aamir: ['JO JEETA WOHI SIKANDAR!', 'ONE MORE ROUND, SIR.', 'PERFECT.'],
   furie: ['NO MERCY.', 'REVENGE, SENSIBLY DRESSED.', 'RELOAD? NO. FINISH.'], bey: ['I AM THE SAVIOR OF THE WORLD.', 'MOUSTACHE FIRST.', 'SLOWLY. THEN ALL AT ONCE.'],
   gada: ['MACE OF JUSTICE!', 'ONE SWING. ONE VILLAGE.', 'THAAP!'], silat: ['FIFTEEN FLOORS. NO LIFT.', 'SILAT. THEN BULLETS.', 'THE CORRIDOR IS MINE.'],
   hongbao: ['LIGHT ON MY FEET. HEAVY ON YOUR FACE.', 'DUMPLINGS FIRST.', 'A GOOD LUNCH IS A WEAPON.'],
+  ajumma: ['AIGOO, YOUNG PEOPLE.', 'EAT MORE KIMCHI.', 'THE SCOOTER WAS MY INHERITANCE.'],
   pob: ['I ONLY BORROW THEM.', 'COME HERE. I WANT YOUR LIVER.', 'DINNER IS SERVED. BY ME.'],""")
-rep("const HERO_POW = { aamir: 0.95, ", "const HERO_POW = { furie: 1.2, bey: 1.0, gada: 1.2, silat: 1.25, hongbao: 1.25, pob: 1.2, aamir: 0.95, ")
-rep("srk: 'introSRK', aamir: 'introAamir',", "srk: 'introSRK', aamir: 'introAamir', furie: 'introNew5', bey: 'introNew5', gada: 'introNew5', silat: 'introNew5', hongbao: 'introNew5', pob: 'introNew5',")
+rep("const HERO_POW = { aamir: 0.95, ", "const HERO_POW = { furie: 1.2, bey: 1.0, gada: 1.2, silat: 1.25, hongbao: 1.25, pob: 1.2, ajumma: 1.1, aamir: 0.95, ")
+rep("srk: 'introSRK', aamir: 'introAamir',", "srk: 'introSRK', aamir: 'introAamir', furie: 'introNew5', bey: 'introNew5', gada: 'introNew5', silat: 'introNew5', hongbao: 'introNew5', pob: 'introNew5', ajumma: 'introNew5',")
 rep("    case 'introSingham':", """    case 'introNew5':
       p.vx = 0;
       if (at(0.2)) { audio.play('whoosh'); dust(p.x + p.w / 2, p.y + p.h, 6, 8); }
@@ -504,19 +508,20 @@ rep("    case 'introSingham':", """    case 'introNew5':
       break;
     case 'introSingham':""")
 rep("const r = p.ch === 'aamir' ? clamp(1 - (p.bikeCd || 0) / 3.2, 0, 1) : ", "const r = HUD5[p.ch] ? HUD5[p.ch](p) : p.ch === 'aamir' ? clamp(1 - (p.bikeCd || 0) / 3.2, 0, 1) : ")
-rep("'ichi', 'ogami', 'aamir'].includes(p.ch)) {", "'ichi', 'ogami', 'aamir', 'furie', 'bey', 'gada', 'silat', 'hongbao', 'pob'].includes(p.ch)) {")
-rep("srk: 'ARMS', aamir: 'BIKE',", "srk: 'ARMS', aamir: 'BIKE', furie: 'SLIDE', bey: 'BLADE', gada: 'MACE', silat: 'MAG', hongbao: 'BUN', pob: 'ORGAN',")
+rep("'ichi', 'ogami', 'aamir'].includes(p.ch)) {", "'ichi', 'ogami', 'aamir', 'furie', 'bey', 'gada', 'silat', 'hongbao', 'pob', 'ajumma'].includes(p.ch)) {")
+rep("srk: 'ARMS', aamir: 'BIKE',", "srk: 'ARMS', aamir: 'BIKE', furie: 'SLIDE', bey: 'BLADE', gada: 'MACE', silat: 'MAG', hongbao: 'BUN', pob: 'ORGAN', ajumma: 'RUSH',")
 rep("TRAIN DARE L',", """TRAIN DARE L',
     furie: 'MOVE A/D  JUMP W/CTRL  PISTOL J  SLIDE K  HEADSHOT S+J  NO MERCY L',
     bey: 'MOVE A/D  JUMP W/CTRL  HEAVY FISTS J  SWORD K  STOMP S+J  DIVE AIR+J  SAVIOR L',
     gada: 'MOVE A/D  JUMP W/CTRL  MACE J  THROW K  GROUND SMASH S+J  WHIRLWIND L',
     silat: 'MOVE A/D  JUMP W/CTRL  SILAT J  SMG HOLD K  SWEEP S+J  THE RAID L',
     hongbao: 'MOVE A/D  JUMP W/CTRL  KICKS J  BUN K  BELLY BUMP S+J  AIR+J DROP-KICK  BUFFET L',
+    ajumma: 'MOVE A/D  JUMP W/CTRL  UMBRELLA J  KIMCHI K  HORN S+J  AJUMMA RUSH L',
     pob: 'MOVE A/D  JUMP W/CTRL  CLAW J  ORGAN WHIP K (GUT/LIVER/HEART)  GRAB S+J  ORGAN FEAST L',""")
 rep("['TRAINS DARED', String(s.ults)]],", """['TRAINS DARED', String(s.ults)]],
     furie: [['SHOTS FIRED', String(s.shots)], ['NO MERCY', String(s.ults)]], bey: [['BLOWS LANDED', String(s.melee)], ['WORLDS SAVED', String(s.ults)]],
     gada: [['SWINGS LANDED', String(s.melee)], ['WHIRLWINDS', String(s.ults)]], silat: [['ROUNDS FIRED', String(s.shots)], ['RAIDS', String(s.ults)]],
-    hongbao: [['HITS LANDED', String(s.melee)], ['BUFFETS', String(s.ults)]], pob: [['ORGANS USED', String(s.melee)], ['FEASTS', String(s.ults)]],""")
+    hongbao: [['HITS LANDED', String(s.melee)], ['BUFFETS', String(s.ults)]], pob: [['ORGANS USED', String(s.melee)], ['FEASTS', String(s.ults)]], ajumma: [['KIMCHI & UMBRELLAS', String(s.melee)], ['RUSHES', String(s.ults)]],""")
 rep("  if (p.ch === 'paimei' && p.stanceT > 0) {", "  if (p.ch === 'bey') { const s5 = n5(p); s5.shrug++; if (s5.shrug % 2 === 1) { p.inv = 0.6; popup(p.x + 5, p.y - 12, 'NOT EVEN A SCRATCH.', '#e8a030'); audio.play('clang'); sparks(p.x + 5, p.y + 8, 5, p.face, '#ffffff'); return; } }\n  if (p.ch === 'paimei' && p.stanceT > 0) {")
 rep("(P.ch === 'siang' || P.ch === 'sura' || P.ch === 'juk')", "(P.ch === 'siang' || P.ch === 'sura' || P.ch === 'juk' || NEW5.has(P.ch))")
 rep("    else if (q.kind === 'shot') { ctx.fillStyle = '#fff2b0'; ctx.fillRect(-3, -1, 6, 2); }", """    else if (q.kind === 'bun') { ctx.rotate(q.t * 10); ctx.fillStyle = '#f8f0e0'; ctx.beginPath(); ctx.arc(0, 0, 4, 0, 6.283); ctx.fill(); ctx.fillStyle = '#d8c8a8'; ctx.fillRect(-1, -4, 2, 2); ctx.fillStyle = '#fff'; ctx.fillRect(-2, -2, 2, 1); }
@@ -533,7 +538,7 @@ rep("  G.mode = 'select'; G.sel = CHAR_KEYS.indexOf(CHOSEN); G.selT = 0;", "  G.
 import json as _json, base64 as _b64, sys as _sys
 _sys.path.insert(0, ROOT + '/tools'); from native_names import NATIVE as _NAT
 _nat_js = _json.dumps({k: [{'deva': 'deva', 'taml': 'taml', 'telu': 'telu'}[v[0]], v[1], v[2]] for k, v in _NAT.items()}, ensure_ascii=False)
-_art = {k: _b64.b64encode(open(ROOT + '/art/poster_%s.jpg' % k, 'rb').read()).decode() for k in ('vijay', 'zhang', 'ram', 'furie', 'silat', 'hongbao', 'bey', 'gada', 'eagle', 'sombat', 'sorapong', 'siang', 'phiphop', 'kham', 'juk', 'singham', 'srk', 'aamir', 'rajini', 'chiru', 'pob', 'shaolin', 'wah', 'ma', 'fei', 'nine', 'sura', 'li', 'ximen', 'dong', 'michelle', 'madong', 'oldboy', 'paimei', 'lady', 'ichi', 'ogami', 'pob') if os.path.exists(ROOT + '/art/poster_%s.jpg' % k)}
+_art = {k: _b64.b64encode(open(ROOT + '/art/poster_%s.jpg' % k, 'rb').read()).decode() for k in ('vijay', 'zhang', 'ram', 'furie', 'silat', 'hongbao', 'bey', 'gada', 'eagle', 'sombat', 'sorapong', 'siang', 'phiphop', 'kham', 'juk', 'singham', 'srk', 'aamir', 'rajini', 'chiru', 'pob', 'shaolin', 'wah', 'ma', 'fei', 'nine', 'sura', 'li', 'ximen', 'dong', 'michelle', 'madong', 'oldboy', 'paimei', 'lady', 'ichi', 'ogami', 'pob', 'ajumma') if os.path.exists(ROOT + '/art/poster_%s.jpg' % k)}
 names28_js = open(ROOT + '/modules/names28.js').read().replace('/*NATIVE_JSON*/', _nat_js).replace('/*ART_JSON*/', _json.dumps(_art))
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + names28_js + "\nfunction spawnDovesUI(x, y) {")
 _css = ''.join('@font-face{font-family:"NOC-%s";font-weight:700;src:url(data:font/woff;base64,%s) format("woff");}' % (sc, _b64.b64encode(open(ROOT + '/assets/noc-%s.woff' % sc, 'rb').read()).decode()) for sc in ('deva', 'taml', 'telu'))
@@ -554,10 +559,12 @@ rep("function swapHero(k, c) {\n  const p = G.player; if (!p || p.dead || G.mode
     "const helpAge = () => G.time - (G.helpT0 || 0);        // seconds since the control hints were last (re)started: run start or a stunt-double swap\nfunction swapHero(k, c) {\n  const p = G.player; if (!p || p.dead || G.mode !== 'play' || G.cine) return;\n  G.actor = k; G.helpT0 = G.time;")
 
 # ---- v29b: Gemini chibi sprites ----
-_spr_png = {k: _b64.b64encode(open(ROOT + '/assets/%s_sprites.png' % k, 'rb').read()).decode() for k in ('aamir', 'bey', 'chiru', 'dong', 'eagle', 'fei', 'furie', 'gada', 'hongbao', 'ichi', 'juk', 'kham', 'lady', 'li', 'ma', 'madong', 'michelle', 'nine', 'ogami', 'oldboy', 'paimei', 'phiphop', 'pob', 'rajini', 'ram', 'shaolin', 'siang', 'silat', 'singham', 'sombat', 'sorapong', 'srk', 'sura', 'vijay', 'wah', 'ximen', 'zhang') if os.path.exists(ROOT + '/assets/%s_sprites.png' % k)}
-_spr_meta = {k: _json.loads(open(ROOT + '/assets/%s_sprites.json' % k).read()) for k in ('aamir', 'bey', 'chiru', 'dong', 'eagle', 'fei', 'furie', 'gada', 'hongbao', 'ichi', 'juk', 'kham', 'lady', 'li', 'ma', 'madong', 'michelle', 'nine', 'ogami', 'oldboy', 'paimei', 'phiphop', 'pob', 'rajini', 'ram', 'shaolin', 'siang', 'silat', 'singham', 'sombat', 'sorapong', 'srk', 'sura', 'vijay', 'wah', 'ximen', 'zhang') if os.path.exists(ROOT + '/assets/%s_sprites.png' % k)}
+_spr_png = {k: _b64.b64encode(open(ROOT + '/assets/%s_sprites.png' % k, 'rb').read()).decode() for k in ('aamir', 'ajumma', 'bey', 'chiru', 'dong', 'eagle', 'fei', 'furie', 'gada', 'hongbao', 'ichi', 'juk', 'kham', 'lady', 'li', 'ma', 'madong', 'michelle', 'nine', 'ogami', 'oldboy', 'paimei', 'phiphop', 'pob', 'rajini', 'ram', 'shaolin', 'siang', 'silat', 'singham', 'sombat', 'sorapong', 'srk', 'sura', 'vijay', 'wah', 'ximen', 'zhang') if os.path.exists(ROOT + '/assets/%s_sprites.png' % k)}
+_spr_meta = {k: _json.loads(open(ROOT + '/assets/%s_sprites.json' % k).read()) for k in ('aamir', 'ajumma', 'bey', 'chiru', 'dong', 'eagle', 'fei', 'furie', 'gada', 'hongbao', 'ichi', 'juk', 'kham', 'lady', 'li', 'ma', 'madong', 'michelle', 'nine', 'ogami', 'oldboy', 'paimei', 'phiphop', 'pob', 'rajini', 'ram', 'shaolin', 'siang', 'silat', 'singham', 'sombat', 'sorapong', 'srk', 'sura', 'vijay', 'wah', 'ximen', 'zhang') if os.path.exists(ROOT + '/assets/%s_sprites.png' % k)}
 sprites29_js = open(ROOT + '/modules/sprites29.js').read().replace('/*SPR_META*/', _json.dumps(_spr_meta)).replace('/*SPR_PNG*/', _json.dumps(_spr_png))
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + sprites29_js + "\nfunction spawnDovesUI(x, y) {")
+tweaks30_js = open(ROOT + '/modules/tweaks30.js').read()
+rep("\nfunction spawnDovesUI(x, y) {", "\n" + tweaks30_js + "\nfunction spawnDovesUI(x, y) {")
 
 open(OUT, 'w').write(s)
 print('v21 written', len(s))
