@@ -216,7 +216,7 @@
   "name": "T2 stage 02 clear recorded (forced C)",
   "ok": true,
   "info": {
-   "time": 91.52,
+   "time": 95.93,
    "rank": "C"
   }
  },
@@ -225,7 +225,7 @@
   "ok": true,
   "info": {
    "mode": "win",
-   "time": 101.05,
+   "time": 102.77,
    "deaths": 1,
    "rank": "A",
    "expected": "A",
@@ -368,7 +368,7 @@
  {
   "name": "T6 best time (original key) kept",
   "ok": true,
-  "info": "91.51666666668557"
+  "info": "93.83333333335408"
  },
  {
   "name": "T5 unlocked UNCLE NINE can be selected and plays",
@@ -413,8 +413,8 @@
   "name": "T8 stage 01 completes with wah",
   "ok": true,
   "info": {
-   "time": 116.26,
-   "deaths": 8
+   "time": 96.99,
+   "deaths": 5
   }
  },
  {
@@ -440,8 +440,8 @@
   "name": "T8 stage 03 completes with fei",
   "ok": true,
   "info": {
-   "time": 144.75,
-   "deaths": 7
+   "time": 142.65,
+   "deaths": 6
   }
  },
  {
@@ -467,7 +467,7 @@
   "name": "T8 stage 03 completes with vijay",
   "ok": true,
   "info": {
-   "time": 133.16,
+   "time": 129.88,
    "deaths": 4
   }
  },

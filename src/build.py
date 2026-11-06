@@ -608,6 +608,8 @@ pol31_js = open(ROOT + '/modules/polish31.js').read()
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + pol31_js + "\nfunction spawnDovesUI(x, y) {")
 pol32_js = open(ROOT + '/modules/polish32.js').read()
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + pol32_js + "\nfunction spawnDovesUI(x, y) {")
+score32_js = open(ROOT + '/modules/score32.js').read()
+rep("\nfunction spawnDovesUI(x, y) {", "\n" + score32_js + "\nfunction spawnDovesUI(x, y) {")
 coop32_js = open(ROOT + '/modules/coop32.js').read()
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + coop32_js + "\nfunction spawnDovesUI(x, y) {")
 rep("const held = a => !NOINPUT", "let held = a => !NOINPUT")
@@ -620,6 +622,9 @@ s = s[:_i] + _seg + s[_j:]
 rep("  if (STAGE === 5) return startCar5();", "  if (STAGE === 5) return startCar5();\n  if (STAGE === 7) return startBoat7();\n")
 rep("    case 'outroCar5': cineCar5Out(c, p, dt); break;\n", "    case 'outroCar5': cineCar5Out(c, p, dt); break;\n    case 'introBoat7': cineBoat7(c, p, dt); break;\n")
 
+rep('Arcade action, 29 uncles and aunts, 3 districts. Keyboard, gamepad or touch.', 'Arcade action, 38 uncles and aunts, 7 districts, 2-player co-op. Keyboard, gamepad or touch.')
+rep('ONE MORE RUN — STAGE 01: THE OLD FACTORY  (first playable prototype)', 'NEIGHBORHOOD OF CHAOS — 38 uncles and aunts, 7 districts, 2-player local co-op')
+rep('   Pure HTML5 canvas + WebAudio. No external assets, no dependencies.\n   All art is drawn procedurally, all sound is synthesised.', '   Single-file HTML5 canvas + WebAudio. Characters and effects are drawn in code, sound is synthesised;\n   a few stage backdrops are embedded images.')
 # TEMP MUTE (user request): no AudioContext is created unless the URL has ?sound=1. Delete this rep to restore sound.
 rep("    try { ac = new (window.AudioContext", "    if (!/[?&]sound=1/.test(location.search)) return;\n    try { ac = new (window.AudioContext")
 open(OUT, 'w').write(s)
