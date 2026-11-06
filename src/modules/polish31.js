@@ -46,7 +46,7 @@ function carveStashes() {
     for (const e of G.enemies) if (e.x / TS > tx0 - 1 && e.x / TS < tx1 + 1) return true;
     for (const b of G.barrels) if (b.x / TS > tx0 - 2 && b.x / TS < tx1 + 2) return true;
     for (const c of G.checkpoints) if (c.x / TS > tx0 - 1 && c.x / TS < tx1 + 1) return true;
-    for (const L of (LOCKS || [])) if ((L.x1 > tx0 - 3 && L.x1 < tx1 + 3) || (L.x0 > tx0 - 3 && L.x0 < tx1 + 3)) return true;
+    for (const L of (LOCKS || [])) if (L.x1 > tx0 - 3 && L.x0 < tx1 + 3) return true;      // never inside an ambush zone (pyramid / arena / crowd stand there)
     if (typeof ARENA !== 'undefined' && ARENA && ARENA.x1 > tx0 - 3 && ARENA.x0 < tx1 + 3 && STAGE !== 3) return true;
     if (G.flag && Math.abs(G.flag.x / TS - tx0) < 10) return true;
     return Math.abs(G.player.x / TS - tx0) < 12;

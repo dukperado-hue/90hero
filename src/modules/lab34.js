@@ -2,7 +2,7 @@
 const GOLD_META = /*GOLD_META*/;
 const GOLD_IM = { g: new Image(), f: new Image() };
 GOLD_IM.g.src = 'data:image/png;base64,/*GOLD_PNG*/'; GOLD_IM.f.src = 'data:image/png;base64,/*GOLD_FLESH*/';
-const GOLD_ARM = 8;                                   // armour points: bullets chip them, then the gold cracks and he takes full damage for a few seconds
+const GOLD_ARM = 6;                                   // armour points: bullets chip them, then the gold cracks and he takes full damage for a few seconds
 const goldOK = () => GOLD_IM.g.complete && GOLD_IM.g.naturalWidth && GOLD_IM.f.complete && GOLD_IM.f.naturalWidth;
 const armMax = e => e.armMax || GOLD_ARM;
 function goldCrack(e, why) {
@@ -74,7 +74,7 @@ function goldCrack(e, why) {
     ctx.filter = 'none'; ctx.imageSmoothingEnabled = sm; ctx.restore();
   }
   const _de = drawEnemy;
-  drawEnemy = function (e) { if (e.type === 'monk' && goldOK() && !e.gibbed) return drawGolden(e); if (e.type === 'crowd' && goldOK() && !e.gibbed) return drawGolden(e, 0.37); return _de.call(this, e); };
+  drawEnemy = function (e) { if (e.type === 'monk' && goldOK() && !e.gibbed) return drawGolden(e, e.form === 'pyr' ? 0.37 : 0.5); if (e.type === 'crowd' && goldOK() && !e.gibbed) return drawGolden(e, 0.37); return _de.call(this, e); };
   const _step = step;
   step = function (dt, ip) {
     _step.apply(this, arguments);
@@ -122,8 +122,13 @@ function goldCrack(e, why) {
   // ELITE golden men (the ones after the hundred): faster, much tougher, and they leap in with a flying kick
   const _um = updMonk;
   updMonk = function (e, dt) {
-    if (e.form === 'elite') { e.form = 'line'; e.elite = true; e.hp = e.maxHp = 34; e.armMax = 12; e.armor = 12; e.jcd = rnd(0.8, 2); }
-    if (!e.elite || e.dead) return _um.apply(this, arguments);
+    if (e.form === 'elite') { e.form = 'line'; e.elite = true; e.hp = e.maxHp = 28; e.armMax = 9; e.armor = 9; e.jcd = rnd(0.8, 2); }
+    if (e.form === 'pyr' || e.dead) return _um.apply(this, arguments);
+    if (!e.elite) {                                    // regular golden men: quicker on their feet and quicker to re-attack (the first version was sluggish)
+      e.cd -= dt * 0.4; const r0 = _um.apply(this, arguments);
+      if (e.state === 'engage' && Math.abs(e.vx) > 5) e.vx = clamp(e.vx * 1.3, -90, 90);
+      return r0;
+    }
     const p = G.player, ecx = e.x + e.w / 2, dx = (p.x + p.w / 2) - ecx, dy = (p.y + p.h) - (e.y + e.h);
     if (e.state === 'jwind') { e.t -= dt; e.vx = approach(e.vx, 0, 900 * dt); e.face = sign(dx) || e.face; if (e.t <= 0) { e.state = 'jkick'; e.t = 0.25; e.vy = -400; e.vx = e.face * 290; e.kicked = false; audio.play('whoosh'); } return; }
     if (e.state === 'jkick') {
@@ -137,6 +142,12 @@ function goldCrack(e, why) {
     const r = _um.apply(this, arguments);
     if (e.state === 'engage' && Math.abs(e.vx) > 5) e.vx = clamp(e.vx * 1.32, -98, 98);
     return r;
+  };
+  // the pyramid: its six men are drawn/boxed at the old height (22) so the top ones stay reachable
+  const _sp = spawnPyramid;
+  spawnPyramid = function () {
+    const n0 = G.enemies.length; _sp.apply(this, arguments);
+    for (let i = n0; i < G.enemies.length; i++) { const e = G.enemies[i]; if (e.form !== 'pyr') continue; e.h = 22; e.y = 18 * TS - 22 * (e.tier + 1) + e.tier * 2; }
   };
   const _ng = newGame; newGame = function () { _ng.apply(this, arguments); G.tethers = []; };
 }

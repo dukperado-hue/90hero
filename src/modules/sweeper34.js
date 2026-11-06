@@ -18,7 +18,7 @@ function spawnSweeper() {
   const x0 = 140 * TS, x1 = 178 * TS;
   G.sweeps = []; G.sweepStarted = true;
   G.cp = { x: 146 * TS, y: 18 * TS - PC.standH };
-  G.boss = { type: 'sweeper', name: '掃地僧  THE SWEEPING MONK', x: x1 - 70, y: 18 * TS - 34, w: 14, h: 34, vx: 0, vy: 0, hp: 300, maxHp: 300, face: -1,
+  G.boss = { type: 'sweeper', name: '掃地僧  THE SWEEPING MONK', x: x1 - 70, y: 18 * TS - 34, w: 14, h: 34, vx: 0, vy: 0, hp: 150, maxHp: 150, face: -1,
     state: 'enter', t: 3.4, flash: 0, onGround: false, dead: false, phase: 1, atk: 0, dying: 0, anim: 0, shown: 0, cd: 0, ceil: false, x0: x0 + 12, x1: x1 - 12, shk: 0 };
   G.banner = { t: 0, title: '掃地僧', sub: 'THE SWEEPING MONK  —  "DON\'T MIND ME. I\'M JUST SWEEPING."' };
   audio.play('roar'); shake(0.4);
@@ -36,7 +36,8 @@ function sweeperPick(b) {
 }
 function updSweeper(b, dt) {
   const p = G.player, pcx = p.x + p.w / 2, bcx = b.x + b.w / 2, dx = pcx - bcx, FL = 18 * TS;
-  b.flash -= dt; b.anim += dt; b.t -= dt; b.cd -= dt;
+  b.flash -= dt; b.anim += dt; b.t -= dt; b.cd -= dt; if (b.dodgeCd > 0) b.dodgeCd -= dt; if (b.pop > 0) b.pop -= dt;
+  if (b.lastState !== b.state) { b.lastState = b.state; b.pop = 0.14; }
   const sp = 1 + (b.phase - 1) * 0.22;
   if (!b.ceil) { b.vy = Math.min(b.vy + 1500 * dt, 900); const wasG = b.onGround; moveBody(b, dt); b.x = clamp(b.x, b.x0, b.x1 - b.w); if (b.fell && b.onGround && !wasG) sweeperLand(b); }
   if (b.dying > 0) {
@@ -66,26 +67,26 @@ function updSweeper(b, dt) {
   }
   switch (b.state) {
     case 'sweep': {                                   // he ignores you and tidies up — you mostly bounce off
-      b.face = sign(dx) || b.face; const want = Math.abs(dx) > 70 ? sign(dx) * 90 * sp : -sign(dx) * 40;
+      b.face = sign(dx) || b.face; const want = Math.abs(dx) > 34 ? sign(dx) * 105 * sp : 0;
       b.vx = approach(b.vx, want, 500 * dt);
       if (Math.random() < dt * 8) part('debris', bcx + b.face * 12, b.y + b.h - 3, b.face * rnd(20, 60), rnd(-50, -10), rnd(0.3, 0.6), 1, '#c8b89a', { g: 300 });
       if (b.t <= 0) { b.vx = 0; sweeperPick(b); }
       break;
     }
     case 'dust_tele': b.vx = approach(b.vx, 0, 900 * dt); b.face = sign(dx) || b.face; if (b.t <= 0) { b.state = 'dust_go'; b.t = 0.3; audio.play('whoosh'); shake(0.12); dustWave(bcx + b.face * 16, b.face, 300 * sp); if (b.phase >= 2) later(0.3, () => { if (b && !b.dead) dustWave(bcx + b.face * 16, b.face, 340 * sp); }); if (b.phase === 3) dustWave(bcx - b.face * 16, -b.face, 300); } break;
-    case 'dust_go': if (b.t <= 0) { b.state = 'rec'; b.t = 0.9 / sp; } break;
+    case 'dust_go': if (b.t <= 0) { b.state = 'rec'; b.t = 1.25 / sp; } break;
     case 'dash_tele': b.vx = approach(b.vx, 0, 900 * dt); b.face = sign(dx) || b.face; if (b.t <= 0) { b.state = 'dash'; b.t = 0.7; b.hitDash = false; b.vx = b.face * 560 * sp; audio.play('whoosh'); } break;
     case 'dash':
       if (Math.random() < dt * 40) dust(bcx - b.face * 10, b.y + b.h, 1, 4);
       if (!b.hitDash) { const q = swpHurtCheck(b, q => Math.abs((q.x + q.w / 2) - (bcx + b.face * 8)) < 20 && Math.abs((q.y + q.h) - (b.y + b.h)) < 34); if (q) { b.hitDash = true; hurtP(q, 2, bcx); shake(0.2); audio.play('slam'); } }
-      if (b.t <= 0 || b.x <= b.x0 + 1 || b.x >= b.x1 - b.w - 1) { if (b.t > 0) { shake(0.3); audio.play('slam'); } b.state = 'rec'; b.t = 1.0 / sp; }
+      if (b.t <= 0 || b.x <= b.x0 + 1 || b.x >= b.x1 - b.w - 1) { if (b.t > 0) { shake(0.3); audio.play('slam'); } b.state = 'rec'; b.t = 1.4 / sp; }
       break;
     case 'spin':
       b.face = sign(dx) || b.face; b.vx = approach(b.vx, b.face * 210 * sp, 1200 * dt); b.hitT -= dt;
       if (b.hitT <= 0) { b.hitT = 0.32; const q = swpHurtCheck(b, q => Math.abs((q.x + q.w / 2) - bcx) < 34 && (q.y + q.h) > b.y + 4); if (q) { hurtP(q, 1, bcx); audio.play('punch'); } audio.play('whoosh'); }
-      if (b.t <= 0) { b.state = 'rec'; b.t = 1.0 / sp; b.vx = 0; }
+      if (b.t <= 0) { b.state = 'rec'; b.t = 1.3 / sp; b.vx = 0; }
       break;
-    case 'rec': b.vx = approach(b.vx, 0, 1200 * dt); if (b.t <= 0) { b.state = 'sweep'; b.t = rnd(0.7, 1.2) / sp; } break;
+    case 'rec': b.vx = approach(b.vx, 0, 1200 * dt); if (b.t <= 0) { b.state = 'sweep'; b.t = rnd(0.5, 0.9) / sp; } break;
     case 'ceil_tele': b.vx = approach(b.vx, 0, 900 * dt); if (b.t <= 0) {
       b.state = 'ceil'; b.t = (b.phase === 3 ? 3.6 : 3.0); b.ceil = true; b.vy = 0; b.vx = 0; b.y = ceilY(); b.rock = 0.3;
       dust(bcx, FL, 6, 8); part('ring', bcx, b.y + b.h, 0, 0, 0.3, 50, '#ffe9b8'); audio.play('whoosh'); G.sweepVanish = 0.2;
@@ -115,7 +116,7 @@ function sweeperLand(b) {
   dustWave(cx, 1, 320); dustWave(cx, -1, 320);
   { const q = swpHurtCheck(b, q => Math.abs((q.x + q.w / 2) - cx) < 26 && q.onGround); if (q) hurtP(q, 2, cx); }
   if (b.phase === 3) { later(0.3, () => { if (!b.dead) { dustWave(cx, 1, 340); dustWave(cx, -1, 340); } }); }
-  b.state = 'rec'; b.t = 1.6; b.recLong = true;
+  b.state = 'rec'; b.t = 1.6; b.recLong = true; b.pop = 0.25;
   popup(cx - 12, b.y - 8, 'SORRY.', '#ffe9b8', false, 'sry' + b.atk);
 }
 // damage rules: untouchable on the roof, shrugs while sweeping, vulnerable when he is worn out
@@ -126,8 +127,8 @@ function sweeperLand(b) {
     if (b && b.type === 'sweeper' && !b.dead && b.dying <= 0) {
       if (b.state === 'enter' || b.state === 'rage') return;
       if (b.ceil || b.state === 'ceil_tele' || b.state === 'drop_tele') { if (Math.random() < 0.15) popup(b.x + 6, b.y + b.h + 6, 'WHOOSH', '#9a9aa4', false, 'ig'); return; }
-      let m = b.state === 'rec' ? 1.25 : b.state === 'drop' ? 0.8 : b.state === 'sweep' ? 0.3 : b.state === 'spin' ? 0.25 : 0.55;
-      if (b.state === 'sweep' && Math.random() < 0.3) { b.vx = sign(b.x + 11 - srcX) * 260; popup(b.x + 6, b.y - 8, '*SWEEP*', '#cfd0d8', false, 'sw'); }
+      let m = b.state === 'rec' ? 1.5 : b.state === 'drop' ? 1 : b.state === 'sweep' ? 0.85 : b.state === 'spin' ? 0.7 : 1;
+      if (b.state === 'sweep' && !(b.dodgeCd > 0) && Math.random() < 0.3) { b.dodgeCd = 1.8; b.vx = sign(b.x + 7 - srcX) * 300; b.pop = 0.15; popup(b.x + 4, b.y - 8, '*SWEEP*', '#cfd0d8', false, 'sw'); }
       d *= m;
     }
     return _db.call(this, d, srcX);
@@ -197,9 +198,16 @@ function drawSweeper(b, corpse) {
   if (b.ceil) { ctx.translate(fx, b.y); ctx.scale(b.face || 1, -1); } else { ctx.translate(fx, fy); ctx.scale(b.face || 1, 1); }
   if (b.dying > 0) ctx.globalAlpha = 0.5 + 0.5 * Math.abs(Math.sin(G.clock * 30));
   const dw = f.w * S, dh = f.h * S, dx = -f.ax * S;
+  if (!corpse && !b.dying) {                                  // juice: lean into the run, bob, squash on every state change, afterimages when fast
+    const vx = (b.vx || 0) * (b.face || 1), run = Math.abs(b.vx || 0) > 60;
+    if (b.ceil) ctx.translate(0, 0); else { ctx.translate(0, run && b.onGround ? -Math.abs(Math.sin(b.anim * 13)) * 1.4 : 0); ctx.rotate(clamp(vx / 2400, -0.22, 0.22)); }
+    const pk = Math.max(0, b.pop || 0) / 0.14, sq = b.state === 'rec' && b.recLong ? 0 : 0.16 * Math.min(1, pk);
+    ctx.scale(1 + sq, 1 - sq);
+    if (Math.abs(b.vx || 0) > 230) for (let g = 1; g <= 3; g++) { ctx.globalAlpha = 0.18 / g; ctx.drawImage(SWP_IM, f.x, f.y, f.w, f.h, dx - Math.sign(vx || 1) * g * 9, -dh, dw, dh); }
+    ctx.globalAlpha = 1;
+  }
   ctx.drawImage(SWP_IM, f.x, f.y, f.w, f.h, dx, -dh, dw, dh);
   if (b.flash > 0) { ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = 0.5; ctx.drawImage(SWP_IM, f.x, f.y, f.w, f.h, dx, -dh, dw, dh); ctx.globalCompositeOperation = 'source-over'; }
-  if (b.state === 'spin' || b.state === 'dash') { ctx.globalAlpha = 0.25; ctx.drawImage(SWP_IM, f.x, f.y, f.w, f.h, dx - 10, -dh, dw, dh); }
   ctx.imageSmoothingEnabled = sm; ctx.restore();
   if (!corpse && b.state === 'rec' && b.t > 0.2) { ctx.fillStyle = '#ffd23f'; const k = (Math.floor(G.clock * 6) % 2); ctx.fillRect(Math.round(b.x + b.w / 2) - 1, Math.round(b.y) - 16 - k, 2, 6); ctx.fillRect(Math.round(b.x + b.w / 2) - 1, Math.round(b.y) - 8 - k, 2, 2); }
 }

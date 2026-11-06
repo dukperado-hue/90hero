@@ -617,7 +617,7 @@ import base64 as _b64
 _gm = open(ROOT + '/art/golden/meta.json').read()
 lab34_js = lab34_js.replace('/*GOLD_META*/', _gm).replace('/*GOLD_PNG*/', _b64.b64encode(open(ROOT + '/art/golden/atlas_gold.png', 'rb').read()).decode()).replace('/*GOLD_FLESH*/', _b64.b64encode(open(ROOT + '/art/golden/atlas_flesh.png', 'rb').read()).decode())
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + lab34_js + "\nfunction spawnDovesUI(x, y) {")
-rep("monk: { w: 10, h: 21, hp: 8 }", "monk: { w: 12, h: 30, hp: 22 }, dummy: { w: 14, h: 28, hp: 9 }")
+rep("monk: { w: 10, h: 21, hp: 8 }", "monk: { w: 12, h: 30, hp: 16 }, dummy: { w: 14, h: 28, hp: 9 }")
 rep("GOLD SKIN: BULLETS GLANCE OFF  ·  FISTS AND FIRE HIT FULL", "GOLD ARMOUR: BULLETS CRACK IT  ·  CRACKED GOLD TAKES FULL DAMAGE")
 coop32_js = open(ROOT + '/modules/coop32.js').read()
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + coop32_js + "\nfunction spawnDovesUI(x, y) {")

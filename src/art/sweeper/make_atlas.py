@@ -20,7 +20,10 @@ for i,n in enumerate(names):
     mask=(lab==keep)&al
     arr[...,3]=np.where(mask,255,0)
     ys,xs=np.where(mask);fr=Image.fromarray(arr).crop((xs.min(),ys.min(),xs.max()+1,ys.max()+1))
-    a2=np.array(fr)[...,3];h=a2.shape[0];yy,xx=np.where(a2[int(h*0.4):]>0)
+    arr2=np.array(fr).astype(int);al2=arr2[...,3]>0
+    mx=arr2[...,:3].max(axis=2);mn=arr2[...,:3].min(axis=2);sat=(mx-mn)/np.maximum(mx,1)
+    body=al2&(sat<0.22)&(mx>60)                          # grey robe / white hair+beard only: the broom is saturated, so it doesn't drag the anchor around
+    yy,xx=np.where(body) if body.sum()>30 else np.where(al2)
     sm=fr.resize((max(1,round(fr.width*K)),max(1,round(fr.height*K))),Image.LANCZOS)
     frames.append((n,sm,float(xx.mean())*K));print(n,fr.size)
 PAD=2;WW=sum(f[1].width+PAD for f in frames)+PAD;HH=max(f[1].height for f in frames)+2*PAD
