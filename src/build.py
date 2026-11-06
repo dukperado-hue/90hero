@@ -606,6 +606,11 @@ om31_js = open(ROOT + '/modules/onemore31.js').read()
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + om31_js + "\nfunction spawnDovesUI(x, y) {")
 pol31_js = open(ROOT + '/modules/polish31.js').read()
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + pol31_js + "\nfunction spawnDovesUI(x, y) {")
+pol32_js = open(ROOT + '/modules/polish32.js').read()
+rep("\nfunction spawnDovesUI(x, y) {", "\n" + pol32_js + "\nfunction spawnDovesUI(x, y) {")
+coop32_js = open(ROOT + '/modules/coop32.js').read()
+rep("\nfunction spawnDovesUI(x, y) {", "\n" + coop32_js + "\nfunction spawnDovesUI(x, y) {")
+rep("const held = a => !NOINPUT", "let held = a => !NOINPUT")
 
 # Uncle Wah on his bike: match the brown-jacket / striped-tee look of his chibi sprite and poster (was blue denim)
 _i = s.index('function drawBikeHD(p) {'); _j = s.index('\nfunction ', _i + 10); _seg = s[_i:_j]
