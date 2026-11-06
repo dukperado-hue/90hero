@@ -605,6 +605,11 @@ rep("\nfunction spawnDovesUI(x, y) {", "\n" + tweaks30_js + "\nfunction spawnDov
 om31_js = open(ROOT + '/modules/onemore31.js').read()
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + om31_js + "\nfunction spawnDovesUI(x, y) {")
 
+# Uncle Wah on his bike: match the brown-jacket / striped-tee look of his chibi sprite and poster (was blue denim)
+_i = s.index('function drawBikeHD(p) {'); _j = s.index('\nfunction ', _i + 10); _seg = s[_i:_j]
+for _a, _c in (("'#3a5a8a'", "'#7a4e30'"), ("'#2a4a76'", "'#5a3820'"), ("'#6a8aba'", "'#9a6a44'"), ("'#5a7aaa'", "'#a07850'")): _seg = _seg.replace(_a, _c)
+_seg = _seg.replace("hp(-1, -20.5, 2, 5.5, '#e8e8e8');", "hp(-1, -20.5, 2, 5.5, '#e8e8e8'); hp(-1, -19.5, 2, 1, '#c83a2a'); hp(-1, -17.5, 2, 1, '#c83a2a');")
+s = s[:_i] + _seg + s[_j:]
 rep("  if (STAGE === 5) return startCar5();", "  if (STAGE === 5) return startCar5();\n  if (STAGE === 7) return startBoat7();\n")
 rep("    case 'outroCar5': cineCar5Out(c, p, dt); break;\n", "    case 'outroCar5': cineCar5Out(c, p, dt); break;\n    case 'introBoat7': cineBoat7(c, p, dt); break;\n")
 
