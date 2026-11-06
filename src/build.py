@@ -575,6 +575,8 @@ sprites29_js = open(ROOT + '/modules/sprites29.js').read().replace('/*SPR_META*/
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + sprites29_js + "\nfunction spawnDovesUI(x, y) {")
 tweaks30_js = open(ROOT + '/modules/tweaks30.js').read()
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + tweaks30_js + "\nfunction spawnDovesUI(x, y) {")
+om31_js = open(ROOT + '/modules/onemore31.js').read()
+rep("\nfunction spawnDovesUI(x, y) {", "\n" + om31_js + "\nfunction spawnDovesUI(x, y) {")
 
 open(OUT, 'w').write(s)
 print('v21 written', len(s))
