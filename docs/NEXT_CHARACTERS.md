@@ -13,3 +13,11 @@ Rules for both: parody names only, invented faces (not real people), recognisabl
 - Look: short bob haircut, grey-green button shirt, hands raised in a claw-like grab. Costume and pose only; the face is invented.
 - Signature move: **pulls her own entrails out** and uses them as a whip / grab rope, drawn cartoon-style (a long pink-red ribbon / sausage-link rope, no gore detail), so she can yank enemies toward her (the "yip" = grab).
 - Name to be confirmed with the owner.
+
+## Ajumma (Korean auntie) — requested 2026-11-06
+- Name idea: AUNTIE AJUMMA. Costume only (huge sun visor, permed curly hair, quilted vest, patterned scarf, fanny pack); invented face, no real person.
+- Rides a slow "inheritance-rush" mobility scooter: slow but tanky.
+- K: throws kimchi (lobbed jar/clump, splat + stink cloud).
+- J: umbrella whack combo (long-handled umbrella, ~3 hits).
+- Ult idea: ajumma crowd rush / tour-bus charge.
+- Plan: Gemini poster + chibi sprite sheet (idle/walk/jump/attack/hurt/win), same pipeline as Pob.
