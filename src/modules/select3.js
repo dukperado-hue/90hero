@@ -112,6 +112,11 @@ function selBg(o, x, y, w, h, t) {
 }
 // ---------- the 4-slot move strip
 const SLOT_DEFAULT = ['ATTACK', 'SPECIAL', 'SKILL', 'ULTIMATE'];
+const SLOT_OVR = {                                   // hand-written labels (<= 10 chars) where the move text is too long to parse; null = parse
+  furie: ['PISTOL', 'SLIDE', 'HEADSHOT', 'NO MERCY'], bey: ['HEAVY', 'CURVED', 'STOMP', 'SAVIOR'],
+  gada: ['MACE ARCS', 'THROW', 'GROUND', 'WHIRLWIND'], silat: ['ELBOW-KNEE', 'HOLD SMG', 'SWEEP', 'THE RAID'],
+  hongbao: ['KICK COMBO', 'BUN TOSS', 'BELLY BUMP', 'ROLL']
+};
 function selSlots(C) {                               // 4 x {key,label,real}: from the hero's own move text, else a generic label
   const want = ['J', 'K', 'S+J', 'L'], out = [null, null, null, null];
   (C.lines || []).slice(1).forEach(l => l.split('·').forEach(seg => {
@@ -121,7 +126,8 @@ function selSlots(C) {                               // 4 x {key,label,real}: fr
     let lab = ''; for (const w of words) { if ((lab + ' ' + w).trim().length > 10) break; lab = (lab + ' ' + w).trim(); }
     lab = lab.replace(/\s+(&|AND|THE|A|OF|TO|IN|ON|AT)$/i, '').replace(/[:,&]$/, ''); out[i] = { key: k, label: lab || words[0].slice(0, 10), real: true };
   }));
-  return out.map((o, i) => o || { key: want[i], label: SLOT_DEFAULT[i], real: false });
+  const ov = SLOT_OVR[CHAR_KEYS.find(z => CHARS[z] === C)] || [];
+  return out.map((o, i) => ov[i] ? { key: want[i], label: ov[i], real: true } : o || { key: want[i], label: SLOT_DEFAULT[i], real: false });
 }
 function slotFx(i, x, y, col, t) {
   const ph = (t * 1.6 + i * 0.25) % 1; ctx.save();

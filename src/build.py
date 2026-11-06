@@ -528,7 +528,7 @@ rep("  G.mode = 'select'; G.sel = CHAR_KEYS.indexOf(CHOSEN); G.selT = 0;", "  G.
 import json as _json, base64 as _b64, sys as _sys
 _sys.path.insert(0, ROOT + '/tools'); from native_names import NATIVE as _NAT
 _nat_js = _json.dumps({k: [{'deva': 'deva', 'taml': 'taml', 'telu': 'telu'}[v[0]], v[1], v[2]] for k, v in _NAT.items()}, ensure_ascii=False)
-_art = {k: _b64.b64encode(open(ROOT + '/art/poster_%s.jpg' % k, 'rb').read()).decode() for k in ('vijay', 'zhang', 'ram')}
+_art = {k: _b64.b64encode(open(ROOT + '/art/poster_%s.jpg' % k, 'rb').read()).decode() for k in ('vijay', 'zhang', 'ram', 'furie', 'silat', 'hongbao', 'bey', 'gada')}
 names28_js = open(ROOT + '/modules/names28.js').read().replace('/*NATIVE_JSON*/', _nat_js).replace('/*ART_JSON*/', _json.dumps(_art))
 rep("\nfunction spawnDovesUI(x, y) {", "\n" + names28_js + "\nfunction spawnDovesUI(x, y) {")
 _css = ''.join('@font-face{font-family:"NOC-%s";font-weight:700;src:url(data:font/woff;base64,%s) format("woff");}' % (sc, _b64.b64encode(open(ROOT + '/assets/noc-%s.woff' % sc, 'rb').read()).decode()) for sc in ('deva', 'taml', 'telu'))
