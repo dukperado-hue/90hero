@@ -629,5 +629,13 @@ rep('ONE MORE RUN — STAGE 01: THE OLD FACTORY  (first playable prototype)', 'N
 rep('   Pure HTML5 canvas + WebAudio. No external assets, no dependencies.\n   All art is drawn procedurally, all sound is synthesised.', '   Single-file HTML5 canvas + WebAudio. Characters and effects are drawn in code, sound is synthesised;\n   a few stage backdrops are embedded images.')
 # TEMP MUTE (user request): no AudioContext is created unless the URL has ?sound=1. Delete this rep to restore sound.
 rep("    try { ac = new (window.AudioContext", "    if (!/[?&]sound=1/.test(location.search)) return;\n    try { ac = new (window.AudioContext")
+# ===== v34 — enemy death animation (stagger -> fall -> thud -> lie down), by cause x enemy type =====
+death34_js = open(ROOT + '/modules/death34.js', encoding='utf-8').read()
+rep("e.rot += e.vr * dt;", "deathRot(e, dt, vy0);")   # must run before the module is inlined (the module contains the same text)
+rep("function killEnemy(e, dir, explosive, chain) {", death34_js + "function killEnemy(e, dir, explosive, chain) {")
+rep("dismember(e, dir, killCause(e, explosive));", "const _kc = killCause(e, explosive); dismember(e, dir, _kc); deathStart(e, dir, _kc);")
+rep("const vx0 = e.vx; moveBody(e, dt);\n    if (e.hitWall) e.vx = -vx0 * 0.3;", "const vx0 = e.vx, vy0 = e.vy; moveBody(e, dt);\n    if (e.hitWall) e.vx = -vx0 * 0.3;")
+rep("if (e.dead) { ctx.globalAlpha = clamp(1 - (e.deadT - 4.5) / 1.5, 0, 1); ctx.translate(0, -e.h / 2); ctx.rotate(e.rot); ctx.translate(0, e.h / 2); }",
+    "if (e.dead) { ctx.globalAlpha = clamp(1 - (e.deadT - 4.5) / 1.5, 0, 1); ctx.translate(0, -e.h / 2); ctx.rotate(e.rot); ctx.translate(0, e.h / 2);\n    if (e.dy) { if (e.deadT < e.dy.stg) ctx.scale(1, 1 - e.dy.sq * (e.deadT / e.dy.stg)); else if (e.landT != null) { const q = Math.max(0, 1 - (e.deadT - e.landT) / 0.45); ctx.translate(Math.sin(e.deadT * 70) * 0.9 * q, 0); } } }")
 open(OUT, 'w').write(s)
 print('v21 written', len(s))
