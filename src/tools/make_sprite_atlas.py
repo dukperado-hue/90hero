@@ -4,17 +4,19 @@ Order of cells (row-major, 2 columns): idle walkA walkB jump kickW kick hurt win
 import sys, json, numpy as np
 from PIL import Image, ImageFilter
 from scipy import ndimage
-sheet, key = sys.argv[1], sys.argv[2]; TH = int(sys.argv[3]) if len(sys.argv) > 3 else 38
+sheet, key = sys.argv[1], sys.argv[2]; TH = int(sys.argv[3]) if len(sys.argv) > 3 else 38; CROP = float(sys.argv[4]) if len(sys.argv) > 4 else 1.0
 a = np.array(Image.open(sheet).convert('RGB')).astype(int)
 g = (a[:, :, 1] > 140) & (a[:, :, 1] - a[:, :, 0] > 45) & (a[:, :, 1] - a[:, :, 2] > 45)
 al = np.array(Image.fromarray((~g * 255).astype(np.uint8)).filter(ImageFilter.MinFilter(5)))
 r, gc, b = a[:, :, 0], a[:, :, 1], a[:, :, 2]
 rgba = np.dstack([np.dstack([r, np.minimum(gc, np.maximum(r, b) + 10), b]).astype(np.uint8), al])
-H, W = a.shape[:2]; cw, ch = W // 2, H // 4
+H, W = a.shape[:2]; cw, ch = W // 2, H // 4; BOXES = json.load(open(sys.argv[5])) if len(sys.argv) > 5 else None   # optional {name:[x0,y0,x1,y1]} when Gemini ignores the grid
 names = ['idle', 'walkA', 'walkB', 'jump', 'kickW', 'kick', 'hurt', 'win']; cells = {}
 for i, n in enumerate(names):
-    rr, c = divmod(i, 2); cell = rgba[rr * ch + 6:(rr + 1) * ch - 6, c * cw + 6:(c + 1) * cw - 6].copy()
-    if n == 'kick': cell[:, int(cw * .555):, 3] = 0           # drop the projectile (the game draws its own)
+    rr, c = divmod(i, 2)
+    if BOXES: x0, y0, x1, y1 = BOXES[n]; cell = rgba[y0:y1, x0:x1].copy()
+    else: cell = rgba[rr * ch + 6:(rr + 1) * ch - 6, c * cw + 6:(c + 1) * cw - 6].copy()
+    if n == 'kick' and CROP < 1: cell[:, int(cw * CROP):, 3] = 0           # drop the projectile (the game draws its own)
     m = cell[:, :, 3] > 0; rows = np.where(m.sum(1) > 3)[0]; cols = np.where(m.sum(0) > 3)[0]
     cells[n] = Image.fromarray(cell[rows[0]:rows[-1] + 1, cols[0]:cols[-1] + 1])
 S = TH / cells['idle'].size[1]; frames = {}; atlas = []; x = 0

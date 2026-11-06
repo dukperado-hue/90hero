@@ -25,7 +25,7 @@ function drawSpriteHero(p) {
   if (p.flash > 0) { ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = 0.6; ctx.drawImage(S.im, fr.x, fr.y, fr.w, fr.h, -fr.ax, -fr.h, fr.w, fr.h); }
   ctx.imageSmoothingEnabled = sm; ctx.restore(); return true;
 }
-DRAW5.shaolin = drawSpriteHero;
+for (const k in SPR) DRAW5[k] = drawSpriteHero;
 
 // Scale: the chibi hero is drawn ~1.5x the old pixel guy, so enemies/bosses grow with him and the ball (his heart) is a proper football.
 const CHIBI = { enemy: 1.4, boss: 1.3, ball: 2.0 };
