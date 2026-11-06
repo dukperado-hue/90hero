@@ -399,6 +399,33 @@ rep("rx += 27; });", "rx += 23; });")
 rep("STAGE = STAGE % 5 + 1;", "STAGE = STAGE % 6 + 1;")
 rep("STAGE < 5) STAGE++", "STAGE < 6) STAGE++")
 
+# ======================= v32: STAGE 07 — BANGKOK, UNCLE CAN'T GET HOME =======================
+s7 = open(ROOT + '/modules/stage7.js').read()
+arts7 = ''
+for k, f in [('S7_MARKET_SRC', 's7_market.jpg'), ('S7_ARUN_SRC', 's7_arun.jpg'), ('S7_TU_SRC', 's7_tu.jpg'), ('S7_RATCH_SRC', 's7_ratch.jpg')]:
+    fp = ROOT + '/art/' + f
+    if os.path.exists(fp): arts7 += "const " + k + " = '" + b64jpg(fp) + "';\n"
+rep("const S3_BG_SRC = ", arts7 + s7 + "\nconst S3_BG_SRC = ")
+rep("  else if (e.type === 'jiangshi') updJiangshi(e, dt);\n", "  else if (e.type === 'jiangshi') updJiangshi(e, dt);\n")
+rep("  if (b.type === 'general') return updGeneral(b, dt);", "  if (b.type === 'general') return updGeneral(b, dt);\n  if (b.type === 'baron') return updBaron(b, dt);")
+rep("  if (b.type === 'general') return drawGeneral(b);", "  if (b.type === 'general') return drawGeneral(b);\n  if (b.type === 'baron') return drawBaron(b);")
+rep("    if (STAGE === 6 && skin6(LCTX, t, tx, ty, x, y, i)) return;\n", "    if (STAGE === 6 && skin6(LCTX, t, tx, ty, x, y, i)) return;\n    if (STAGE === 7 && skin7(LCTX, t, tx, ty, x, y, i)) return;\n")
+rep("  if (STAGE === 6) drawStage6Mid(cam);\n", "  if (STAGE === 6) drawStage6Mid(cam);\n  if (STAGE === 7) drawStage7Mid(cam);\n")
+rep("if (STAGE === 6) drawStage6Front();", "if (STAGE === 6) drawStage6Front(); if (STAGE === 7) drawStage7Front();")
+rep("updStage6(dt);", "updStage6(dt); updStage7(dt);")
+rep("  if (STAGE === 6) return drawStage6BG(cam);\n", "  if (STAGE === 6) return drawStage6BG(cam);\n  if (STAGE === 7) return drawStage7BG(cam);\n")
+rep("  if (STAGE === 6) { return buildStage6(E, set, fill, en, br, cp, hint); }", "  if (STAGE === 6) { return buildStage6(E, set, fill, en, br, cp, hint); }\n  if (STAGE === 7) { return buildStage7(E, set, fill, en, br, cp, hint); }")
+rep("  else if (STAGE === 6) { LW = S6.W;", "  else if (STAGE === 7) { LW = S7.W; LH = 22; Object.assign(ARENA, { x0: 188, x1: 218, trigger: 192, sum: null, row: 18, door: 216 }); }\n  else if (STAGE === 6) { LW = S6.W;")
+rep("6: 'HAUNTED HILLS: HOLD YOUR BREATH' };", "6: 'HAUNTED HILLS: HOLD YOUR BREATH', 7: 'BANGKOK: UNCLE CAN\\'T GET HOME' };")
+rep("HOLD YOUR BREATH.', col: '#7dffd0' }", "HOLD YOUR BREATH.', col: '#7dffd0' },\n  { s: 7, x: 292, y: 206, city: 'BANGKOK', sub: 'กรุงเทพฯ · ลุงกลับบ้านไม่ได้', blurb: 'A FLOATING MARKET, WAT ARUN, A SCHOOL ELEPHANT, A TRUCK BARON.', col: '#ffb040' }")
+rep("  6: { S: [240, 0], A: [330, 1], B: [450, 4] },", "  7: { S: [260, 0], A: [350, 1], B: [480, 4] },  // BANGKOK (market, pier, quad, avenue + the Truck Baron)\n  6: { S: [240, 0], A: [330, 1], B: [450, 4] },")
+rep("5: {}, 6: {} }, clears: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 }", "5: {}, 6: {}, 7: {} }, clears: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 }")
+rep("[1, 2, 3, 4, 5, 6]", "[1, 2, 3, 4, 5, 6, 7]", 6)
+rep("8 + i * 18, 10, s === STAGE", "8 + i * 15, 10, s === STAGE")
+rep("rx += 23; });", "rx += 20; });")
+rep("STAGE = STAGE % 6 + 1;", "STAGE = STAGE % 7 + 1;")
+rep("STAGE < 6) STAGE++", "STAGE < 7) STAGE++")
+
 # ======================= v26: THE NEW LOOK — big heads, long limbs, 2.5D volume (V toggles) =======================
 look = open(ROOT + '/modules/look.js').read()
 rep("function px(x, y, w, h, c) { ctx.fillStyle = OUTL || (FLASH ? '#ffffff' : c); ctx.fillRect(x, y, w, h); }",
