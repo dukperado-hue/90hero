@@ -47,7 +47,7 @@ function updPob(p, dt, ip) {
     const k = (s.c = ((s.c || 0) + 1)) % 3, cx = p.x + p.w / 2, cy = p.y + 10; audio.play('whoosh'); p.swingT = 0.2; p.swingK = 'punch'; s.a = 0.7;
     if (k === 1) {                                       // GUT: long lash, drags the foe to her feet
       const f = pobFoe(p, 120); s.whip = { t: 0.28, kind: 'gut', len: f ? Math.abs(f.x + f.w / 2 - cx) : 90 };
-      if (f) { damageEnemy(f, 2.4, p.x, false); if (!f.dead) { f.vx = -p.face * 400; f.stun = 0.7; } popup(p.x + 4, p.y - 14, 'PULL!', '#ff9aa8'); addUlt(p, 6); audio.play('punch'); G.stats.melee++; }
+      if (f) { damageEnemy(f, 2.4, p.x, false); if (!f.dead) { if (pobPull(p, f)) { f.stun = 1.0; } else { f.vx = -p.face * 400; f.stun = 0.7; } } popup(p.x + 4, p.y - 14, 'PULL!', '#ff9aa8'); addUlt(p, 6); audio.play('punch'); G.stats.melee++; }
     } else if (k === 2) {                                // LIVER: a wet slap with long reach
       s.whip = { t: 0.3, kind: 'liver', len: 70 };
       let hit = 0; for (const e of G.enemies) if (!e.dead && !e.para) { const dx = (e.x + e.w / 2 - cx) * p.face; if (dx > -2 && dx < 76 && Math.abs(e.y + e.h - (p.y + p.h)) < 30) { damageEnemy(e, 3.0, p.x, true); if (!e.dead) { e.vx = p.face * 300; e.vy = -140; e.stun = 0.5; } hit++; } }
