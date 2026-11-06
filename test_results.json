@@ -216,7 +216,7 @@
   "name": "T2 stage 02 clear recorded (forced C)",
   "ok": true,
   "info": {
-   "time": 93.3,
+   "time": 91.52,
    "rank": "C"
   }
  },
@@ -225,7 +225,7 @@
   "ok": true,
   "info": {
    "mode": "win",
-   "time": 96.53,
+   "time": 101.05,
    "deaths": 1,
    "rank": "A",
    "expected": "A",
@@ -368,7 +368,7 @@
  {
   "name": "T6 best time (original key) kept",
   "ok": true,
-  "info": "91.07500000001855"
+  "info": "91.51666666668557"
  },
  {
   "name": "T5 unlocked UNCLE NINE can be selected and plays",
@@ -384,7 +384,7 @@
     "mode": "play",
     "x": 788,
     "deaths": 0,
-    "time": 4.950000000000036
+    "time": 4.908333333333367
    }
   }
  },
@@ -413,8 +413,8 @@
   "name": "T8 stage 01 completes with wah",
   "ok": true,
   "info": {
-   "time": 115.53,
-   "deaths": 7
+   "time": 116.26,
+   "deaths": 8
   }
  },
  {
@@ -440,8 +440,8 @@
   "name": "T8 stage 03 completes with fei",
   "ok": true,
   "info": {
-   "time": 143.92,
-   "deaths": 6
+   "time": 144.75,
+   "deaths": 7
   }
  },
  {
@@ -467,16 +467,16 @@
   "name": "T8 stage 03 completes with vijay",
   "ok": true,
   "info": {
-   "time": 140.73,
-   "deaths": 6
+   "time": 133.16,
+   "deaths": 4
   }
  },
  {
   "name": "T2 stage 03 rank recorded (vijay)",
   "ok": true,
   "info": {
-   "rank": "C",
-   "saved": "C",
+   "rank": "B",
+   "saved": "B",
    "unlocked": [
     "shaolin",
     "eagle",
@@ -486,7 +486,10 @@
     "wah",
     "fei",
     "vijay",
-    "ximen"
+    "ximen",
+    "siang",
+    "furie",
+    "pob"
    ]
   }
  },

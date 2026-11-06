@@ -620,5 +620,7 @@ s = s[:_i] + _seg + s[_j:]
 rep("  if (STAGE === 5) return startCar5();", "  if (STAGE === 5) return startCar5();\n  if (STAGE === 7) return startBoat7();\n")
 rep("    case 'outroCar5': cineCar5Out(c, p, dt); break;\n", "    case 'outroCar5': cineCar5Out(c, p, dt); break;\n    case 'introBoat7': cineBoat7(c, p, dt); break;\n")
 
+# TEMP MUTE (user request): no AudioContext is created unless the URL has ?sound=1. Delete this rep to restore sound.
+rep("    try { ac = new (window.AudioContext", "    if (!/[?&]sound=1/.test(location.search)) return;\n    try { ac = new (window.AudioContext")
 open(OUT, 'w').write(s)
 print('v21 written', len(s))
