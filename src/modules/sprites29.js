@@ -26,3 +26,13 @@ function drawSpriteHero(p) {
   ctx.imageSmoothingEnabled = sm; ctx.restore(); return true;
 }
 DRAW5.shaolin = drawSpriteHero;
+
+// Scale: the chibi hero is drawn ~1.5x the old pixel guy, so enemies/bosses grow with him and the ball (his heart) is a proper football.
+const CHIBI = { enemy: 1.4, boss: 1.3, ball: 2.0 };
+function scaledAbout(cx, cy, k, fn) { ctx.save(); ctx.translate(cx, cy); ctx.scale(k, k); ctx.translate(-cx, -cy); try { fn(); } finally { ctx.restore(); } }
+{
+  const _el = drawEnemyLook, _boss = drawBoss, _ball = drawShaolinBall;
+  drawEnemyLook = function (e) { if (G.mode === 'title' || G.mode === 'select') return _el(e); scaledAbout(e.x + e.w / 2, e.y + e.h, CHIBI.enemy, () => _el(e)); };
+  drawBoss = function (b, corpse) { scaledAbout(b.x + b.w / 2, b.y + b.h, CHIBI.boss, () => _boss(b, corpse)); };
+  drawShaolinBall = function (p) { const B = p.ball; if (!B) return; scaledAbout(Math.round(B.x), Math.round(B.y), CHIBI.ball, () => _ball(p)); };
+}
