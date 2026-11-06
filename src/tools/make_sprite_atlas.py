@@ -26,8 +26,8 @@ for n in names:
     pm = Image.fromarray(np.dstack([arr[:, :, :3] * pa, arr[:, :, 3:4]]).astype(np.uint8), 'RGBA')
     s = np.array(pm.resize((w, h), Image.BOX)).astype(float); A = s[:, :, 3:4] / 255
     rgb = np.where(A > 0, s[:, :, :3] / np.maximum(A, 1e-3), 0).clip(0, 255); alp = np.where(A[:, :, 0] > 0.5, 255, 0)
-    lab, k = ndimage.label(alp > 0)
-    if k > 1: keep = np.argmax(ndimage.sum(alp > 0, lab, range(1, k + 1))) + 1; alp = np.where(lab == keep, 255, 0)
+    lab, k = ndimage.label(ndimage.binary_dilation(alp > 0, iterations=3))   # group parts that sit close together (mace, scarf...)
+    if k > 1: keep = np.argmax(ndimage.sum(alp > 0, lab, range(1, k + 1))) + 1; alp = np.where((lab == keep) & (alp > 0), 255, 0)
     m = alp > 0; rows = np.where(m.any(1))[0]; lo = rows[-1]; sel = m[max(0, lo - max(2, int(h * .12))):lo + 1]
     frames[n] = {'x': x, 'w': w, 'h': h, 'ax': int(round(np.where(sel.any(0))[0].mean()))}
     atlas.append((x, Image.fromarray(np.dstack([rgb, alp]).astype(np.uint8)))); x += w + 1
