@@ -214,7 +214,7 @@
   "name": "T2 stage 02 clear recorded (forced C)",
   "ok": true,
   "info": {
-   "time": 82.31,
+   "time": 84.47,
    "rank": "C"
   }
  },
@@ -223,7 +223,7 @@
   "ok": true,
   "info": {
    "mode": "win",
-   "time": 91.56,
+   "time": 79.65,
    "deaths": 2,
    "rank": "B",
    "expected": "B",
@@ -322,7 +322,7 @@
  {
   "name": "T6 best time (original key) kept",
   "ok": true,
-  "info": "81.50000000001093"
+  "info": "79.65000000000946"
  },
  {
   "name": "T5 unlocked UNCLE NINE can be selected and plays",
@@ -338,7 +338,7 @@
     "mode": "play",
     "x": 788,
     "deaths": 0,
-    "time": 4.900000000000033
+    "time": 4.908333333333367
    }
   }
  },
@@ -366,12 +366,40 @@
   "name": "T8 stage 01 completes with wah",
   "ok": true,
   "info": {
-   "time": 106.86,
-   "deaths": 6
+   "time": 70.39,
+   "deaths": 2
   }
  },
  {
   "name": "T2 stage 01 rank recorded (wah)",
+  "ok": true,
+  "info": {
+   "rank": "B",
+   "saved": "B",
+   "unlocked": [
+    "shaolin",
+    "eagle",
+    "sombat",
+    "sorapong",
+    "juk",
+    "wah",
+    "fei",
+    "vijay",
+    "ximen",
+    "ma"
+   ]
+  }
+ },
+ {
+  "name": "T8 stage 03 completes with fei",
+  "ok": true,
+  "info": {
+   "time": 145.08,
+   "deaths": 6
+  }
+ },
+ {
+  "name": "T2 stage 03 rank recorded (fei)",
   "ok": true,
   "info": {
    "rank": "C",
@@ -390,15 +418,15 @@
   }
  },
  {
-  "name": "T8 stage 03 completes with fei",
+  "name": "T8 stage 03 completes with vijay",
   "ok": true,
   "info": {
-   "time": 136.85,
+   "time": 133.41,
    "deaths": 4
   }
  },
  {
-  "name": "T2 stage 03 rank recorded (fei)",
+  "name": "T2 stage 03 rank recorded (vijay)",
   "ok": true,
   "info": {
    "rank": "B",
@@ -415,33 +443,6 @@
     "ximen",
     "siang",
     "furie"
-   ]
-  }
- },
- {
-  "name": "T8 stage 03 completes with vijay",
-  "ok": true,
-  "info": {
-   "time": 147.2,
-   "deaths": 5
-  }
- },
- {
-  "name": "T2 stage 03 rank recorded (vijay)",
-  "ok": true,
-  "info": {
-   "rank": "C",
-   "saved": "C",
-   "unlocked": [
-    "shaolin",
-    "eagle",
-    "sombat",
-    "sorapong",
-    "juk",
-    "wah",
-    "fei",
-    "vijay",
-    "ximen"
    ]
   }
  },

@@ -548,5 +548,11 @@ rep("  if (G.time < 14 && G.mode === 'play' && !G.cine) { ctx.globalAlpha = clam
 rep("function swapHero(k, c) {\n  const p = G.player; if (!p || p.dead || G.mode !== 'play' || G.cine) return;\n  G.actor = k;",
     "const helpAge = () => G.time - (G.helpT0 || 0);        // seconds since the control hints were last (re)started: run start or a stunt-double swap\nfunction swapHero(k, c) {\n  const p = G.player; if (!p || p.dead || G.mode !== 'play' || G.cine) return;\n  G.actor = k; G.helpT0 = G.time;")
 
+# ---- v29b: Gemini chibi sprites ----
+_spr_png = {k: _b64.b64encode(open(ROOT + '/assets/%s_sprites.png' % k, 'rb').read()).decode() for k in ('shaolin',)}
+_spr_meta = {k: _json.loads(open(ROOT + '/assets/%s_sprites.json' % k).read()) for k in ('shaolin',)}
+sprites29_js = open(ROOT + '/modules/sprites29.js').read().replace('/*SPR_META*/', _json.dumps(_spr_meta)).replace('/*SPR_PNG*/', _json.dumps(_spr_png))
+rep("\nfunction spawnDovesUI(x, y) {", "\n" + sprites29_js + "\nfunction spawnDovesUI(x, y) {")
+
 open(OUT, 'w').write(s)
 print('v21 written', len(s))
