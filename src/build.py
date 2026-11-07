@@ -688,5 +688,9 @@ rep("if (held('down') && p.kneeCd <= 0) { p.kneeCd = 1.4; p.kneeT = 0.45; p.vy =
 rep("BREAKER K  KNEE S+J", "BREAKER K  KNEE S+J OR J IN AIR")
 s = s.replace("'SINGHAM-STYLE ENTRY!'", "'LION-STYLE ENTRY!'")
 s = s.replace('// SINGHAM (parody)', '// LION BHAI (parody)')
+
+# ===== v35 modules + reps live in build35.py (keeps this file's history readable) =====
+exec(open(ROOT + '/build35.py').read())
+exec(open(ROOT + '/build36.py').read())
 open(OUT, 'w').write(s)
 print('v21 written', len(s))
